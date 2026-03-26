@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id-ID" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Frontend Execution: Vite & TypeScript - Catatan Kader</title>
+    <meta name="description"
+        content="Panduan mendalam arsitektur frontend menggunakan Vite dan TypeScript untuk skalabilitas enterprise.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#6366f1',
+                            hover: '#4f46e5',
+                            light: '#e0e7ff',
+                            dark: '#818cf8',
+                            darkLight: 'rgba(99, 102, 241, 0.15)',
+                        }
+                    },
+                    animation: {
+                        fadeUp: 'fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            ::-webkit-scrollbar-thumb {
+                background: #3f3f46;
+            }
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to top, rgba(9, 9, 11, 0.9), transparent);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-slate-50 font-sans antialiased overflow-x-hidden selection:bg-brand selection:text-white">
+
+    <div class="fixed top-4 md:top-6 left-0 w-full z-[100] px-4 md:px-6 flex justify-center pointer-events-none">
+        <nav id="navbar"
+            class="w-full max-w-6xl pointer-events-auto transition-all duration-300 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-slate-200 dark:border-zinc-800 rounded-2xl md:rounded-full px-5 py-3 shadow-sm flex flex-col md:flex-row md:items-center justify-between">
+
+            <div class="flex items-center justify-between w-full md:w-auto">
+                <a href="../index.html" class="flex items-center group">
+                    <img src="../asset/image/logo.png" alt="Logo"
+                        class="h-8 md:h-9 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
+                </a>
+
+                <button id="mobile-menu-btn"
+                    class="md:hidden text-slate-600 dark:text-slate-300 hover:text-brand focus:outline-none p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <ul id="nav-links"
+                class="hidden md:flex flex-col md:flex-row gap-4 md:gap-8 mt-4 md:mt-0 pb-2 md:pb-0 list-none text-sm font-semibold">
+                <li><a href="../index.html"
+                        class="block text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors relative group">Beranda<span
+                            class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity"></span></a>
+                </li>
+                <li><a href="../cooming_soon/index.html"
+                        class="block text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors relative group">Tentang
+                        Saya<span
+                            class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity"></span></a>
+                </li>
+                <li><a href="../contacts/index.html"
+                        class="block text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors relative group">Hubungi<span
+                            class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity"></span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <div class="max-w-6xl mx-auto px-5 md:px-6 pt-32 md:pt-40 pb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 lg:gap-16 items-start">
+            <main class="w-full min-w-0">
+                <div id="skeleton-loader" class="flex flex-col gap-6 w-full">
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-8 w-32 rounded-full"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-12 w-full md:w-5/6 rounded-lg"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-64 w-full rounded-xl my-6"></div>
+                </div>
+
+                <article id="actual-content" class="hidden opacity-0">
+                    <header class="mb-8">
+                        <div
+                            class="inline-block px-4 py-1.5 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-mono text-xs font-semibold rounded-full mb-6">
+                            Frontend Engineering / React
+                        </div>
+                        <h1
+                            class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-8 text-slate-900 dark:text-white">
+                            Eksekusi Frontend Modern via Vite & TypeScript
+                        </h1>
+
+                        <div
+                            class="relative w-full h-64 md:h-[400px] rounded-3xl overflow-hidden mb-10 shadow-2xl border border-slate-200 dark:border-zinc-800">
+                            <img src="../asset/image/course/react/instalasi.webp" alt="Vite Installation Banner"
+                                class="w-full h-full object-cover">
+                            <div class="absolute inset-0 hero-gradient flex flex-col justify-end p-6 md:p-10">
+                                <p class="text-white/70 font-mono text-sm mb-2">By: Abdul Kader</p>
+                                <h2 class="text-white text-xl md:text-3xl font-bold italic">"From Init to Production
+                                    Ready"</h2>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-wrap items-center gap-6 font-mono text-sm text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-zinc-800 pb-8">
+                            <div class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                    stroke-width="2" viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                </svg>Maret 26, 2026</div>
+                            <div class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                    stroke-width="2" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>15 Menit Eksekusi</div>
+                        </div>
+                    </header>
+
+                    <div
+                        class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-[17px] leading-relaxed">
+
+                        <p class="mb-8 font-medium text-lg text-slate-900 dark:text-white">Membangun aplikasi web di
+                            tahun 2026 bukan lagi sekadar membuat tampilan yang berjalan. Kita berbicara tentang
+                            <b>Developer Experience (DX)</b>, kecepatan <i>Hot Module Replacement</i> (HMR), dan
+                            keamanan tipe data yang absolut.
+                        </p>
+
+                        <h2
+                            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-12 mb-6 tracking-tight">
+                            1. Paradigma Baru: Native ESM vs Bundling</h2>
+                        <p class="mb-6">Berbeda dengan Webpack yang melakukan <i>bundling</i> seluruh aplikasi sebelum
+                            server dijalankan, Vite melayani kode sumber melalui <b>Native ESM</b>. Ini berarti Vite
+                            hanya memproses modul yang benar-benar diminta oleh browser saat itu juga.</p>
+
+                        <div
+                            class="p-6 bg-slate-100 dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 my-8">
+                            <ul class="space-y-4 list-none pl-0">
+                                <li class="flex gap-3"><span class="text-brand">⚡</span> <b>Cold Start:</b> Instan
+                                    karena tidak ada proses bundling di awal.</li>
+                                <li class="flex gap-3"><span class="text-brand">🔥</span> <b>HMR:</b> Kecepatan tetap
+                                    konstan tidak peduli seberapa besar ukuran aplikasi.</li>
+                                <li class="flex gap-3"><span class="text-brand">🛠️</span> <b>Rollup:</b> Digunakan di
+                                    sisi produksi untuk optimasi build yang sangat agresif.</li>
+                            </ul>
+                        </div>
+
+                        <h2
+                            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-12 mb-6 tracking-tight">
+                            2. Konfigurasi Jeroan (vite.config.ts)</h2>
+                        <p class="mb-6">File konfigurasi adalah otak dari alur kerja kita. Di sini kita mendefinisikan
+                            <i>alias</i> agar kode lebih bersih.
+                        </p>
+
+                        <pre
+                            class="bg-[#0f172a] text-slate-200 p-6 rounded-xl overflow-x-auto font-mono text-sm leading-relaxed my-8 border border-slate-800 shadow-lg"><code>import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@components": path.resolve(__dirname, "./src/components"),
+    },
+  },
+})</code></pre>
+
+                        <h2
+                            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-12 mb-6 tracking-tight">
+                            3. Arsitektur Komponen Skala Enterprise</h2>
+                        <p class="mb-6">Kita menerapkan pola <b>Feature-Based Architecture</b>. Setiap fitur besar
+                            memiliki folder sendiri.</p>
+
+                        <pre
+                            class="bg-[#0f172a] text-slate-200 p-4 rounded-xl font-mono text-sm mb-8 border border-slate-800"><code>src/
+├── features/
+│   ├── auth/
+│   └── dashboard/
+├── shared/
+└── main.tsx</code></pre>
+
+                        <div class="my-16 border-t-2 border-dashed border-slate-200 dark:border-zinc-800 pt-16">
+                            <div
+                                class="inline-block px-4 py-1 bg-red-500 text-white font-bold text-[10px] uppercase rounded mb-4">
+                                Live Execution</div>
+                            <h2
+                                class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter">
+                                LAB: Scaffolding & Core Setup</h2>
+
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-brand text-white flex items-center justify-center text-sm">01</span>
+                                Inisialisasi Project via Terminal
+                            </h3>
+                            <p class="mb-4 text-sm">Jalankan perintah ini di terminal kesayanganmu (pastikan Node.js
+                                v18+ sudah terinstal):</p>
+                            <pre
+                                class="bg-black text-green-400 p-6 rounded-xl font-mono text-sm mb-8 border border-zinc-800 shadow-xl"><code># Inisialisasi Vite dengan template TS
+npm create vite@latest aether-pro-app -- --template react-ts
+
+# Masuk ke folder & install deps
+cd aether-pro-app
+npm install
+
+# Install Tailwind & Peer Deps
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p</code></pre>
+
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-brand text-white flex items-center justify-center text-sm">02</span>
+                                Implementasi Interface TypeScript
+                            </h3>
+                            <p class="mb-4 text-sm">Mari kita buat komponen yang benar-benar aman (Type-Safe). Buat file
+                                baru di <code>src/components/Card.tsx</code>:</p>
+                            <pre
+                                class="bg-[#1e1e2e] text-blue-300 p-6 rounded-xl font-mono text-sm mb-8 border border-zinc-800"><code>interface CardProps {
+  title: string;
+  description: string;
+  variant: 'primary' | 'secondary';
+  onExecute: () => void;
+}
+
+export const ActionCard = ({ title, description, variant, onExecute }: CardProps) => {
+  return (
+    &lt;div className={`p-6 rounded-2xl border ${variant === 'primary' ? 'border-brand bg-brand/5' : 'border-zinc-800'}`}&gt;
+      &lt;h4 className="text-xl font-bold mb-2"&gt;{title}&lt;/h4&gt;
+      &lt;p className="text-zinc-400 text-sm mb-4"&gt;{description}&lt;/p&gt;
+      &lt;button onClick={onExecute} className="px-4 py-2 bg-brand text-white rounded-lg font-bold"&gt;
+        Eksekusi Sekarang
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-brand text-white flex items-center justify-center text-sm">03</span>
+                                Eksekusi Build Produksi
+                            </h3>
+                            <p class="mb-4 text-sm">Saat kode siap dilepas ke dunia nyata, gunakan perintah build untuk
+                                optimasi rollup:</p>
+                            <pre
+                                class="bg-black text-yellow-500 p-6 rounded-xl font-mono text-sm mb-8 border border-zinc-800 shadow-xl"><code># Menghasilkan folder /dist yang sudah teroptimasi
+npm run build
+
+# Preview hasil build secara lokal
+npm run preview</code></pre>
+                        </div>
+
+                        <div
+                            class="p-8 bg-brand-light dark:bg-brand-darkLight border-l-4 border-brand rounded-r-xl my-12 font-medium">
+                            <b>Kader Note:</b> Eksekusi bukan cuma soal "jalan", tapi soal skalabilitas. Dengan
+                            TypeScript, kamu menangkap bug sebelum user menemukannya.
+                        </div>
+
+                    </div>
+
+                    <a href="../index.html"
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full font-semibold text-slate-700 dark:text-slate-300 mt-12 hover:border-slate-900 dark:hover:border-white transition-all duration-300 shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Kembali ke Roadmap
+                    </a>
+                </article>
+            </main>
+
+            <aside class="hidden lg:block w-full h-full">
+                <div class="sticky top-28 lg:top-36 flex flex-col gap-8">
+                    <div
+                        class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 shadow-sm">
+                        <h3
+                            class="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6">
+                            Prinsip AETHER</h3>
+                        <blockquote
+                            class="text-[15px] italic text-slate-700 dark:text-slate-300 leading-relaxed mb-4 border-l-4 border-brand pl-4">
+                            "Speed without type-safety is a liability. Type-safety without speed is a frustration."
+                        </blockquote>
+                        <cite class="block text-right text-sm font-extrabold text-brand not-italic">- Aether Code
+                            Studio</cite>
+                    </div>
+
+                    <div
+                        class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 shadow-sm">
+                        <h3
+                            class="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6">
+                            Materi Terkait</h3>
+                        <div class="flex flex-col gap-4">
+                            <a href="tailwind-design.html"
+                                class="flex gap-4 items-center p-3 rounded-xl border border-transparent hover:border-brand hover:bg-slate-50 dark:hover:bg-zinc-800/50 hover:-translate-y-1 transition-all duration-300">
+                                <div
+                                    class="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-slate-200 dark:border-zinc-700 bg-brand/10 p-2 flex items-center justify-center text-brand font-bold">
+                                    TW</div>
+                                <div class="flex flex-col gap-1.5">
+                                    <h4 class="text-sm font-extrabold text-slate-900 dark:text-white leading-snug">
+                                        Design System & Tailwind</h4>
+                                    <span
+                                        class="inline-block text-[11px] text-brand font-bold font-mono px-2.5 py-1 bg-brand-light dark:bg-brand-darkLight rounded-md w-fit">Styling</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+  <footer class="bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <img src="../asset/image/logo-dark.png" alt="Catatan Kader"
+                class="h-8 mx-auto mb-6 opacity-80 dark:opacity-100">
+            <p class="text-slate-500 dark:text-slate-400 text-[15px] max-w-lg mx-auto mb-8 leading-relaxed">
+                Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis logika, serta
+                standarisasi implementasi sistem teknologi.
+            </p>
+            <p class="font-mono text-[13px] text-slate-500 dark:text-slate-400">
+                &copy; 2026 Catatan Kader. Deployment Active.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const navbar = document.getElementById("navbar");
+            const mobileBtn = document.getElementById("mobile-menu-btn");
+            const navLinks = document.getElementById("nav-links");
+            const menuIcon = document.getElementById("menu-icon");
+
+            // Navbar Scroll Effect
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add("shadow-md", "dark:shadow-zinc-950/50");
+                    navbar.classList.replace("bg-white/70", "bg-white/95");
+                    navbar.classList.replace("dark:bg-zinc-900/70", "dark:bg-zinc-900/95");
+                } else {
+                    navbar.classList.remove("shadow-md", "dark:shadow-zinc-950/50");
+                    navbar.classList.replace("bg-white/95", "bg-white/70");
+                    navbar.classList.replace("dark:bg-zinc-900/95", "dark:bg-zinc-900/70");
+                }
+            });
+
+            // Mobile Menu Toggle
+            let isMenuOpen = false;
+            mobileBtn.addEventListener("click", () => {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    navLinks.classList.remove("hidden");
+                    navLinks.classList.add("flex");
+                    // Change icon to 'X'
+                    menuIcon.setAttribute("d", "M6 18L18 6M6 6l12 12");
+                } else {
+                    navLinks.classList.add("hidden");
+                    navLinks.classList.remove("flex");
+                    // Change icon back to hamburger
+                    menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+                }
+            });
+
+            // Skeleton Loader Logic
+            const skeleton = document.getElementById('skeleton-loader');
+            const content = document.getElementById('actual-content');
+
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                content.classList.remove('hidden');
+                content.classList.add('animate-fadeUp'); // Custom tailwind class defined in config
+            }, 1200);
+        });
+    </script>
+</body>
+
+</html>

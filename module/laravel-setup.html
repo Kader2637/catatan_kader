@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id-ID" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standardisasi Environment Laravel 11 Skala Produksi - Catatan Kader</title>
+    <meta name="description"
+        content="Dokumentasi komprehensif mengenai konfigurasi environment lokal dan produksi untuk framework Laravel 11.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media', // Otomatis mengikuti tema device (Dark/Light Mode)
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#6366f1',
+                            hover: '#4f46e5',
+                            light: '#e0e7ff',
+                            dark: '#818cf8',
+                            darkLight: 'rgba(99, 102, 241, 0.15)',
+                        }
+                    },
+                    animation: {
+                        fadeUp: 'fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar opsional agar lebih clean */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            ::-webkit-scrollbar-thumb {
+                background: #3f3f46;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-slate-50 font-sans antialiased overflow-x-hidden selection:bg-brand selection:text-white">
+
+    <div class="fixed top-4 md:top-6 left-0 w-full z-[100] px-4 md:px-6 flex justify-center pointer-events-none">
+        <nav id="navbar"
+            class="w-full max-w-6xl pointer-events-auto transition-all duration-300 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-slate-200 dark:border-zinc-800 rounded-2xl md:rounded-full px-5 py-3 shadow-sm flex flex-col md:flex-row md:items-center justify-between">
+
+            <div class="flex items-center justify-between w-full md:w-auto">
+                <a href="../index.html" class="flex items-center group">
+                    <img src="../asset/image/logo.png" alt="Logo"
+                        class="h-8 md:h-9 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
+                </a>
+
+                <button id="mobile-menu-btn"
+                    class="md:hidden text-slate-600 dark:text-slate-300 hover:text-brand focus:outline-none p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <ul id="nav-links"
+                class="hidden md:flex flex-col md:flex-row gap-4 md:gap-8 mt-4 md:mt-0 pb-2 md:pb-0 list-none text-sm font-semibold">
+                <li><a href="../index.html"
+                        class="block text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors relative group">Beranda<span
+                            class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity"></span></a>
+                </li>
+                <li><a href="../cooming_soon/index.html"
+                        class="block text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors relative group">Tentang
+                        Saya<span
+                            class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity"></span></a>
+                </li>
+                <li><a href="../contacts/index.html"
+                        class="block text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors relative group">Hubungi<span
+                            class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity"></span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="max-w-[1240px] mx-auto px-5 md:px-6 pt-32 md:pt-40 pb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 lg:gap-16 items-start">
+            <main class="w-full">
+
+                <div id="skeleton-loader" class="flex flex-col gap-6 w-full">
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-8 w-32 rounded-full"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-12 w-full md:w-5/6 rounded-lg"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-12 w-3/4 rounded-lg mb-4"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-6 w-64 rounded mb-8"></div>
+                    <div
+                        class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-[260px] md:h-[460px] w-full rounded-2xl mb-8">
+                    </div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-4 w-full rounded"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-4 w-full rounded"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-4 w-4/5 rounded"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-48 w-full rounded-xl my-6"></div>
+                </div>
+
+                <article id="actual-content" class="hidden opacity-0">
+                    <header class="mb-10">
+                        <div
+                            class="inline-block px-4 py-1.5 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-mono text-xs font-semibold rounded-full mb-6">
+                            Backend / Laravel
+                        </div>
+                        <h1
+                            class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6 text-slate-900 dark:text-white">
+                            Standardisasi Environment Laravel 11 Skala Produksi
+                        </h1>
+
+                        <div
+                            class="flex flex-wrap items-center gap-6 font-mono text-sm text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-zinc-800 pb-8">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                Desember 14, 2025
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                8 Menit Membaca
+                            </div>
+                        </div>
+                    </header>
+
+                    <div
+                        class="w-full h-[260px] md:h-[460px] rounded-2xl overflow-hidden mb-12 border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                        <img src="../asset/image/course/laravel/instalasi.jpeg" alt="Standardisasi Laravel 11"
+                            class="w-full h-full object-cover">
+                    </div>
+
+                    <div
+                        class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-[17px] leading-relaxed">
+                        <p class="mb-6">Proses mendeploy aplikasi Laravel ke lingkungan produksi tidak berhenti hanya
+                            pada sekadar menjalankan perintah <code
+                                class="bg-slate-100 dark:bg-zinc-800 text-brand px-2 py-1 rounded-md font-mono text-sm">git pull</code>
+                            dan menyalin file. Lingkungan produksi menuntut standar yang jauh lebih tinggi dalam hal
+                            performa, keandalan, dan terutama keamanan.</p>
+                        <p class="mb-6">Pada catatan teknis ini, saya mendokumentasikan langkah-langkah esensial yang
+                            harus dilakukan untuk menstandarisasi environment server sebelum aplikasi Laravel 11
+                            benar-benar siap menerima beban trafik publik yang masif.</p>
+
+                        <h2
+                            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-12 mb-6 tracking-tight">
+                            1. Optimasi Dependencies Composer</h2>
+                        <p class="mb-6">Langkah pertama yang paling krusial namun sering terabaikan adalah melakukan
+                            optimasi pada saat menginstal paket composer. Di server produksi, kita tidak membutuhkan
+                            paket-paket <em>development</em> seperti PHPUnit, Ignition, atau Faker.</p>
+
+                        <pre
+                            class="bg-[#0f172a] text-slate-200 p-6 rounded-xl overflow-x-auto font-mono text-sm leading-relaxed my-8 border border-slate-800 shadow-lg"><code>composer install --optimize-autoloader --no-dev</code></pre>
+
+                        <p class="mb-6">Penambahan flag <code
+                                class="bg-slate-100 dark:bg-zinc-800 text-brand px-2 py-1 rounded-md font-mono text-sm">--optimize-autoloader</code>
+                            akan mengubah pemetaan autoload PSR-4 menjadi array statis, sehingga aplikasi tidak perlu
+                            melakukan pemindaian sistem file setiap kali ada kelas baru yang dipanggil. Hal ini akan
+                            meningkatkan waktu muat aplikasi secara eksponensial.</p>
+
+                        <h2
+                            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-12 mb-6 tracking-tight">
+                            2. Konfigurasi Variabel Environment (.env)</h2>
+                        <p class="mb-6">File <code
+                                class="bg-slate-100 dark:bg-zinc-800 text-brand px-2 py-1 rounded-md font-mono text-sm">.env</code>
+                            mengatur bagaimana keseluruhan aplikasi Anda berperilaku. Pada environment produksi,
+                            terdapat beberapa variabel kunci yang wajib diatur secara presisi untuk menghindari
+                            kebocoran data sensitif ke publik.</p>
+
+                        <pre
+                            class="bg-[#0f172a] text-slate-200 p-6 rounded-xl overflow-x-auto font-mono text-sm leading-relaxed my-8 border border-slate-800 shadow-lg"><code>APP_NAME="Nama Enterprise App"
+APP_ENV=production
+APP_KEY=base64:rahasia_key_aplikasi_anda=
+APP_DEBUG=false
+APP_URL=https://aplikasianda.com
+
+LOG_CHANNEL=daily
+LOG_LEVEL=error</code></pre>
+
+                        <div
+                            class="p-6 bg-brand-light dark:bg-brand-darkLight border-l-4 border-brand rounded-r-xl my-8 font-medium text-slate-900 dark:text-white">
+                            Peringatan Keras: Membiarkan <code
+                                class="bg-transparent text-brand px-0 font-bold">APP_DEBUG=true</code> pada server
+                            produksi adalah bencana keamanan. Jika terjadi error, baris kode, kueri database, hingga
+                            kredensial server Anda bisa terekspos secara publik kepada pengguna.
+                        </div>
+
+                        <h2
+                            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-12 mb-6 tracking-tight">
+                            3. Implementasi Caching Sistem</h2>
+                        <p class="mb-6">Framework Laravel memuat banyak sekali file konfigurasi dan rute setiap kali
+                            menerima request. Untuk menekan penggunaan CPU dan memori, kita harus menggabungkan seluruh
+                            file konfigurasi dan rute tersebut menjadi satu file terenkripsi yang siap baca.</p>
+                        <p class="mb-6">Jalankan perintah baris artisan berikut di terminal server Anda:</p>
+
+                        <pre
+                            class="bg-[#0f172a] text-slate-200 p-6 rounded-xl overflow-x-auto font-mono text-sm leading-relaxed my-8 border border-slate-800 shadow-lg"><code>php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan event:cache</code></pre>
+
+                        <h2
+                            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-12 mb-6 tracking-tight">
+                            4. Keamanan Direktori Web Server (Nginx)</h2>
+                        <p class="mb-6">Kesalahan fatal yang sering dilakukan pemula adalah mengarahkan root direktori
+                            server web ke folder instalasi utama Laravel, bukan ke folder <code
+                                class="bg-slate-100 dark:bg-zinc-800 text-brand px-2 py-1 rounded-md font-mono text-sm">/public</code>.
+                            Jika ini terjadi, siapapun bisa mengakses file .env Anda melalui browser.</p>
+
+                        <pre
+                            class="bg-[#0f172a] text-slate-200 p-6 rounded-xl overflow-x-auto font-mono text-sm leading-relaxed my-8 border border-slate-800 shadow-lg"><code>server {
+    listen 80;
+    server_name aplikasianda.com;
+    
+    root /var/www/aplikasianda/public;
+    
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+    
+    index index.php;
+    
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+    
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}</code></pre>
+
+                    </div>
+
+                    <a href="../index.html"
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-full font-semibold text-slate-700 dark:text-slate-300 mt-12 hover:border-slate-900 dark:hover:border-white hover:text-slate-900 dark:hover:text-white hover:-translate-y-0.5 transition-all duration-300 shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Kembali ke Daftar Eksplorasi
+                    </a>
+                </article>
+            </main>
+
+            <aside class="hidden lg:block w-full h-full">
+                <div class="sticky top-28 lg:top-36 flex flex-col gap-8">
+
+                    <div
+                        class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 shadow-sm">
+                        <h3
+                            class="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6">
+                            Kutipan Berpikir
+                        </h3>
+                        <blockquote
+                            class="text-[15px] italic text-slate-700 dark:text-slate-300 leading-relaxed mb-4 border-l-4 border-brand pl-4">
+                            "Program yang baik adalah program yang tidak hanya dipahami oleh mesin, tetapi juga mudah
+                            dipahami oleh programmer lain."
+                        </blockquote>
+                        <cite class="block text-right text-sm font-extrabold text-brand not-italic">- Rekayasa Perangkat
+                            Lunak</cite>
+                    </div>
+
+                    <div
+                        class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 shadow-sm">
+                        <h3
+                            class="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6">
+                            Eksplorasi Selanjutnya
+                        </h3>
+
+                        <div class="flex flex-col gap-4">
+                            <a href="laravel-api.html"
+                                class="flex gap-4 items-center p-3 rounded-xl border border-transparent hover:border-brand hover:bg-slate-50 dark:hover:bg-zinc-800/50 hover:-translate-y-1 transition-all duration-300">
+                                <div
+                                    class="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-slate-200 dark:border-zinc-700">
+                                    <img src="../asset/image/course/laravel/instalasi.jpeg" alt="RESTful API"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <h4 class="text-sm font-extrabold text-slate-900 dark:text-white leading-snug">
+                                        Desain Kontrak RESTful API Skalabel</h4>
+                                    <span
+                                        class="inline-block text-[11px] text-brand font-bold font-mono px-2.5 py-1 bg-brand-light dark:bg-brand-darkLight rounded-md w-fit">Laravel</span>
+                                </div>
+                            </a>
+
+                            <a href="laravel-queue.html"
+                                class="flex gap-4 items-center p-3 rounded-xl border border-transparent hover:border-brand hover:bg-slate-50 dark:hover:bg-zinc-800/50 hover:-translate-y-1 transition-all duration-300">
+                                <div
+                                    class="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-slate-200 dark:border-zinc-700">
+                                    <img src="../asset/image/leangue_pemrograman/laravel.png" alt="Redis Queue"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <h4 class="text-sm font-extrabold text-slate-900 dark:text-white leading-snug">
+                                        Isolasi Beban Redis Queue</h4>
+                                    <span
+                                        class="inline-block text-[11px] text-brand font-bold font-mono px-2.5 py-1 bg-brand-light dark:bg-brand-darkLight rounded-md w-fit">System
+                                        Design</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <footer class="bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <img src="../asset/image/logo-dark.png" alt="Catatan Kader"
+                class="h-8 mx-auto mb-6 opacity-80 dark:opacity-100">
+            <p class="text-slate-500 dark:text-slate-400 text-[15px] max-w-lg mx-auto mb-8 leading-relaxed">
+                Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis logika, serta
+                standarisasi implementasi sistem teknologi.
+            </p>
+            <p class="font-mono text-[13px] text-slate-500 dark:text-slate-400">
+                &copy; 2026 Catatan Kader. Deployment Active.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const navbar = document.getElementById("navbar");
+            const mobileBtn = document.getElementById("mobile-menu-btn");
+            const navLinks = document.getElementById("nav-links");
+            const menuIcon = document.getElementById("menu-icon");
+
+            // Navbar Scroll Effect
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add("shadow-md", "dark:shadow-zinc-950/50");
+                    navbar.classList.replace("bg-white/70", "bg-white/95");
+                    navbar.classList.replace("dark:bg-zinc-900/70", "dark:bg-zinc-900/95");
+                } else {
+                    navbar.classList.remove("shadow-md", "dark:shadow-zinc-950/50");
+                    navbar.classList.replace("bg-white/95", "bg-white/70");
+                    navbar.classList.replace("dark:bg-zinc-900/95", "dark:bg-zinc-900/70");
+                }
+            });
+
+            // Mobile Menu Toggle
+            let isMenuOpen = false;
+            mobileBtn.addEventListener("click", () => {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    navLinks.classList.remove("hidden");
+                    navLinks.classList.add("flex");
+                    // Change icon to 'X'
+                    menuIcon.setAttribute("d", "M6 18L18 6M6 6l12 12");
+                } else {
+                    navLinks.classList.add("hidden");
+                    navLinks.classList.remove("flex");
+                    // Change icon back to hamburger
+                    menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+                }
+            });
+
+            // Skeleton Loader Logic
+            const skeleton = document.getElementById('skeleton-loader');
+            const content = document.getElementById('actual-content');
+
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                content.classList.remove('hidden');
+                content.classList.add('animate-fadeUp'); // Custom tailwind class defined in config
+            }, 1200);
+        });
+    </script>
+</body>
+
+</html>

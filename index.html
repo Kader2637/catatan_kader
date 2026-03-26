@@ -1,1089 +1,1261 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Catatan Kader</title>
-    <meta name="description" content="Catatan Kader - website personal" />
-    <link rel="canonical" href="index.html" />
-    <link rel="next" href="page/2/index.html" />
-    <link rel="stylesheet" type="text/css" href="asset/css/style.css" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Catatan Kader" />
-    <meta
-      property="og:description"
-      content="Catatan Kader - website personal"
-    />
+<html lang="id-ID">
 
-    <link rel="icon" href="asset/image/favicon.png" type="image/x-icon" />
-    <link
-      rel="shortcut icon"
-      href="asset/image/favicon.png"
-      type="image/x-icon"
-    />
-    <meta property="og:url" content="index.html" />
-    <meta property="og:site_name" content="Catatan Kader" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link
-      rel="stylesheet"
-      id="c03430c052935636522b5af73126e251-css"
-      href="wp-content/cache/autoptimize/2/css/autoptimize_single_4df495a60ac3dd6f93a64b54105409642169.css?ver=1729250392"
-      media="all"
-    />
-  </head>
-  <body
-    class="home blog wp-embed-responsive cs-page-layout-right cs-navbar-smart-enabled cs-sticky-sidebar-enabled cs-stick-last"
-    data-scheme="auto"
-  >
-    <div class="cs-site-overlay"></div>
-    <div class="cs-offcanvas">
-      <div class="cs-offcanvas__header">
-        <div class="cs-logo">
-          <a class="cs-header__logo cs-logo-default" href="index.html">
-            <img
-              src="asset/image/logo.png"
-              alt="Catatan Kader"
-              style="width: 170px"
-            />
-          </a>
-          <a class="cs-header__logo cs-logo-dark" href="index.html">
-            <img
-              src="asset/image/logo-dark.png"
-              alt="Catatan kader"
-              style="width: 170px"
-            />
-          </a>
-        </div>
-        <nav class="cs-offcanvas__nav">
-          <span
-            class="cs-offcanvas__toggle"
-            role="button"
-            aria-label="Close mobile menu button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="m11.4 12.789l2.1-2.1l2.1 2.1l.688-.689l-2.1-2.1l2.1-2.1l-.688-.689l-2.1 2.1l-2.1-2.1l-.688.689l2.1 2.1l-2.1 2.1zM8.116 17q-.691 0-1.153-.462T6.5 15.385V4.615q0-.69.463-1.153T8.116 3h10.769q.69 0 1.153.462t.462 1.153v10.77q0 .69-.462 1.152T18.884 17zm0-1h10.769q.23 0 .423-.192t.192-.423V4.615q0-.23-.192-.423T18.884 4H8.116q-.231 0-.424.192t-.192.423v10.77q0 .23.192.423t.423.192m-3 4q-.69 0-1.153-.462T3.5 18.385V6.615h1v11.77q0 .23.192.423t.423.192h11.77v1zM7.5 4v12z"
-              />
-            </svg>
-          </span>
-        </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catatan Kader - Senior Developer Notes</title>
+  <meta name="description" content="Kumpulan catatan, arsitektur, dan dokumentasi teknis.">
+  <link rel="icon" href="asset/image/favicon.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #fafafa;
+      --bg-card: #ffffff;
+      --bg-nav: rgba(255, 255, 255, 0.7);
+      --text-100: #0f172a;
+      --text-200: #334155;
+      --text-300: #64748b;
+      --border-color: #e2e8f0;
+      --border-hover: #cbd5e1;
+      --brand: #6366f1;
+      --brand-hover: #4f46e5;
+      --brand-light: #e0e7ff;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+      --shadow-nav: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-main: #09090b;
+        --bg-card: #18181b;
+        --bg-nav: rgba(24, 24, 27, 0.7);
+        --text-100: #f8fafc;
+        --text-200: #cbd5e1;
+        --text-300: #94a3b8;
+        --border-color: #27272a;
+        --border-hover: #3f3f46;
+        --brand: #818cf8;
+        --brand-hover: #6366f1;
+        --brand-light: rgba(99, 102, 241, 0.15);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-100);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-y: scroll;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .nav-wrapper {
+      position: fixed;
+      top: 24px;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding: 0 24px;
+      pointer-events: none;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-nav);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: 1px solid var(--border-color);
+      width: 100%;
+      max-width: 1192px;
+      pointer-events: auto;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-nav);
+    }
+
+    .navbar.scrolled {
+      background: var(--bg-card);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-hover);
+      padding: 10px 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 36px;
+      transition: transform var(--transition);
+    }
+
+    .logo:hover img {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-item {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-300);
+      position: relative;
+      padding: 4px 0;
+      transition: color var(--transition);
+    }
+
+    .nav-item::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--brand);
+      opacity: 0;
+      transition: all var(--transition);
+    }
+
+    .nav-item:hover {
+      color: var(--text-100);
+    }
+
+    .nav-item:hover::before,
+    .nav-item.active::before {
+      opacity: 1;
+      bottom: 0px;
+    }
+
+    .nav-item.active {
+      color: var(--text-100);
+    }
+
+    .hero {
+      padding: 180px 0 100px 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--brand-light) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-200);
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+      animation: slideDown 0.6s ease-out;
+    }
+
+    .badge span {
+      width: 8px;
+      height: 8px;
+      background-color: var(--brand);
+      border-radius: 50%;
+      margin-right: 10px;
+      box-shadow: 0 0 10px var(--brand);
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      color: var(--text-100);
+      margin-bottom: 24px;
+      max-width: 900px;
+      animation: fadeUp 0.8s ease-out;
+    }
+
+    .typing-box {
+      color: var(--brand);
+      display: inline-block;
+      min-height: 1.2em;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 4px;
+      height: 0.9em;
+      background-color: var(--brand);
+      vertical-align: text-bottom;
+      animation: blink 1s infinite;
+      margin-left: 4px;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-300);
+      max-width: 600px;
+      margin-bottom: 48px;
+      animation: fadeUp 1s ease-out;
+    }
+
+    .tech-stack {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 1.2s ease-out;
+    }
+
+    .tech-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tech-icon:hover {
+      transform: translateY(-8px);
+      border-color: var(--brand);
+      box-shadow: 0 12px 24px var(--brand-light);
+    }
+
+    .tech-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px;
+      padding: 80px 0;
+      align-items: start;
+    }
+
+    .section-head {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-300);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text-100);
+    }
+
+    .filter-btn.active {
+      background: var(--text-100);
+      border-color: var(--text-100);
+      color: var(--bg-main);
+    }
+
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      min-height: 800px;
+    }
+
+    .cards-grid,
+    .skeleton-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .skeleton-grid {
+      display: none;
+    }
+
+    .card,
+    .skeleton {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all var(--transition);
+    }
+
+    .card {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .card.show {
+      animation: cardEnter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .card:hover {
+      border-color: var(--brand);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-8px);
+    }
+
+    .card-image,
+    .sk-img {
+      width: 100%;
+      height: 220px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-image img {
+      transform: scale(1.08);
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-tag {
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--brand-light);
+      color: var(--brand);
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.4;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .card-excerpt {
+      font-size: 15px;
+      color: var(--text-300);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .card-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-100);
+      margin-top: auto;
+    }
+
+    .card-action::after {
+      content: "→";
+      color: var(--brand);
+      transition: transform var(--transition);
+    }
+
+    .card-action:hover::after {
+      transform: translateX(6px);
+    }
+
+    .sk-anim {
+      background: linear-gradient(90deg, var(--border-color) 25%, var(--border-hover) 50%, var(--border-color) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: var(--radius-sm);
+    }
+
+    .sk-tag {
+      height: 28px;
+      width: 100px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+    }
+
+    .sk-title {
+      height: 28px;
+      width: 90%;
+      margin-bottom: 12px;
+    }
+
+    .sk-title-2 {
+      height: 28px;
+      width: 60%;
+      margin-bottom: 24px;
+    }
+
+    .sk-text {
+      height: 16px;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .sk-btn {
+      height: 20px;
+      width: 120px;
+      margin-top: 24px;
+    }
+
+    .pagination {
+      display: none;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .page-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-300);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .page-btn.text-btn {
+      width: auto;
+      padding: 0 20px;
+    }
+
+    .page-btn:hover:not(.disabled) {
+      border-color: var(--text-100);
+      color: var(--text-100);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .page-btn.active {
+      background: var(--text-100);
+      border-color: var(--text-100);
+      color: var(--bg-main);
+    }
+
+    .page-btn.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      background: transparent;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+
+    .widget-title {
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-300);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 20px auto;
+      border: 1px solid var(--border-color);
+      padding: 4px;
+      background: var(--bg-main);
+    }
+
+    .profile-name {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+    }
+
+    .profile-role {
+      font-size: 14px;
+      color: var(--brand);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .profile-desc {
+      font-size: 14px;
+      color: var(--text-300);
+      line-height: 1.6;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .tool {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tool-box {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      transition: all var(--transition);
+    }
+
+    .tool:hover .tool-box {
+      border-color: var(--brand);
+      transform: translateY(-4px);
+    }
+
+    .tool span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-300);
+    }
+
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      padding: 64px 0;
+      text-align: center;
+    }
+
+    .footer-logo {
+      height: 32px;
+      margin: 0 auto 24px auto;
+    }
+
+    .footer-text {
+      color: var(--text-300);
+      max-width: 500px;
+      margin: 0 auto 32px auto;
+      font-size: 15px;
+    }
+
+    .footer-copy {
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      color: var(--text-300);
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 36px;
+      }
+
+      .navbar {
+        border-radius: 16px;
+        padding: 16px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .filters {
+        overflow-x: auto;
+        padding-bottom: 12px;
+        flex-wrap: nowrap;
+      }
+
+      .filter-btn {
+        white-space: nowrap;
+      }
+
+      .cards-grid,
+      .skeleton-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="nav-wrapper">
+    <nav class="navbar" id="navbar">
+      <a href="index.html" class="logo">
+        <img src="asset/image/logo.png" alt="Logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-item active">Beranda</a></li>
+        <li><a href="cooming_soon/index.html" class="nav-item">Tentang Saya</a></li>
+        <li><a href="contacts/index.html" class="nav-item">Hubungi</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="badge">
+        <span></span> Status: Tersedia untuk kolaborasi
       </div>
-      <aside class="cs-offcanvas__sidebar">
-        <div class="cs-offcanvas__inner cs-offcanvas__area cs-widget-area">
-          <div class="widget widget_nav_menu">
-            <div class="menu-mobile-container">
-              <ul id="menu-mobile" class="menu">
-                <li
-                  id="menu-item-666"
-                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-666"
-                >
-                  <a href="/index.html">Home</a>
-                </li>
-                <li
-                  id="menu-item-666"
-                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-666"
-                >
-                  <a href="cooming_soon/index.html">Tentang Saya</a>
-                </li>
-                <li
-                  id="menu-item-667"
-                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-667"
-                >
-                  <a href="contacts/index.html">Hubungi</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="cs-offcanvas__bottombar">
-            <div class="cs-social">
-              <h4>Catatan Kader</h4>
-            </div>
-            <span
-              class="cs-site-scheme-toggle cs-offcanvas__scheme-toggle"
-              role="button"
-              aria-label="Scheme Toggle"
-            >
-              <span class="cs-header__scheme-toggle-icons">
-                <span
-                  class="cs-header__scheme-cs-icon-box cs-light-mode"
-                  data-mode="light"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M11.5 5.423V2.039h1v3.384zm5.496 2.289l-.682-.683l2.357-2.452l.727.733zm1.581 4.788v-1h3.385v1zM11.5 21.962v-3.366h1v3.366zM7.042 7.68L4.577 5.329l.752-.708L7.73 7.004zm11.624 11.742l-2.352-2.452l.677-.657l2.388 2.346zM2.039 12.5v-1h3.384v1zm3.27 6.923l-.688-.752l2.358-2.357l.36.348l.378.354zM12.006 17q-2.082 0-3.544-1.457T7 12.005T8.457 8.46T11.995 7t3.544 1.457T17 11.995t-1.457 3.544T12.005 17M12 16q1.65 0 2.825-1.175T16 12t-1.175-2.825T12 8T9.175 9.175T8 12t1.175 2.825T12 16m0-4"
-                    />
-                  </svg>
-                </span>
-                <span
-                  class="cs-header__scheme-cs-icon-box cs-dark-mode"
-                  data-mode="dark"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Zm0 6q.675 0 1.3-.125t1.2-.4q-1.575-.725-2.538-2.175T11 12q0-1.85.963-3.3T14.5 6.525q-.575-.275-1.2-.4T12 6Q9.5 6 7.75 7.738T6 12q0 2.5 1.75 4.25T12 18Z"
-                    />
-                  </svg>
-                </span>
-              </span>
-            </span>
-          </div>
-        </div>
-      </aside>
-    </div>
-    <div id="page" class="cs-site">
-      <div class="cs-site-inner">
-        <div class="cs-header-before"></div>
-        <header class="cs-header cs-header-stretch">
-          <div class="cs-container">
-            <div class="cs-header__inner cs-header__inner-desktop">
-              <div class="cs-header__col cs-col-left">
-                <div class="cs-logo">
-                  <a class="cs-header__logo cs-logo-default" href="index.html">
-                    <img
-                      src="asset/image/logo.png"
-                      alt="Catatan Kader"
-                      width="151"
-                      height="38"
-                    />
-                  </a>
-                  <a class="cs-header__logo cs-logo-dark" href="index.html">
-                    <img
-                      src="asset/image/logo-dark.png"
-                      alt="Catatan Kader"
-                      width="151"
-                      height="38"
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="cs-header__col cs-col-center">
-                <nav class="cs-header__nav">
-                  <ul id="menu-primary" class="cs-header__nav-inner">
-                    <li
-                      id="menu-item-368"
-                      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-368"
-                    >
-                      <a href="/index.html"
-                        ><span><span>Home</span></span></a
-                      >
-                    </li>
-                    <li
-                      id="menu-item-368"
-                      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-368"
-                    >
-                      <a href="cooming_soon/index.html"
-                        ><span><span>Tentang Saya</span></span></a
-                      >
-                    </li>
-                    <li
-                      id="menu-item-310"
-                      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-310"
-                    >
-                      <a href="contacts/index.html"
-                        ><span><span>Hubungi</span></span></a
-                      >
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-              <div class="cs-header__col cs-col-right">
-                <span
-                  class="cs-site-scheme-toggle cs-header__scheme-toggle"
-                  role="button"
-                  aria-label="Dark mode toggle button"
-                >
-                  <span class="cs-header__scheme-toggle-icons">
-                    <span
-                      class="cs-header__scheme-cs-icon-box cs-light-mode"
-                      data-mode="light"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M11.5 5.423V2.039h1v3.384zm5.496 2.289l-.682-.683l2.357-2.452l.727.733zm1.581 4.788v-1h3.385v1zM11.5 21.962v-3.366h1v3.366zM7.042 7.68L4.577 5.329l.752-.708L7.73 7.004zm11.624 11.742l-2.352-2.452l.677-.657l2.388 2.346zM2.039 12.5v-1h3.384v1zm3.27 6.923l-.688-.752l2.358-2.357l.36.348l.378.354zM12.006 17q-2.082 0-3.544-1.457T7 12.005T8.457 8.46T11.995 7t3.544 1.457T17 11.995t-1.457 3.544T12.005 17M12 16q1.65 0 2.825-1.175T16 12t-1.175-2.825T12 8T9.175 9.175T8 12t1.175 2.825T12 16m0-4"
-                        />
-                      </svg>
-                    </span>
-                    <span
-                      class="cs-header__scheme-cs-icon-box cs-dark-mode"
-                      data-mode="dark"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Zm0 6q.675 0 1.3-.125t1.2-.4q-1.575-.725-2.538-2.175T11 12q0-1.85.963-3.3T14.5 6.525q-.575-.275-1.2-.4T12 6Q9.5 6 7.75 7.738T6 12q0 2.5 1.75 4.25T12 18Z"
-                        />
-                      </svg>
-                    </span>
-                  </span>
-                </span>
-              </div>
-            </div>
-            <div class="cs-header__inner cs-header__inner-mobile">
-              <div class="cs-header__col cs-col-left">
-                <span
-                  class="cs-header__offcanvas-toggle"
-                  role="button"
-                  aria-label="Mobile menu button"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="cs-header__col cs-col-center">
-                <div class="cs-logo">
-                  <a class="cs-header__logo cs-logo-default" href="index.html">
-                    <img
-                      src="asset/image/logo.png"
-                      alt="Catatan Kader"
-                      width="131"
-                      height="38"
-                    />
-                  </a>
-                  <a class="cs-header__logo cs-logo-dark" href="index.html">
-                    <img
-                      src="asset/image/logo-dark.png"
-                      alt="Catatan Kader"
-                      width="132"
-                      height="40"
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
-        <main id="main" class="cs-site-primary">
-          <div
-            class="cs-site-content cs-sidebar-enabled cs-sidebar-right cs-metabar-disabled"
-          >
-            <div class="cs-container">
-              <section class="cs-home-hero cs-hero-type-1">
-                <div class="cs-hero-type-1__wrapper">
-                  <div class="cs-hero__content">
-                    <h1 class="cs-hero__heading">
-                      Selamat datang di website personal saya,
-                      <span>Abdul Kader.</span>
-                    </h1>
-                    <div class="cs-hero__subheading">
-                      Di sini, saya membagikan pengalaman serta materi
-                      pembelajaran yang bermanfaat.
-                    </div>
-                  </div>
-                </div>
-              </section>
-              <div class="cs-categories-list cs-categories-list-container">
-                <h2 class="cs-categories-list__heading">Learning</h2>
-                <div class="cs-categories-list__wrapper">
-                  <div class="cs-category-item">
-                    <div class="cs-category-item__icon-box">
-                      <div class="cs-category-item__icon">
-                        <img
-                          src="wp-content/uploads/sites/2/2024/09/tech.webp"
-                          alt="Technology"
-                          title="Technology"
-                        />
-                      </div>
-                    </div>
-                    <div class="cs-category-item__title">
-                      <a href="javascript:void(0)">Technology</a>
-                    </div>
-                  </div>
-                  <div class="cs-category-item">
-                    <div class="cs-category-item__icon-box">
-                      <div class="cs-category-item__icon">
-                        <img
-                          src="asset/image/leangue_pemrograman/laravel.png"
-                          alt="Laravel"
-                          title="Laravel"
-                        />
-                      </div>
-                    </div>
-                    <div class="cs-category-item__title">
-                      <a href="javascript:void(0)">Laravel</a>
-                    </div>
-                  </div>
-                  <div class="cs-category-item">
-                    <div class="cs-category-item__icon-box">
-                      <div class="cs-category-item__icon">
-                        <img
-                          src="asset/image/leangue_pemrograman/taildwind.png"
-                          alt="Taildwind"
-                          title="Taildwind"
-                        />
-                      </div>
-                    </div>
-                    <div class="cs-category-item__title">
-                      <a href="javascript:void(0)">Taildwind</a>
-                    </div>
-                  </div>
-                  <div class="cs-category-item">
-                    <div class="cs-category-item__icon-box">
-                      <div class="cs-category-item__icon">
-                        <img
-                          src="asset/image/leangue_pemrograman/react.png"
-                          alt="React"
-                          title="React"
-                        />
-                      </div>
-                    </div>
-                    <div class="cs-category-item__title">
-                      <a href="javascript:void(0)">React</a>
-                    </div>
-                  </div>
-                  <div class="cs-category-item">
-                    <div class="cs-category-item__icon-box">
-                      <div class="cs-category-item__icon">
-                        <img
-                          src="asset/image/leangue_pemrograman/python.png"
-                          alt="Python"
-                          title="Python"
-                        />
-                      </div>
-                    </div>
-                    <div class="cs-category-item__title">
-                      <a href="javascript:void(0)">Python</a>
-                    </div>
-                  </div>
-                  <div class="cs-category-item">
-                    <div class="cs-category-item__icon-box">
-                      <div class="cs-category-item__icon">
-                        <img
-                          src="asset/image/leangue_pemrograman/bootstrap.png"
-                          alt="Bootstrap"
-                          title="Bootstrap"
-                        />
-                      </div>
-                    </div>
-                    <div class="cs-category-item__title">
-                      <a href="javascript:void(0)">Bootstrap</a>
-                    </div>
-                  </div>
-                  <div class="cs-category-item">
-                    <div class="cs-category-item__icon-box">
-                      <div class="cs-category-item__icon">
-                        <img
-                          src="asset/image/leangue_pemrograman/php.png"
-                          alt="PHP"
-                          title="PHP"
-                        />
-                      </div>
-                    </div>
-                    <div class="cs-category-item__title">
-                      <a href="javascript:void(0)">PHP</a>
-                    </div>
-                  </div>
-                  <div class="cs-category-item">
-                    <div class="cs-category-item__icon-box">
-                      <div class="cs-category-item__icon">
-                        <img
-                          src="asset/image/leangue_pemrograman/next.png"
-                          alt="NEXT"
-                          title="NEXT"
-                        />
-                      </div>
-                    </div>
-                    <div class="cs-category-item__title">
-                      <a href="javascript:void(0)">NEXT</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="content" class="cs-main-content">
-                <div id="primary" class="cs-content-area">
-                  <div class="cs-posts-area cs-posts-area-posts">
-                    <div class="cs-posts-area__outer">
-                      <div
-                        class="cs-posts-area__main cs-archive-list cs-posts-area__home cs-posts-area__list cs-desktop-column-2"
-                      >
-                        <article
-                          class="post-266 post type-post status-publish format-standard has-post-thumbnail category-sport cs-entry"
-                        >
-                          <div class="cs-entry__outer">
-                            <div
-                              class="cs-entry__inner cs-entry__thumbnail cs-entry__overlay cs-overlay-ratio cs-ratio-landscape-16-9"
-                              data-scheme="inverse"
-                            >
-                              <div
-                                class="cs-overlay-post-meta cs-meta-overlay-background"
-                              >
-                                <div class="cs-entry__post-meta">
-                                  <div class="cs-meta-category">
-                                    <ul class="post-categories">
-                                      <li>
-                                        <a
-                                          href="javascript:void(0)"
-                                          rel="category tag"
-                                          >Pemrograman</a
-                                        >
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div
-                                class="cs-overlay-background cs-overlay-transparent"
-                              >
-                                <img
-                                  width="400"
-                                  height="225"
-                                  src="asset/image/course/laravel/instalasi.jpeg"
-                                  class="attachment-csco-thumbnail size-csco-thumbnail wp-post-image"
-                                  alt=""
-                                  decoding="async"
-                                  fetchpriority="high"
-                                  sizes="(max-width: 400px) 100vw, 400px"
-                                />
-                              </div>
-                            </div>
-                            <div class="cs-entry__inner cs-entry__content">
-                              <div class="cs-entry__post-meta">
-                                <div class="cs-meta-author">
-                                  <a
-                                    class="cs-meta-author-link url fn n"
-                                    href="javascript:void(0)"
-                                    ><span class="cs-meta-author-name"
-                                      >Abdul Kader</span
-                                    ></a
-                                  >
-                                </div>
-                                <div class="cs-meta-date">
-                                  <span class="cs-meta-date-on">Dibuat</span
-                                  >Desember 14, 2024
-                                </div>
-                              </div>
-                              <h2 class="cs-entry__title">
-                                <a href="javascript:void(0)"
-                                  ><span>Instalasi Laravel 11</span></a
-                                >
-                              </h2>
-                              <div class="cs-entry__excerpt">
-                                Laravel 11 adalah framework PHP yang kuat untuk
-                                membangun aplikasi web. Panduan instalasi ini
-                                akan memandu Anda langkah demi langkah untuk
-                                mengatur Laravel 11 di lingkungan lokal,
-                                memastikan semua alat dan konfigurasi yang
-                                diperlukan tersedia untuk pengalaman
-                                pengembangan yang lancar.
-                              </div>
-                              <div class="cs-entry__discover-more">
-                                <a
-                                  class="cs-button"
-                                  href="javascript:void(0)"
-                                  title="Instalasi Laravel 11"
-                                >
-                                  Detail
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-
-                        <article
-                          class="post-266 post type-post status-publish format-standard has-post-thumbnail category-sport cs-entry"
-                        >
-                          <div class="cs-entry__outer">
-                            <div
-                              class="cs-entry__inner cs-entry__thumbnail cs-entry__overlay cs-overlay-ratio cs-ratio-landscape-16-9"
-                              data-scheme="inverse"
-                            >
-                              <div
-                                class="cs-overlay-post-meta cs-meta-overlay-background"
-                              >
-                                <div class="cs-entry__post-meta">
-                                  <div class="cs-meta-category">
-                                    <ul class="post-categories">
-                                      <li>
-                                        <a
-                                          href="javascript:void(0)"
-                                          rel="category tag"
-                                          >Pemrograman</a
-                                        >
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div
-                                class="cs-overlay-background cs-overlay-transparent"
-                              >
-                                <img
-                                  width="400"
-                                  height="225"
-                                  src="asset/image/course/laravel/mvc.png"
-                                  class="attachment-csco-thumbnail size-csco-thumbnail wp-post-image"
-                                  alt=""
-                                  decoding="async"
-                                  fetchpriority="high"
-                                  sizes="(max-width: 400px) 100vw, 400px"
-                                />
-                              </div>
-                            </div>
-                            <div class="cs-entry__inner cs-entry__content">
-                              <div class="cs-entry__post-meta">
-                                <div class="cs-meta-author">
-                                  <a
-                                    class="cs-meta-author-link url fn n"
-                                    href="javascript:void(0)"
-                                    ><span class="cs-meta-author-name"
-                                      >Abdul Kader</span
-                                    ></a
-                                  >
-                                </div>
-                                <div class="cs-meta-date">
-                                  <span class="cs-meta-date-on">Dibuat</span
-                                  >Desember 14, 2024
-                                </div>
-                              </div>
-                              <h2 class="cs-entry__title">
-                                <a href="javascript:void(0)"
-                                  ><span>Membuat MVC di Laravel</span></a
-                                >
-                              </h2>
-                              <div class="cs-entry__excerpt">
-                                Laravel adalah framework PHP yang kuat untuk
-                                pengembangan aplikasi web. Panduan ini akan
-                                membantu Anda memahami konsep
-                                Model-View-Controller (MVC) di Laravel,
-                                memberikan panduan langkah demi langkah untuk
-                                membangun aplikasi yang terstruktur dengan baik
-                                dan mudah dikelola. Sekarang, saya akan membuat
-                                thumbnail yang sesuai untuk tema ini. Tunggu
-                                sebentar ya!
-                              </div>
-                              <div class="cs-entry__discover-more">
-                                <a
-                                  class="cs-button"
-                                  href="javascript:void(0)"
-                                  title="Mvc Laravel 11"
-                                >
-                                  Detail
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                        <article
-                          class="post-266 post type-post status-publish format-standard has-post-thumbnail category-sport cs-entry"
-                        >
-                          <div class="cs-entry__outer">
-                            <div
-                              class="cs-entry__inner cs-entry__thumbnail cs-entry__overlay cs-overlay-ratio cs-ratio-landscape-16-9"
-                              data-scheme="inverse"
-                            >
-                              <div
-                                class="cs-overlay-post-meta cs-meta-overlay-background"
-                              >
-                                <div class="cs-entry__post-meta">
-                                  <div class="cs-meta-category">
-                                    <ul class="post-categories">
-                                      <li>
-                                        <a
-                                          href="javascript:void(0)"
-                                          rel="category tag"
-                                          >Pemrograman</a
-                                        >
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div
-                                class="cs-overlay-background cs-overlay-transparent"
-                              >
-                                <img
-                                  width="400"
-                                  height="225"
-                                  src="asset/image/course/react/instalasi.webp"
-                                  class="attachment-csco-thumbnail size-csco-thumbnail wp-post-image"
-                                  alt=""
-                                  decoding="async"
-                                  fetchpriority="high"
-                                  sizes="(max-width: 400px) 100vw, 400px"
-                                />
-                              </div>
-                            </div>
-                            <div class="cs-entry__inner cs-entry__content">
-                              <div class="cs-entry__post-meta">
-                                <div class="cs-meta-author">
-                                  <a
-                                    class="cs-meta-author-link url fn n"
-                                    href="javascript:void(0)"
-                                    ><span class="cs-meta-author-name"
-                                      >Abdul Kader</span
-                                    ></a
-                                  >
-                                </div>
-                                <div class="cs-meta-date">
-                                  <span class="cs-meta-date-on">Dibuat</span
-                                  >Desember 14, 2024
-                                </div>
-                              </div>
-                              <h2 class="cs-entry__title">
-                                <a href="javascript:void(0)"
-                                  ><span>Instalasi React</span></a
-                                >
-                              </h2>
-                              <div class="cs-entry__excerpt">
-                                React adalah pustaka JavaScript yang kuat untuk
-                                membangun antarmuka pengguna. Panduan instalasi
-                                ini akan memandu Anda langkah demi langkah untuk
-                                mengatur React di lingkungan lokal, memastikan
-                                semua alat dan konfigurasi yang diperlukan
-                                tersedia untuk pengalaman pengembangan yang
-                                lancar.
-                              </div>
-                              <div class="cs-entry__discover-more">
-                                <a
-                                  class="cs-button"
-                                  href="javascript:void(0)"
-                                  title="React Laravel 11"
-                                >
-                                  Detail
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <aside id="secondary" class="cs-widget-area cs-sidebar__area">
-                  <div class="cs-sidebar__inner">
-                    <div class="widget block-12 widget_block">
-                      <div
-                        class="wp-block-group is-style-cs-about is-layout-constrained wp-block-group-is-layout-constrained"
-                      >
-                        <h2 class="wp-block-heading">Tentang Saya</h2>
-                        <div
-                          class="wp-block-group is-nowrap is-layout-flex wp-container-core-group-is-layout-2 wp-block-group-is-layout-flex"
-                        >
-                          <div class="wp-block-avatar">
-                            <a
-                              href="author/codesupplyco/index.html"
-                              target="_self"
-                              class="wp-block-avatar__link"
-                              ><img
-                                alt="Abdul Kader"
-                                src="asset/image/im.jpg"
-                                class="avatar avatar-50 photo"
-                                height="50"
-                                width="50"
-                            /></a>
-                          </div>
-                          <div
-                            class="wp-block-group is-layout-constrained wp-block-group-is-layout-constrained"
-                          >
-                            <h3
-                              class="wp-block-heading has-primary-color has-text-color has-link-color"
-                              style="
-                                margin-bottom: 6px;
-                                font-size: 18px;
-                                font-style: normal;
-                                font-weight: 700;
-                                letter-spacing: -0.04em;
-                                line-height: 1.2;
-                                text-decoration: none;
-                                text-transform: capitalize;
-                              "
-                            >
-                              <a href="javascript:void(0)">Abdul Kader</a>
-                            </h3>
-                            <p
-                              class="has-secondary-color has-text-color has-link-color"
-                              style="
-                                margin-top: 0px;
-                                margin-bottom: 0px;
-                                font-size: 12px;
-                                font-style: normal;
-                                font-weight: 800;
-                                letter-spacing: 0.1em;
-                                line-height: 1.2;
-                                text-transform: uppercase;
-                              "
-                            >
-                              Developer
-                            </p>
-                          </div>
-                        </div>
-                        <p
-                          class="has-secondary-color has-text-color has-link-color wp-elements-e3056b2c003e2189852b42a0ae94a720"
-                          style="margin-top: 12px; line-height: 1.55"
-                        >
-                          Seorang developer yang berpengalaman, fokus pada
-                          pengembangan solusi kreatif dan efisien. Mampu bekerja
-                          dalam tim dan beradaptasi dengan cepat terhadap
-                          kebutuhan proyek.
-                        </p>
-                        <h4
-                          class="wp-block-heading has-primary-color has-text-color has-link-color"
-                          style="
-                            margin-top: 12px;
-                            margin-bottom: 0px;
-                            font-size: 16px;
-                            font-style: normal;
-                            font-weight: 400;
-                            letter-spacing: 0em;
-                            line-height: 1.55;
-                            text-transform: capitalize;
-                          "
-                        >
-                          Probolinggo, Jawa timur
-                        </h4>
-                      </div>
-                    </div>
-                    <div class="widget block-9 widget_block">
-                      <div
-                        class="wp-block-group is-style-cs-technologies is-layout-constrained wp-block-group-is-layout-constrained"
-                      >
-                        <h2 class="wp-block-heading">Technologies</h2>
-                        <div
-                          class="wp-block-group is-vertical is-nowrap is-layout-flex wp-container-core-group-is-layout-11 wp-block-group-is-layout-flex"
-                        >
-                          <div
-                            class="wp-block-columns is-not-stacked-on-mobile is-layout-flex wp-container-core-columns-is-layout-7 wp-block-columns-is-layout-flex"
-                          >
-                            <div
-                              class="wp-block-column is-layout-constrained wp-block-column-is-layout-constrained"
-                              style="flex-basis: 48px"
-                            >
-                              <figure
-                                class="wp-block-image size-full is-resized has-custom-border"
-                              >
-                                <img
-                                  loading="lazy"
-                                  decoding="async"
-                                  width="96"
-                                  height="96"
-                                  src="asset/image/tools/vsc.png"
-                                  alt=""
-                                  class="wp-image-517"
-                                  style="
-                                    border-radius: 10px;
-                                    box-shadow: var(
-                                      --wp--preset--shadow--standard
-                                    );
-                                    width: 48px;
-                                  "
-                                />
-                              </figure>
-                            </div>
-                            <div
-                              class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"
-                            >
-                              <div
-                                class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"
-                              >
-                                <h2
-                                  class="wp-block-heading has-primary-color has-text-color has-link-color wp-elements-01b48ca49862dd424e7bd3db021d0c11"
-                                  style="
-                                    margin-bottom: 3px;
-                                    font-size: 18px;
-                                    font-style: normal;
-                                    font-weight: 700;
-                                    letter-spacing: -0.04em;
-                                    line-height: 1.2;
-                                    text-transform: capitalize;
-                                  "
-                                >
-                                  Visual studio Code
-                                </h2>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            class="wp-block-columns is-not-stacked-on-mobile is-layout-flex wp-container-core-columns-is-layout-8 wp-block-columns-is-layout-flex"
-                          >
-                            <div
-                              class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"
-                              style="flex-basis: 48px"
-                            >
-                              <figure
-                                class="wp-block-image size-full is-resized has-custom-border"
-                              >
-                                <img
-                                  loading="lazy"
-                                  decoding="async"
-                                  width="96"
-                                  height="96"
-                                  src="asset/image/tools/notion.webp"
-                                  alt=""
-                                  class="wp-image-518"
-                                  style="
-                                    border-radius: 10px;
-                                    box-shadow: var(
-                                      --wp--preset--shadow--standard
-                                    );
-                                    width: 48px;
-                                  "
-                                />
-                              </figure>
-                            </div>
-                            <div
-                              class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"
-                            >
-                              <div
-                                class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"
-                              >
-                                <h2
-                                  class="wp-block-heading has-primary-color has-text-color has-link-color wp-elements-e0699060d2a69dc394983b27e2c43a0a"
-                                  style="
-                                    margin-bottom: 3px;
-                                    font-size: 18px;
-                                    font-style: normal;
-                                    font-weight: 700;
-                                    letter-spacing: -0.04em;
-                                    line-height: 1.2;
-                                    text-transform: capitalize;
-                                  "
-                                >
-                                  Notion
-                                </h2>
-                              </div>
-                            </div>
-                          </div>
-                          <br />
-                          <div
-                            class="wp-block-columns is-not-stacked-on-mobile is-layout-flex wp-container-core-columns-is-layout-9 wp-block-columns-is-layout-flex"
-                          >
-                            <div
-                              class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"
-                              style="flex-basis: 48px"
-                            >
-                              <figure
-                                class="wp-block-image size-full is-resized has-custom-border"
-                              >
-                                <img
-                                  loading="lazy"
-                                  decoding="async"
-                                  width="96"
-                                  height="96"
-                                  src="asset/image/tools/github.png"
-                                  alt=""
-                                  class="wp-image-519"
-                                  style="
-                                    border-radius: 10px;
-                                    box-shadow: var(
-                                      --wp--preset--shadow--standard
-                                    );
-                                    width: 55px;
-                                  "
-                                />
-                              </figure>
-                            </div>
-                            <div
-                              class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"
-                            >
-                              <div
-                                class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"
-                              >
-                                <h2
-                                  class="wp-block-heading has-primary-color has-text-color has-link-color wp-elements-5250ccc0b2c145e9cf4b6180464beaa4"
-                                  style="
-                                    margin-bottom: 3px;
-                                    font-size: 18px;
-                                    font-style: normal;
-                                    font-weight: 700;
-                                    letter-spacing: -0.04em;
-                                    line-height: 1.2;
-                                    text-transform: capitalize;
-                                  "
-                                >
-                                  Github
-                                </h2>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            class="wp-block-columns is-not-stacked-on-mobile is-layout-flex wp-container-core-columns-is-layout-10 wp-block-columns-is-layout-flex"
-                          >
-                            <div
-                              class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"
-                              style="flex-basis: 48px"
-                            >
-                              <figure
-                                class="wp-block-image size-full is-resized has-custom-border"
-                              >
-                                <img
-                                  loading="lazy"
-                                  decoding="async"
-                                  width="96"
-                                  height="96"
-                                  src="asset/image/tools/figma.png"
-                                  alt=""
-                                  class="wp-image-516"
-                                  style="
-                                    border-radius: 10px;
-                                    box-shadow: var(
-                                      --wp--preset--shadow--standard
-                                    );
-                                    width: 80px;
-                                  "
-                                />
-                              </figure>
-                            </div>
-                            <div
-                              class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"
-                            >
-                              <div
-                                class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"
-                              >
-                                <h2
-                                  class="wp-block-heading has-primary-color has-text-color has-link-color wp-elements-2b1484c9e34ff7981f7bc756a39684ed"
-                                  style="
-                                    margin-bottom: 3px;
-                                    font-size: 18px;
-                                    font-style: normal;
-                                    font-weight: 700;
-                                    letter-spacing: -0.04em;
-                                    line-height: 1.2;
-                                    text-transform: capitalize;
-                                  "
-                                >
-                                  Figma
-                                </h2>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </aside>
-              </div>
-            </div>
-          </div>
-        </main>
-        <footer class="cs-footer">
-          <div class="cs-container">
-            <div class="cs-footer__item">
-              <div class="cs-footer__item-inner">
-                <div class="cs-footer__col cs-col-left">
-                  <div class="cs-logo">
-                    <a
-                      class="cs-footer__logo cs-logo-default"
-                      href="index.html"
-                    >
-                      <img
-                        src="asset/image/logo.png"
-                        alt="Catatan Kader"
-                        width="131"
-                        height="38"
-                      />
-                    </a>
-                    <a class="cs-footer__logo cs-logo-dark" href="index.html">
-                      <img src="asset/image/logo-dark.png" alt="Catatan Kader" width="131" height="38"  />
-                    </a>
-                  </div>
-                  <div class="cs-footer__desc">
-                    Selamat datang di dunia pemrograman, tempat di mana
-                    kreativitas dan logika berpadu. Di sini, kita menjelajahi
-                    keajaiban kode dan membangun solusi yang membuat hidup lebih
-                    mudah. Ngoding itu bukan soal mengetik, tapi tentang
-                    berpikir logis!
-                  </div>
-                  <div class="cs-social"></div>
-                </div>
-                <div class="cs-footer__col cs-col-right">
-                  <div class="cs-footer__nav-menu"></div>
-                </div>
-              </div>
-              <div class="cs-footer__item-inner-bottom">
-                <div class="cs-footer__copyright">
-                  © 2024 — Catatan Kader. All Rights Reserved.
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-        <button
-          class="cs-scroll-top"
-          role="button"
-          aria-label="Scroll to top button"
-        >
-          <div class="cs-scroll-top-progress mt-5 px-5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="currentColor" d="m12 7l5 5h-3v4h-4v-4H7zm0 15A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10a10 10 0 0 1-10 10m0-2a8 8 0 0 0 8-8a8 8 0 0 0-8-8a8 8 0 0 0-8 8a8 8 0 0 0 8 8"/></svg>
-          </div>
-        </button>
+      <h1 class="hero-title">Arsitektur, Kode & <br><span class="typing-box" id="typing-text"></span><span
+          class="cursor"></span></h1>
+      <p class="hero-desc">Platform catatan digital pribadi. Mendokumentasikan perjalanan rekayasa perangkat lunak,
+        penyelesaian masalah algoritma, dan desain sistem modern.</p>
+      <div class="tech-stack">
+        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/bootstrap.png" alt="Bootstrap"></div>
+        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/laravel.png" alt="Laravel"></div>
+        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/next.png" alt="Next.js"></div>
+        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/php.png" alt="PHP"></div>
+        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/python.png" alt="Python"></div>
+        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/react.png" alt="React"></div>
+        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/taildwind.png" alt="Tailwind"></div>
       </div>
     </div>
-    <script
-      src="wp-includes/js/dist/hooks.min4fdd.js?ver=4d63a3d491d11ffd8ac6"
-      id="wp-hooks-js"
-    ></script>
-    <script
-      src="wp-includes/js/dist/i18n.minc33c.js?ver=5e580eb46a90c2b997e6"
-      id="wp-i18n-js"
-    ></script>
-    <script
-      defer
-      id="wp-i18n-js-after"
-      src="data:text/javascript;base64,CndwLmkxOG4uc2V0TG9jYWxlRGF0YSggeyAndGV4dCBkaXJlY3Rpb25cdTAwMDRsdHInOiBbICdsdHInIF0gfSApOwo="
-    ></script>
-    <script
-      defer
-      src="wp-content/cache/autoptimize/2/js/autoptimize_single_2e187162915b1d22fd4558fee30f561337ad.js?ver=6.0.1"
-      id="swv-js"
-    ></script>
-    <script
-      defer
-      id="contact-form-7-js-before"
-      src="data:text/javascript;base64,CnZhciB3cGNmNyA9IHsKICAgICJhcGkiOiB7CiAgICAgICAgInJvb3QiOiAiaHR0cHM6XC9cL3JldmlzaW9uLmNvZGVzdXBwbHkuY29cL3JldmlzaW9uXC93cC1qc29uXC8iLAogICAgICAgICJuYW1lc3BhY2UiOiAiY29udGFjdC1mb3JtLTdcL3YxIgogICAgfQp9Owo="
-    ></script>
-    <script
-      defer
-      src="wp-content/cache/autoptimize/2/js/autoptimize_single_2912c657d0592cc532dff73d0d2ce7bb37ad.js?ver=6.0.1"
-      id="contact-form-7-js"
-    ></script>
-    <script
-      defer
-      id="csco-scripts-js-extra"
-      src="data:text/javascript;base64,CnZhciBjc0xvY2FsaXplID0geyJzaXRlU2NoZW1lTW9kZSI6InN5c3RlbSIsInNpdGVTY2hlbWVUb29nbGUiOiIxIn07Cg=="
-    ></script>
-    <script
-      defer
-      src="wp-content/cache/autoptimize/2/js/autoptimize_single_73784e0eb746f4fbcf29a1ffe63129b6f269.js?ver=1.0.1"
-      id="csco-scripts-js"
-    ></script>
-  </body>
+  </section>
+
+  <div class="container main-grid">
+    <main class="content-area">
+      <div class="section-head">
+        <h2 class="section-title">Eksplorasi Teknis</h2>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">Semua Data</button>
+          <button class="filter-btn" data-filter="laravel">Laravel</button>
+          <button class="filter-btn" data-filter="react">React Ecosystem</button>
+          <button class="filter-btn" data-filter="python">Python</button>
+          <button class="filter-btn" data-filter="php">PHP</button>
+          <button class="filter-btn" data-filter="ui">UI & Styling</button>
+          <button class="filter-btn" data-filter="system">System Design</button>
+        </div>
+      </div>
+
+      <div class="skeleton-grid" id="skeleton-grid">
+        <div class="skeleton">
+          <div class="sk-anim sk-img"></div>
+          <div class="sk-anim sk-tag"></div>
+          <div class="sk-anim sk-title"></div>
+          <div class="sk-anim sk-title-2"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-btn"></div>
+        </div>
+        <div class="skeleton">
+          <div class="sk-anim sk-img"></div>
+          <div class="sk-anim sk-tag"></div>
+          <div class="sk-anim sk-title"></div>
+          <div class="sk-anim sk-title-2"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-btn"></div>
+        </div>
+        <div class="skeleton">
+          <div class="sk-anim sk-img"></div>
+          <div class="sk-anim sk-tag"></div>
+          <div class="sk-anim sk-title"></div>
+          <div class="sk-anim sk-title-2"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-btn"></div>
+        </div>
+        <div class="skeleton">
+          <div class="sk-anim sk-img"></div>
+          <div class="sk-anim sk-tag"></div>
+          <div class="sk-anim sk-title"></div>
+          <div class="sk-anim sk-title-2"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-btn"></div>
+        </div>
+        <div class="skeleton">
+          <div class="sk-anim sk-img"></div>
+          <div class="sk-anim sk-tag"></div>
+          <div class="sk-anim sk-title"></div>
+          <div class="sk-anim sk-title-2"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-btn"></div>
+        </div>
+        <div class="skeleton">
+          <div class="sk-anim sk-img"></div>
+          <div class="sk-anim sk-tag"></div>
+          <div class="sk-anim sk-title"></div>
+          <div class="sk-anim sk-title-2"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-text"></div>
+          <div class="sk-anim sk-btn"></div>
+        </div>
+      </div>
+
+      <div class="cards-grid" id="cards-grid" style="display: none;">
+        <article class="card" data-category="laravel">
+          <div class="card-image"><img src="asset/image/course/laravel/instalasi.jpeg" alt="Laravel Setup"></div>
+          <div class="card-content">
+            <div class="card-tag">Laravel</div>
+            <h2 class="card-title"><a href="module/laravel-setup.html">Standardisasi Environment Laravel 11 Skala Produksi</a>
+            </h2>
+            <p class="card-excerpt">Mendokumentasikan konfigurasi krusial pada level infrastruktur. Meliputi tuning
+              koneksi database, manajemen antrean tingkat lanjut, dan pembatasan akses direktori publik untuk mencegah
+              celah keamanan dasar.</p>
+            <a href="module/laravel-setup.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="system">
+          <div class="card-image"><img src="asset/image/course/laravel/mvc.png" alt="MVC Architecture"></div>
+          <div class="card-content">
+            <div class="card-tag">System Design</div>
+            <h2 class="card-title"><a href="module/mvc-pattern.html">Dekonstruksi Pola MVC untuk Aplikasi Monolitik</a></h2>
+            <p class="card-excerpt">Studi mendalam memisahkan controller yang gemuk menjadi service class yang dapat
+              diuji (testable). Arsitektur ini menggunakan repository pattern untuk memisahkan logika Eloquent dari
+              respon HTTP.</p>
+            <a href="module/mvc-pattern.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="react">
+          <div class="card-image"><img src="asset/image/course/react/instalasi.webp" alt="React Vite"></div>
+          <div class="card-content">
+            <div class="card-tag">React</div>
+            <h2 class="card-title"><a href="module/react-vite.html">Eksekusi Frontend Modern via Vite & TypeScript</a></h2>
+            <p class="card-excerpt">Panduan teknis migrasi bundler dari Webpack ke ekosistem Vite. Menyertakan
+              konfigurasi alias import yang absolut, integrasi strict mode pada TypeScript, dan linting otomatis
+              menggunakan pre-commit hooks.</p>
+            <a href="module/react-vite.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="react">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/next.png" alt="Next SSR"></div>
+          <div class="card-content">
+            <div class="card-tag">Next.js</div>
+            <h2 class="card-title"><a href="module/nextjs-ssr.html">Implementasi Server Components di Next.js 14</a></h2>
+            <p class="card-excerpt">Bagaimana paradigma komponen server mengubah cara kita merender antarmuka. Catatan
+              ini mengupas tuntas teknik revalidasi cache, streaming SSR, dan pemisahan state klien yang kompleks.</p>
+            <a href="module/nextjs-ssr.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="python">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/python.png" alt="Python Data"></div>
+          <div class="card-content">
+            <div class="card-tag">Python</div>
+            <h2 class="card-title"><a href="module/python-data.html">Pipeline ETL Sederhana dengan Python Pandas</a></h2>
+            <p class="card-excerpt">Dokumentasi pembuatan skrip Extract, Transform, Load untuk membersihkan jutaan baris
+              data mentah. Memanfaatkan memori secara efisien dan menyediakan antarmuka API menggunakan FastAPI.</p>
+            <a href="module/python-data.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="ui">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/taildwind.png" alt="Tailwind CSS"></div>
+          <div class="card-content">
+            <div class="card-tag">UI / Styling</div>
+            <h2 class="card-title"><a href="module/tailwind-system.html">Membangun Engine Token Desain via Tailwind</a></h2>
+            <p class="card-excerpt">Pendekatan arsitektural dalam mengatur warna, spasi, dan tipografi agar konsisten
+              melintasi berbagai platform. Fokus pada kustomisasi konfigurasi inti dan pembuatan plugin plugin kustom.
+            </p>
+            <a href="module/tailwind-system.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="php">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/php.png" alt="PHP Security"></div>
+          <div class="card-content">
+            <div class="card-tag">PHP</div>
+            <h2 class="card-title"><a href="module/php-security.html">Protokol Keamanan Wajib untuk Sistem Legacy PHP</a></h2>
+            <p class="card-excerpt">Langkah taktis menutup celah kerentanan pada sistem tanpa framework. Fokus pada
+              injeksi SQL, token anti-CSRF, parameterisasi PDO, dan implementasi header keamanan HTTP yang ketat.</p>
+            <a href="module/php-security.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="ui">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/bootstrap.png" alt="Bootstrap Migration">
+          </div>
+          <div class="card-content">
+            <div class="card-tag">UI / Styling</div>
+            <h2 class="card-title"><a href="module/bootstrap-migration.html">Refactoring Visual: Bootstrap ke Utility-First</a>
+            </h2>
+            <p class="card-excerpt">Jurnal teknis melepaskan ketergantungan pada komponen pre-built. Proses pemetaan
+              utility class, pengelolaan state aktif, dan pengurangan ukuran CSS bundle secara drastis.</p>
+            <a href="module/bootstrap-migration.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="laravel">
+          <div class="card-image"><img src="asset/image/course/laravel/instalasi.jpeg" alt="Laravel API"></div>
+          <div class="card-content">
+            <div class="card-tag">Laravel</div>
+            <h2 class="card-title"><a href="module/laravel-api.html">Desain Kontrak RESTful API yang Skalabel</a></h2>
+            <p class="card-excerpt">Praktik terbaik mendesain endpoint API. Menggunakan form request untuk validasi, API
+              resource untuk serialisasi, dan pemanfaatan sanctum untuk autentikasi token SPA.</p>
+            <a href="module/laravel-api.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="react">
+          <div class="card-image"><img src="asset/image/course/react/instalasi.webp" alt="React State"></div>
+          <div class="card-content">
+            <div class="card-tag">React</div>
+            <h2 class="card-title"><a href="module/react-state.html">Manajemen Memori Re-render pada React Context</a></h2>
+            <p class="card-excerpt">Kajian mendalam mencegah re-render yang tidak perlu saat menggunakan Context API.
+              Pendekatan isolasi state, penggunaan memoization, dan kapan saatnya beralih ke Redux atau Zustand.</p>
+            <a href="module/react-state.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="react">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/react.png" alt="React Native"></div>
+          <div class="card-content">
+            <div class="card-tag">React Native</div>
+            <h2 class="card-title"><a href="module/react-native.html">Optimasi Frame Rate Aplikasi Mobile Lintas Platform</a>
+            </h2>
+            <p class="card-excerpt">Teknik mengurai kemacetan pada jembatan JavaScript. Fokus pada penggunaan Worklets
+              di Reanimated 2 dan implementasi struktur data untuk merender daftar panjang tanpa lag.</p>
+            <a href="module/react-native.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="python">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/python.png" alt="Python Scripting"></div>
+          <div class="card-content">
+            <div class="card-tag">Python</div>
+            <h2 class="card-title"><a href="module/python-devops.html">Sistem Monitoring Server Mandiri via Scripting</a></h2>
+            <p class="card-excerpt">Rangkaian skrip bash dan python untuk memantau lonjakan CPU, kapasitas penyimpanan,
+              dan melakukan rotasi log otomatis. Terintegrasi langsung dengan notifikasi webhook ke Telegram.</p>
+            <a href="module/python-devops.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="react">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/next.png" alt="Next.js SEO"></div>
+          <div class="card-content">
+            <div class="card-tag">Next.js</div>
+            <h2 class="card-title"><a href="module/nextjs-seo.html">Arsitektur Metadata Dinamis untuk Mesin Pencari</a></h2>
+            <p class="card-excerpt">Menghasilkan Open Graph images secara on-the-fly, mengelola sitemap berukuran masif,
+              dan mengimplementasikan schema markup JSON-LD tingkat lanjut pada aplikasi Next.js.</p>
+            <a href="module/nextjs-seo.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="php">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/php.png" alt="PHP Composer"></div>
+          <div class="card-content">
+            <div class="card-tag">PHP</div>
+            <h2 class="card-title"><a href="module/php-composer.html">Menguasai Manajemen Dependency Composer</a></h2>
+            <p class="card-excerpt">Penyelesaian konflik versi package, pemanfaatan classmap dan autoloading PSR-4,
+              serta bagaimana membuat arsitektur plugin modular murni berbasis autoload composer.</p>
+            <a href="module/php-composer.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="system">
+          <div class="card-image"><img src="asset/image/leangue_pemrograman/laravel.png" alt="Laravel Queue"></div>
+          <div class="card-content">
+            <div class="card-tag">System Design</div>
+            <h2 class="card-title"><a href="module/laravel-queue.html">Isolasi Beban Kerja Menggunakan Redis Queue</a></h2>
+            <p class="card-excerpt">Desain topologi antrean untuk menangani traffic tinggi. Penjelasan detail mengenai
+              pemisahan worker berdasarkan prioritas tugas dan metode penanganan proses yang gagal (retry mechanism).
+            </p>
+            <a href="module/laravel-queue.html" class="card-action">Baca Analisis</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </main>
+
+    <aside>
+      <div class="sidebar">
+        <div class="widget">
+          <div class="profile">
+            <img src="asset/image/im.jpg" alt="Abdul Kader" class="profile-img">
+            <h3 class="profile-name">Abdul Kader</h3>
+            <p class="profile-role">Software Engineer</p>
+            <p class="profile-desc">Fokus pada penyusunan basis kode yang bersih, perancangan arsitektur berkinerja
+              tinggi, serta eksplorasi teknologi backend dan antarmuka modern.</p>
+          </div>
+        </div>
+        <div class="widget">
+          <h3 class="widget-title">Core Toolkit</h3>
+          <div class="tools-grid">
+            <div class="tool">
+              <div class="tool-box"><img src="asset/image/tools/vsc.png" alt="VS Code"></div>
+              <span>Code</span>
+            </div>
+            <div class="tool">
+              <div class="tool-box"><img src="asset/image/tools/notion.webp" alt="Notion"></div>
+              <span>Docs</span>
+            </div>
+            <div class="tool">
+              <div class="tool-box"><img src="asset/image/tools/github.png" alt="Github"></div>
+              <span>Repo</span>
+            </div>
+            <div class="tool">
+              <div class="tool-box"><img src="asset/image/tools/figma.png" alt="Figma"></div>
+              <span>Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <img src="asset/image/logo-dark.png" alt="Catatan Kader" class="footer-logo">
+      <p class="footer-text">Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis
+        logika, serta standarisasi implementasi sistem teknologi.</p>
+      <p class="footer-copy">&copy; 2026 Catatan Kader. Deployment Active.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 20) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      const texts = ["Arsitektur Web.", "Desain Sistem.", "Logika Skrip.", "Clean Code."];
+      const typeTarget = document.getElementById("typing-text");
+      let textIdx = 0;
+      let charIdx = 0;
+
+      function typing() {
+        if (charIdx < texts[textIdx].length) {
+          typeTarget.textContent += texts[textIdx].charAt(charIdx);
+          charIdx++;
+          setTimeout(typing, 80);
+        } else {
+          setTimeout(erasing, 2000);
+        }
+      }
+
+      function erasing() {
+        if (charIdx > 0) {
+          typeTarget.textContent = texts[textIdx].substring(0, charIdx - 1);
+          charIdx--;
+          setTimeout(erasing, 40);
+        } else {
+          textIdx++;
+          if (textIdx >= texts.length) textIdx = 0;
+          setTimeout(typing, 500);
+        }
+      }
+      setTimeout(typing, 500);
+
+      const ITEMS_PER_PAGE = 6;
+      let activePage = 1;
+      let activeFilter = 'all';
+      const allCards = Array.from(document.querySelectorAll('.card'));
+      const paginationBox = document.getElementById('pagination');
+      const cardsGrid = document.getElementById('cards-grid');
+      const skeletonGrid = document.getElementById('skeleton-grid');
+
+      function triggerSkeletonAndRender() {
+        cardsGrid.style.display = 'none';
+        paginationBox.style.display = 'none';
+        skeletonGrid.style.display = 'grid';
+
+        const sectionHead = document.querySelector('.section-head');
+        if (window.scrollY > sectionHead.offsetTop) {
+          const y = sectionHead.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        setTimeout(() => {
+          skeletonGrid.style.display = 'none';
+          cardsGrid.style.display = 'grid';
+          paginationBox.style.display = 'flex';
+          renderView();
+        }, 800);
+      }
+
+      function renderView() {
+        const filtered = allCards.filter(card => {
+          return activeFilter === 'all' || card.getAttribute('data-category') === activeFilter;
+        });
+
+        const maxPage = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+        if (activePage > maxPage && maxPage > 0) activePage = maxPage;
+        if (maxPage === 0) activePage = 1;
+
+        const start = (activePage - 1) * ITEMS_PER_PAGE;
+        const end = start + ITEMS_PER_PAGE;
+
+        allCards.forEach(card => {
+          card.style.display = 'none';
+          card.classList.remove('show');
+        });
+
+        filtered.slice(start, end).forEach((card, i) => {
+          card.style.display = 'flex';
+          card.style.animationDelay = `${i * 0.1}s`;
+          setTimeout(() => {
+            card.classList.add('show');
+          }, 20);
+        });
+
+        buildPagination(maxPage);
+      }
+
+      function buildPagination(maxPage) {
+        paginationBox.innerHTML = '';
+        if (maxPage <= 1) return;
+
+        const prev = document.createElement('button');
+        prev.className = `page-btn text-btn ${activePage === 1 ? 'disabled' : ''}`;
+        prev.innerHTML = 'Prev';
+        prev.onclick = () => {
+          if (activePage > 1) {
+            activePage--;
+            triggerSkeletonAndRender();
+          }
+        };
+        paginationBox.appendChild(prev);
+
+        for (let i = 1; i <= maxPage; i++) {
+          const btn = document.createElement('button');
+          btn.className = `page-btn ${activePage === i ? 'active' : ''}`;
+          btn.innerText = i;
+          btn.onclick = () => {
+            if (activePage !== i) {
+              activePage = i;
+              triggerSkeletonAndRender();
+            }
+          };
+          paginationBox.appendChild(btn);
+        }
+
+        const next = document.createElement('button');
+        next.className = `page-btn text-btn ${activePage === maxPage ? 'disabled' : ''}`;
+        next.innerHTML = 'Next';
+        next.onclick = () => {
+          if (activePage < maxPage) {
+            activePage++;
+            triggerSkeletonAndRender();
+          }
+        };
+        paginationBox.appendChild(next);
+      }
+
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (activeFilter === btn.getAttribute("data-filter")) return;
+          filterButtons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeFilter = btn.getAttribute("data-filter");
+          activePage = 1;
+          triggerSkeletonAndRender();
+        });
+      });
+
+      triggerSkeletonAndRender();
+    });
+  </script>
+</body>
+
 </html>
