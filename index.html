@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id-ID">
+<html lang="id-ID" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8">
@@ -12,1103 +12,484 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
     rel="stylesheet">
-  <style>
-    :root {
-      --bg-main: #fafafa;
-      --bg-card: #ffffff;
-      --bg-nav: rgba(255, 255, 255, 0.7);
-      --text-100: #0f172a;
-      --text-200: #334155;
-      --text-300: #64748b;
-      --border-color: #e2e8f0;
-      --border-hover: #cbd5e1;
-      --brand: #6366f1;
-      --brand-hover: #4f46e5;
-      --brand-light: #e0e7ff;
-      --radius-sm: 8px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-      --shadow-nav: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-main: #09090b;
-        --bg-card: #18181b;
-        --bg-nav: rgba(24, 24, 27, 0.7);
-        --text-100: #f8fafc;
-        --text-200: #cbd5e1;
-        --text-300: #94a3b8;
-        --border-color: #27272a;
-        --border-hover: #3f3f46;
-        --brand: #818cf8;
-        --brand-hover: #6366f1;
-        --brand-light: rgba(99, 102, 241, 0.15);
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Fira Code"', 'monospace'],
+          },
+          colors: {
+            primary: '#3b82f6',
+            dark: '#0f172a',
+          }
+        }
       }
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-main);
-      color: var(--text-100);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-y: scroll;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: all var(--transition);
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .container {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .nav-wrapper {
-      position: fixed;
-      top: 24px;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      padding: 0 24px;
-      pointer-events: none;
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg-nav);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 12px 24px;
-      border-radius: 100px;
-      border: 1px solid var(--border-color);
-      width: 100%;
-      max-width: 1192px;
-      pointer-events: auto;
-      transition: all var(--transition);
-      box-shadow: var(--shadow-nav);
-    }
-
-    .navbar.scrolled {
-      background: var(--bg-card);
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-hover);
-      padding: 10px 24px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo img {
-      height: 36px;
-      transition: transform var(--transition);
-    }
-
-    .logo:hover img {
-      transform: scale(1.1) rotate(-5deg);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-item {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-300);
-      position: relative;
-      padding: 4px 0;
-      transition: color var(--transition);
-    }
-
-    .nav-item::before {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background-color: var(--brand);
-      opacity: 0;
-      transition: all var(--transition);
-    }
-
-    .nav-item:hover {
-      color: var(--text-100);
-    }
-
-    .nav-item:hover::before,
-    .nav-item.active::before {
-      opacity: 1;
-      bottom: 0px;
-    }
-
-    .nav-item.active {
-      color: var(--text-100);
-    }
-
-    .hero {
-      padding: 180px 0 100px 0;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      border-bottom: 1px solid var(--border-color);
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -30%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, var(--brand-light) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: -1;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-200);
-      margin-bottom: 32px;
-      box-shadow: var(--shadow-sm);
-      animation: slideDown 0.6s ease-out;
-    }
-
-    .badge span {
-      width: 8px;
-      height: 8px;
-      background-color: var(--brand);
-      border-radius: 50%;
-      margin-right: 10px;
-      box-shadow: 0 0 10px var(--brand);
-    }
-
-    .hero-title {
-      font-size: clamp(40px, 5vw, 64px);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -2px;
-      color: var(--text-100);
-      margin-bottom: 24px;
-      max-width: 900px;
-      animation: fadeUp 0.8s ease-out;
-    }
-
-    .typing-box {
-      color: var(--brand);
-      display: inline-block;
-      min-height: 1.2em;
-    }
-
-    .cursor {
-      display: inline-block;
-      width: 4px;
-      height: 0.9em;
-      background-color: var(--brand);
-      vertical-align: text-bottom;
-      animation: blink 1s infinite;
-      margin-left: 4px;
-    }
-
-    .hero-desc {
-      font-size: 18px;
-      color: var(--text-300);
-      max-width: 600px;
-      margin-bottom: 48px;
-      animation: fadeUp 1s ease-out;
-    }
-
-    .tech-stack {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeUp 1.2s ease-out;
-    }
-
-    .tech-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      transition: all var(--transition);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .tech-icon:hover {
-      transform: translateY(-8px);
-      border-color: var(--brand);
-      box-shadow: 0 12px 24px var(--brand-light);
-    }
-
-    .tech-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 48px;
-      padding: 80px 0;
-      align-items: start;
-    }
-
-    .section-head {
-      margin-bottom: 40px;
-    }
-
-    .section-title {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 24px;
-    }
-
-    .filters {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      padding: 10px 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-300);
-      cursor: pointer;
-      transition: all var(--transition);
-      font-family: inherit;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--border-hover);
-      color: var(--text-100);
-    }
-
-    .filter-btn.active {
-      background: var(--text-100);
-      border-color: var(--text-100);
-      color: var(--bg-main);
-    }
-
-    .content-area {
-      display: flex;
-      flex-direction: column;
-      min-height: 800px;
-    }
-
-    .cards-grid,
-    .skeleton-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      align-items: start;
-    }
-
-    .skeleton-grid {
-      display: none;
-    }
-
-    .card,
-    .skeleton {
-      display: flex;
-      flex-direction: column;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      transition: all var(--transition);
-    }
-
-    .card {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .card.show {
-      animation: cardEnter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-
-    .card:hover {
-      border-color: var(--brand);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-8px);
-    }
-
-    .card-image,
-    .sk-img {
-      width: 100%;
-      height: 220px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 24px;
-    }
-
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .card:hover .card-image img {
-      transform: scale(1.08);
-    }
-
-    .card-content {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .card-tag {
-      display: inline-block;
-      padding: 6px 12px;
-      background: var(--brand-light);
-      color: var(--brand);
-      font-family: 'Fira Code', monospace;
-      font-size: 12px;
-      font-weight: 600;
-      border-radius: 6px;
-      margin-bottom: 16px;
-      align-self: flex-start;
-    }
-
-    .card-title {
-      font-size: 20px;
-      font-weight: 800;
-      line-height: 1.4;
-      letter-spacing: -0.5px;
-      margin-bottom: 16px;
-    }
-
-    .card-excerpt {
-      font-size: 15px;
-      color: var(--text-300);
-      line-height: 1.7;
-      margin-bottom: 24px;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      flex: 1;
-    }
-
-    .card-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-100);
-      margin-top: auto;
-    }
-
-    .card-action::after {
-      content: "→";
-      color: var(--brand);
-      transition: transform var(--transition);
-    }
-
-    .card-action:hover::after {
-      transform: translateX(6px);
-    }
-
-    .sk-anim {
-      background: linear-gradient(90deg, var(--border-color) 25%, var(--border-hover) 50%, var(--border-color) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      border-radius: var(--radius-sm);
-    }
-
-    .sk-tag {
-      height: 28px;
-      width: 100px;
-      margin-bottom: 16px;
-      border-radius: 6px;
-    }
-
-    .sk-title {
-      height: 28px;
-      width: 90%;
-      margin-bottom: 12px;
-    }
-
-    .sk-title-2 {
-      height: 28px;
-      width: 60%;
-      margin-bottom: 24px;
-    }
-
-    .sk-text {
-      height: 16px;
-      width: 100%;
-      margin-bottom: 8px;
-    }
-
-    .sk-btn {
-      height: 20px;
-      width: 120px;
-      margin-top: 24px;
-    }
-
-    .pagination {
-      display: none;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .page-btn {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text-300);
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-
-    .page-btn.text-btn {
-      width: auto;
-      padding: 0 20px;
-    }
-
-    .page-btn:hover:not(.disabled) {
-      border-color: var(--text-100);
-      color: var(--text-100);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .page-btn.active {
-      background: var(--text-100);
-      border-color: var(--text-100);
-      color: var(--bg-main);
-    }
-
-    .page-btn.disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      background: transparent;
-    }
-
-    .sidebar {
-      position: sticky;
-      top: 120px;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    .widget {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-    }
-
-    .widget-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-300);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 24px;
-    }
-
-    .profile {
-      text-align: center;
-    }
-
-    .profile-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 20px auto;
-      border: 1px solid var(--border-color);
-      padding: 4px;
-      background: var(--bg-main);
-    }
-
-    .profile-name {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 4px;
-      letter-spacing: -0.5px;
-    }
-
-    .profile-role {
-      font-size: 14px;
-      color: var(--brand);
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    .profile-desc {
-      font-size: 14px;
-      color: var(--text-300);
-      line-height: 1.6;
-    }
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    .tool {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .tool-box {
-      width: 48px;
-      height: 48px;
-      background: var(--bg-main);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      transition: all var(--transition);
-    }
-
-    .tool:hover .tool-box {
-      border-color: var(--brand);
-      transform: translateY(-4px);
-    }
-
-    .tool span {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-300);
-    }
-
-    .footer {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border-color);
-      padding: 64px 0;
-      text-align: center;
-    }
-
-    .footer-logo {
-      height: 32px;
-      margin: 0 auto 24px auto;
-    }
-
-    .footer-text {
-      color: var(--text-300);
-      max-width: 500px;
-      margin: 0 auto 32px auto;
-      font-size: 15px;
-    }
-
-    .footer-copy {
-      font-family: 'Fira Code', monospace;
-      font-size: 13px;
-      color: var(--text-300);
-    }
-
-    @keyframes blink {
-      50% {
-        opacity: 0;
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer utilities {
+      /* Custom Cursor Animation */
+      .cursor {
+        display: inline-block;
+        width: 3px;
+        height: 1em;
+        background-color: #3b82f6;
+        vertical-align: middle;
+        animation: blink 1s step-end infinite;
       }
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
       }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
+      /* Navbar Scrolled State via JS */
+      .navbar.scrolled {
+        @apply shadow-md bg-white/90 backdrop-blur-md py-3;
       }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      /* Card Entry Animation via JS */
+      .card-item {
+        @apply opacity-0 translate-y-4 transition-all duration-500 ease-out;
       }
-    }
-
-    @keyframes cardEnter {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
+      .card-item.show {
+        @apply opacity-100 translate-y-0;
       }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes shimmer {
-      0% {
-        background-position: 200% 0;
+      /* Active Filter Button */
+      .filter-btn.active {
+        @apply bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200;
       }
 
-      100% {
-        background-position: -200% 0;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 36px;
-      }
-
-      .navbar {
-        border-radius: 16px;
-        padding: 16px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .filters {
-        overflow-x: auto;
-        padding-bottom: 12px;
-        flex-wrap: nowrap;
-      }
-
-      .filter-btn {
-        white-space: nowrap;
-      }
-
-      .cards-grid,
-      .skeleton-grid {
-        grid-template-columns: 1fr;
+      /* Active Pagination Button */
+      .page-btn.active {
+        @apply bg-blue-600 text-white border-blue-600;
       }
     }
   </style>
 </head>
 
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
 
-  <div class="nav-wrapper">
-    <nav class="navbar" id="navbar">
-      <a href="index.html" class="logo">
-        <img src="asset/image/logo.png" alt="Logo">
+  <div class="fixed w-full top-0 z-50 transition-all duration-300 py-5 navbar" id="navbar">
+    <nav class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+
+      <a href="index.html" class="flex items-center group">
+        <img src="asset/image/logo.png" alt="Logo Catatan Kader"
+          class="h-10 md:h-12 w-auto block dark:hidden group-hover:scale-105 transition-transform duration-300">
+        <img src="asset/image/logo-dark.png" alt="Logo Catatan Kader"
+          class="h-10 md:h-12 w-auto hidden dark:block group-hover:scale-105 transition-transform duration-300">
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="nav-item active">Beranda</a></li>
-        <li><a href="cooming_soon/index.html" class="nav-item">Tentang Saya</a></li>
-        <li><a href="contacts/index.html" class="nav-item">Hubungi</a></li>
+
+      <ul class="hidden md:flex gap-8 font-medium text-slate-600">
+        <li><a href="index.html" class="text-blue-600 transition-colors">Beranda</a></li>
+        <!-- <li><a href="aboutus.html" class="hover:text-blue-600 transition-colors">Tentang Saya</a></li>
+        <li><a href="contacts/index.html" class="hover:text-blue-600 transition-colors">Hubungi</a></li> -->
       </ul>
+
+      <button id="mobile-menu-btn"
+        class="md:hidden text-slate-600 hover:text-blue-600 focus:outline-none transition-colors">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
     </nav>
+
+    <div id="mobile-menu"
+      class="hidden md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-t border-slate-100 py-4 px-6 flex flex-col gap-4 font-medium text-slate-600">
+      <a href="index.html" class="text-blue-600 block py-2 border-b border-slate-50">Beranda</a>
+      <!-- <a href="aboutus.html" class="hover:text-blue-600 block py-2 border-b border-slate-50">Tentang Saya</a>
+      <a href="contacts/index.html" class="hover:text-blue-600 block py-2">Hubungi</a> -->
+    </div>
   </div>
 
-  <section class="hero">
-    <div class="container">
-      <div class="badge">
-        <span></span> Status: Tersedia untuk kolaborasi
+  <section class="pt-36 pb-20 px-6 relative overflow-hidden">
+    <div
+      class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob">
+    </div>
+    <div
+      class="absolute top-[20%] right-[-10%] w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000">
+    </div>
+
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-semibold mb-8 animate-fade-in-up">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Status: Tersedia untuk kolaborasi
       </div>
-      <h1 class="hero-title">Arsitektur, Kode & <br><span class="typing-box" id="typing-text"></span><span
-          class="cursor"></span></h1>
-      <p class="hero-desc">Platform catatan digital pribadi. Mendokumentasikan perjalanan rekayasa perangkat lunak,
-        penyelesaian masalah algoritma, dan desain sistem modern.</p>
-      <div class="tech-stack">
-        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/bootstrap.png" alt="Bootstrap"></div>
-        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/laravel.png" alt="Laravel"></div>
-        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/next.png" alt="Next.js"></div>
-        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/php.png" alt="PHP"></div>
-        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/python.png" alt="Python"></div>
-        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/react.png" alt="React"></div>
-        <div class="tech-icon"><img src="asset/image/leangue_pemrograman/taildwind.png" alt="Tailwind"></div>
+      <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+        Arsitektur, Kode & <br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
+          id="typing-text"></span><span class="cursor"></span>
+      </h1>
+      <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+        Platform catatan digital pribadi. Mendokumentasikan perjalanan rekayasa perangkat lunak, penyelesaian masalah
+        algoritma, dan desain sistem modern.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <div title="Bootstrap"
+          class="w-14 h-14 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center hover:-translate-y-2 hover:shadow-md transition-all duration-300 cursor-pointer">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg"
+            alt="Bootstrap" class="w-8 h-8 object-contain">
+        </div>
+        <div title="Laravel"
+          class="w-14 h-14 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center hover:-translate-y-2 hover:shadow-md transition-all duration-300 cursor-pointer">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg"
+            alt="Laravel" class="w-8 h-8 object-contain">
+        </div>
+        <div title="Next.js"
+          class="w-14 h-14 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center hover:-translate-y-2 hover:shadow-md transition-all duration-300 cursor-pointer">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="Next.js"
+            class="w-8 h-8 object-contain">
+        </div>
+        <div title="PHP"
+          class="w-14 h-14 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center hover:-translate-y-2 hover:shadow-md transition-all duration-300 cursor-pointer">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="PHP"
+            class="w-8 h-8 object-contain">
+        </div>
+        <div title="Python"
+          class="w-14 h-14 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center hover:-translate-y-2 hover:shadow-md transition-all duration-300 cursor-pointer">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"
+            class="w-8 h-8 object-contain">
+        </div>
+        <div title="React"
+          class="w-14 h-14 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center hover:-translate-y-2 hover:shadow-md transition-all duration-300 cursor-pointer">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React"
+            class="w-8 h-8 object-contain">
+        </div>
+        <div title="Tailwind CSS"
+          class="w-14 h-14 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center hover:-translate-y-2 hover:shadow-md transition-all duration-300 cursor-pointer">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+            alt="Tailwind CSS" class="w-8 h-8 object-contain">
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="container main-grid">
-    <main class="content-area">
-      <div class="section-head">
-        <h2 class="section-title">Eksplorasi Teknis</h2>
-        <div class="filters">
-          <button class="filter-btn active" data-filter="all">Semua Data</button>
-          <button class="filter-btn" data-filter="laravel">Laravel</button>
-          <button class="filter-btn" data-filter="react">React Ecosystem</button>
-          <button class="filter-btn" data-filter="python">Python</button>
-          <button class="filter-btn" data-filter="php">PHP</button>
-          <button class="filter-btn" data-filter="ui">UI & Styling</button>
-          <button class="filter-btn" data-filter="system">System Design</button>
+  <div class="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 lg:grid-cols-4 gap-12">
+
+    <main class="lg:col-span-3">
+      <div class="section-head mb-8">
+        <h2 class="text-3xl font-bold text-slate-900 mb-6">Eksplorasi Teknis</h2>
+        <div class="filters flex flex-wrap gap-3">
+          <button
+            class="filter-btn active px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            data-filter="all">Semua Data</button>
+          <button
+            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            data-filter="laravel">Laravel</button>
+          <button
+            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            data-filter="react">React</button>
+          <button
+            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            data-filter="python">Python</button>
+          <button
+            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            data-filter="php">PHP</button>
+          <button
+            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            data-filter="ui">UI/UX</button>
+          <button
+            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            data-filter="system">System</button>
         </div>
       </div>
 
-      <div class="skeleton-grid" id="skeleton-grid">
-        <div class="skeleton">
-          <div class="sk-anim sk-img"></div>
-          <div class="sk-anim sk-tag"></div>
-          <div class="sk-anim sk-title"></div>
-          <div class="sk-anim sk-title-2"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-btn"></div>
-        </div>
-        <div class="skeleton">
-          <div class="sk-anim sk-img"></div>
-          <div class="sk-anim sk-tag"></div>
-          <div class="sk-anim sk-title"></div>
-          <div class="sk-anim sk-title-2"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-btn"></div>
-        </div>
-        <div class="skeleton">
-          <div class="sk-anim sk-img"></div>
-          <div class="sk-anim sk-tag"></div>
-          <div class="sk-anim sk-title"></div>
-          <div class="sk-anim sk-title-2"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-btn"></div>
-        </div>
-        <div class="skeleton">
-          <div class="sk-anim sk-img"></div>
-          <div class="sk-anim sk-tag"></div>
-          <div class="sk-anim sk-title"></div>
-          <div class="sk-anim sk-title-2"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-btn"></div>
-        </div>
-        <div class="skeleton">
-          <div class="sk-anim sk-img"></div>
-          <div class="sk-anim sk-tag"></div>
-          <div class="sk-anim sk-title"></div>
-          <div class="sk-anim sk-title-2"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-btn"></div>
-        </div>
-        <div class="skeleton">
-          <div class="sk-anim sk-img"></div>
-          <div class="sk-anim sk-tag"></div>
-          <div class="sk-anim sk-title"></div>
-          <div class="sk-anim sk-title-2"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-text"></div>
-          <div class="sk-anim sk-btn"></div>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="skeleton-grid">
+        <script>
+          for (let i = 0; i < 6; i++) {
+            document.write(`
+              <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 animate-pulse">
+                <div class="bg-slate-200 rounded-xl h-48 mb-4 w-full"></div>
+                <div class="bg-slate-200 h-6 w-1/4 rounded mb-3"></div>
+                <div class="bg-slate-200 h-8 w-3/4 rounded mb-2"></div>
+                <div class="bg-slate-200 h-8 w-1/2 rounded mb-4"></div>
+                <div class="space-y-2 mb-6">
+                  <div class="bg-slate-200 h-4 w-full rounded"></div>
+                  <div class="bg-slate-200 h-4 w-5/6 rounded"></div>
+                </div>
+                <div class="bg-slate-200 h-10 w-1/3 rounded"></div>
+              </div>
+            `);
+          }
+        </script>
       </div>
 
-      <div class="cards-grid" id="cards-grid" style="display: none;">
-        <article class="card" data-category="laravel">
-          <div class="card-image"><img src="asset/image/course/laravel/instalasi.jpeg" alt="Laravel Setup"></div>
-          <div class="card-content">
-            <div class="card-tag">Laravel</div>
-            <h2 class="card-title"><a href="module/laravel-setup.html">Standardisasi Environment Laravel 11 Skala Produksi</a>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="cards-grid" style="display: none;">
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="laravel">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/laravel/instalasi.jpeg" alt="Laravel Setup"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800&h=500'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Laravel</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+              <a href="module/laravel-setup.html">Standardisasi Environment Laravel 11 Skala Produksi</a>
             </h2>
-            <p class="card-excerpt">Mendokumentasikan konfigurasi krusial pada level infrastruktur. Meliputi tuning
-              koneksi database, manajemen antrean tingkat lanjut, dan pembatasan akses direktori publik untuk mencegah
-              celah keamanan dasar.</p>
-            <a href="module/laravel-setup.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="system">
-          <div class="card-image"><img src="asset/image/course/laravel/mvc.png" alt="MVC Architecture"></div>
-          <div class="card-content">
-            <div class="card-tag">System Design</div>
-            <h2 class="card-title"><a href="module/mvc-pattern.html">Dekonstruksi Pola MVC untuk Aplikasi Monolitik</a></h2>
-            <p class="card-excerpt">Studi mendalam memisahkan controller yang gemuk menjadi service class yang dapat
-              diuji (testable). Arsitektur ini menggunakan repository pattern untuk memisahkan logika Eloquent dari
-              respon HTTP.</p>
-            <a href="module/mvc-pattern.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="react">
-          <div class="card-image"><img src="asset/image/course/react/instalasi.webp" alt="React Vite"></div>
-          <div class="card-content">
-            <div class="card-tag">React</div>
-            <h2 class="card-title"><a href="module/react-vite.html">Eksekusi Frontend Modern via Vite & TypeScript</a></h2>
-            <p class="card-excerpt">Panduan teknis migrasi bundler dari Webpack ke ekosistem Vite. Menyertakan
-              konfigurasi alias import yang absolut, integrasi strict mode pada TypeScript, dan linting otomatis
-              menggunakan pre-commit hooks.</p>
-            <a href="module/react-vite.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="react">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/next.png" alt="Next SSR"></div>
-          <div class="card-content">
-            <div class="card-tag">Next.js</div>
-            <h2 class="card-title"><a href="module/nextjs-ssr.html">Implementasi Server Components di Next.js 14</a></h2>
-            <p class="card-excerpt">Bagaimana paradigma komponen server mengubah cara kita merender antarmuka. Catatan
-              ini mengupas tuntas teknik revalidasi cache, streaming SSR, dan pemisahan state klien yang kompleks.</p>
-            <a href="module/nextjs-ssr.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="python">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/python.png" alt="Python Data"></div>
-          <div class="card-content">
-            <div class="card-tag">Python</div>
-            <h2 class="card-title"><a href="module/python-data.html">Pipeline ETL Sederhana dengan Python Pandas</a></h2>
-            <p class="card-excerpt">Dokumentasi pembuatan skrip Extract, Transform, Load untuk membersihkan jutaan baris
-              data mentah. Memanfaatkan memori secara efisien dan menyediakan antarmuka API menggunakan FastAPI.</p>
-            <a href="module/python-data.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="ui">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/taildwind.png" alt="Tailwind CSS"></div>
-          <div class="card-content">
-            <div class="card-tag">UI / Styling</div>
-            <h2 class="card-title"><a href="module/tailwind-system.html">Membangun Engine Token Desain via Tailwind</a></h2>
-            <p class="card-excerpt">Pendekatan arsitektural dalam mengatur warna, spasi, dan tipografi agar konsisten
-              melintasi berbagai platform. Fokus pada kustomisasi konfigurasi inti dan pembuatan plugin plugin kustom.
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
+              Mendokumentasikan konfigurasi krusial pada level infrastruktur. Meliputi tuning koneksi database,
+              manajemen antrean tingkat lanjut...
             </p>
-            <a href="module/tailwind-system.html" class="card-action">Baca Analisis</a>
+            <a href="module/laravel-setup.html"
+              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg>
+            </a>
           </div>
         </article>
 
-        <article class="card" data-category="php">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/php.png" alt="PHP Security"></div>
-          <div class="card-content">
-            <div class="card-tag">PHP</div>
-            <h2 class="card-title"><a href="module/php-security.html">Protokol Keamanan Wajib untuk Sistem Legacy PHP</a></h2>
-            <p class="card-excerpt">Langkah taktis menutup celah kerentanan pada sistem tanpa framework. Fokus pada
-              injeksi SQL, token anti-CSRF, parameterisasi PDO, dan implementasi header keamanan HTTP yang ketat.</p>
-            <a href="module/php-security.html" class="card-action">Baca Analisis</a>
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="system">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/laravel/mvc.png" alt="MVC Architecture"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800&h=500'">
           </div>
-        </article>
-
-        <article class="card" data-category="ui">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/bootstrap.png" alt="Bootstrap Migration">
-          </div>
-          <div class="card-content">
-            <div class="card-tag">UI / Styling</div>
-            <h2 class="card-title"><a href="module/bootstrap-migration.html">Refactoring Visual: Bootstrap ke Utility-First</a>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2 block">System Design</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+              <a href="module/mvc-pattern.html">Dekonstruksi Pola MVC untuk Aplikasi Monolitik</a>
             </h2>
-            <p class="card-excerpt">Jurnal teknis melepaskan ketergantungan pada komponen pre-built. Proses pemetaan
-              utility class, pengelolaan state aktif, dan pengurangan ukuran CSS bundle secara drastis.</p>
-            <a href="module/bootstrap-migration.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="laravel">
-          <div class="card-image"><img src="asset/image/course/laravel/instalasi.jpeg" alt="Laravel API"></div>
-          <div class="card-content">
-            <div class="card-tag">Laravel</div>
-            <h2 class="card-title"><a href="module/laravel-api.html">Desain Kontrak RESTful API yang Skalabel</a></h2>
-            <p class="card-excerpt">Praktik terbaik mendesain endpoint API. Menggunakan form request untuk validasi, API
-              resource untuk serialisasi, dan pemanfaatan sanctum untuk autentikasi token SPA.</p>
-            <a href="module/laravel-api.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="react">
-          <div class="card-image"><img src="asset/image/course/react/instalasi.webp" alt="React State"></div>
-          <div class="card-content">
-            <div class="card-tag">React</div>
-            <h2 class="card-title"><a href="module/react-state.html">Manajemen Memori Re-render pada React Context</a></h2>
-            <p class="card-excerpt">Kajian mendalam mencegah re-render yang tidak perlu saat menggunakan Context API.
-              Pendekatan isolasi state, penggunaan memoization, dan kapan saatnya beralih ke Redux atau Zustand.</p>
-            <a href="module/react-state.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="react">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/react.png" alt="React Native"></div>
-          <div class="card-content">
-            <div class="card-tag">React Native</div>
-            <h2 class="card-title"><a href="module/react-native.html">Optimasi Frame Rate Aplikasi Mobile Lintas Platform</a>
-            </h2>
-            <p class="card-excerpt">Teknik mengurai kemacetan pada jembatan JavaScript. Fokus pada penggunaan Worklets
-              di Reanimated 2 dan implementasi struktur data untuk merender daftar panjang tanpa lag.</p>
-            <a href="module/react-native.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="python">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/python.png" alt="Python Scripting"></div>
-          <div class="card-content">
-            <div class="card-tag">Python</div>
-            <h2 class="card-title"><a href="module/python-devops.html">Sistem Monitoring Server Mandiri via Scripting</a></h2>
-            <p class="card-excerpt">Rangkaian skrip bash dan python untuk memantau lonjakan CPU, kapasitas penyimpanan,
-              dan melakukan rotasi log otomatis. Terintegrasi langsung dengan notifikasi webhook ke Telegram.</p>
-            <a href="module/python-devops.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="react">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/next.png" alt="Next.js SEO"></div>
-          <div class="card-content">
-            <div class="card-tag">Next.js</div>
-            <h2 class="card-title"><a href="module/nextjs-seo.html">Arsitektur Metadata Dinamis untuk Mesin Pencari</a></h2>
-            <p class="card-excerpt">Menghasilkan Open Graph images secara on-the-fly, mengelola sitemap berukuran masif,
-              dan mengimplementasikan schema markup JSON-LD tingkat lanjut pada aplikasi Next.js.</p>
-            <a href="module/nextjs-seo.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="php">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/php.png" alt="PHP Composer"></div>
-          <div class="card-content">
-            <div class="card-tag">PHP</div>
-            <h2 class="card-title"><a href="module/php-composer.html">Menguasai Manajemen Dependency Composer</a></h2>
-            <p class="card-excerpt">Penyelesaian konflik versi package, pemanfaatan classmap dan autoloading PSR-4,
-              serta bagaimana membuat arsitektur plugin modular murni berbasis autoload composer.</p>
-            <a href="module/php-composer.html" class="card-action">Baca Analisis</a>
-          </div>
-        </article>
-
-        <article class="card" data-category="system">
-          <div class="card-image"><img src="asset/image/leangue_pemrograman/laravel.png" alt="Laravel Queue"></div>
-          <div class="card-content">
-            <div class="card-tag">System Design</div>
-            <h2 class="card-title"><a href="module/laravel-queue.html">Isolasi Beban Kerja Menggunakan Redis Queue</a></h2>
-            <p class="card-excerpt">Desain topologi antrean untuk menangani traffic tinggi. Penjelasan detail mengenai
-              pemisahan worker berdasarkan prioritas tugas dan metode penanganan proses yang gagal (retry mechanism).
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
+              Studi mendalam memisahkan controller yang gemuk menjadi service class yang dapat diuji (testable).
+              Arsitektur menggunakan repository pattern...
             </p>
-            <a href="module/laravel-queue.html" class="card-action">Baca Analisis</a>
+            <a href="module/mvc-pattern.html"
+              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg>
+            </a>
           </div>
         </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="react">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/react/instalasi.webp" alt="React Vite"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800&h=500'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-cyan-600 uppercase tracking-wider mb-2 block">React</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+              <a href="module/react-vite.html">Eksekusi Frontend Modern via Vite & TypeScript</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
+              Panduan teknis migrasi bundler dari Webpack ke ekosistem Vite. Menyertakan konfigurasi alias import
+              absolut dan integrasi strict mode...
+            </p>
+            <a href="module/react-vite.html"
+              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="python">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/leangue_pemrograman/python.png" alt="Python Data"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&q=80&w=800&h=500'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-2 block">Python</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+              <a href="module/python-data.html">Pipeline ETL Sederhana dengan Python Pandas</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
+              Dokumentasi pembuatan skrip Extract, Transform, Load untuk membersihkan jutaan baris data mentah secara
+              efisien...
+            </p>
+            <a href="module/python-data.html"
+              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="ui">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/leangue_pemrograman/taildwind.png" alt="Tailwind CSS"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&q=80&w=800&h=500'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-teal-600 uppercase tracking-wider mb-2 block">UI / Styling</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+              <a href="module/tailwind-system.html">Membangun Engine Token Desain via Tailwind</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
+              Pendekatan arsitektural dalam mengatur warna, spasi, dan tipografi agar konsisten melintasi berbagai
+              platform...
+            </p>
+            <a href="module/tailwind-system.html"
+              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="php">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/leangue_pemrograman/php.png" alt="PHP Security"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?auto=format&fit=crop&q=80&w=800&h=500'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2 block">PHP</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+              <a href="module/php-security.html">Protokol Keamanan Wajib untuk Sistem Legacy PHP</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
+              Langkah taktis menutup celah kerentanan pada sistem tanpa framework. Fokus pada injeksi SQL, token
+              anti-CSRF, parameterisasi PDO...
+            </p>
+            <a href="module/php-security.html"
+              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </article>
+
       </div>
 
-      <div class="pagination" id="pagination"></div>
+      <div class="flex justify-center items-center gap-2 mt-12" id="pagination"></div>
     </main>
 
-    <aside>
-      <div class="sidebar">
-        <div class="widget">
-          <div class="profile">
-            <img src="asset/image/im.jpg" alt="Abdul Kader" class="profile-img">
-            <h3 class="profile-name">Abdul Kader</h3>
-            <p class="profile-role">Software Engineer</p>
-            <p class="profile-desc">Fokus pada penyusunan basis kode yang bersih, perancangan arsitektur berkinerja
-              tinggi, serta eksplorasi teknologi backend dan antarmuka modern.</p>
+    <aside class="lg:col-span-1">
+      <div class="sticky top-32 space-y-8">
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
+          <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-slate-50 shadow-inner mb-4">
+            <img src="asset/image/im.jpg" alt="Abdul Kader" class="w-full h-full object-cover"
+              onerror="this.src='https://ui-avatars.com/api/?name=Abdul+Kader&background=0D8ABC&color=fff'">
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Abdul Kader</h3>
+          <p class="text-blue-600 font-medium text-sm mb-4">Software Engineer</p>
+          <p class="text-slate-600 text-sm leading-relaxed text-left">
+            Fokus pada penyusunan basis kode yang bersih, perancangan arsitektur berkinerja tinggi, serta eksplorasi
+            teknologi backend dan antarmuka modern.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <h3 class="text-lg font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">Core Toolkit</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              class="flex flex-col items-center p-3 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+              <div class="w-10 h-10 mb-2 bg-slate-100 rounded flex items-center justify-center">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg"
+                  alt="VS Code" class="w-6 h-6">
+              </div>
+              <span class="text-xs font-medium text-slate-600">Code</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-3 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+              <div class="w-10 h-10 mb-2 bg-slate-100 rounded flex items-center justify-center">
+                <img src="https://cdn.simpleicons.org/notion/000000" alt="Notion" class="w-6 h-6">
+              </div>
+              <span class="text-xs font-medium text-slate-600">Docs</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-3 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+              <div class="w-10 h-10 mb-2 bg-slate-100 rounded flex items-center justify-center">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
+                  alt="Github" class="w-6 h-6">
+              </div>
+              <span class="text-xs font-medium text-slate-600">Repo</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-3 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+              <div class="w-10 h-10 mb-2 bg-slate-100 rounded flex items-center justify-center">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg"
+                  alt="Figma" class="w-6 h-6">
+              </div>
+              <span class="text-xs font-medium text-slate-600">Design</span>
+            </div>
           </div>
         </div>
-        <div class="widget">
-          <h3 class="widget-title">Core Toolkit</h3>
-          <div class="tools-grid">
-            <div class="tool">
-              <div class="tool-box"><img src="asset/image/tools/vsc.png" alt="VS Code"></div>
-              <span>Code</span>
-            </div>
-            <div class="tool">
-              <div class="tool-box"><img src="asset/image/tools/notion.webp" alt="Notion"></div>
-              <span>Docs</span>
-            </div>
-            <div class="tool">
-              <div class="tool-box"><img src="asset/image/tools/github.png" alt="Github"></div>
-              <span>Repo</span>
-            </div>
-            <div class="tool">
-              <div class="tool-box"><img src="asset/image/tools/figma.png" alt="Figma"></div>
-              <span>Design</span>
-            </div>
-          </div>
-        </div>
+
       </div>
     </aside>
+
   </div>
 
-  <footer class="footer">
-    <div class="container">
-      <img src="asset/image/logo-dark.png" alt="Catatan Kader" class="footer-logo">
-      <p class="footer-text">Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis
-        logika, serta standarisasi implementasi sistem teknologi.</p>
-      <p class="footer-copy">&copy; 2026 Catatan Kader. Deployment Active.</p>
+  <footer class="bg-slate-900 text-slate-400 py-12">
+    <div
+      class="max-w-7xl mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="max-w-md">
+        <h2 class="text-2xl font-bold text-white mb-4">Catatan<span class="text-blue-500">Kader</span></h2>
+        <p class="text-sm leading-relaxed mb-4">
+          Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis logika, serta
+          standarisasi implementasi sistem teknologi.
+        </p>
+      </div>
+      <div class="text-sm text-slate-500">
+        <p>&copy; 2026 Catatan Kader. Deployment Active.</p>
+      </div>
     </div>
   </footer>
 
   <script>
+    // Mobile Menu Toggle Logic
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+
+      // Ganti ikon burger ke ikon X (Close) saat menu terbuka
+      if (mobileMenu.classList.contains('hidden')) {
+        menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Ikon Hamburger
+      } else {
+        menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Ikon X
+      }
+    });
     document.addEventListener("DOMContentLoaded", () => {
+      // Navbar Scroll Effect
       const navbar = document.getElementById("navbar");
       window.addEventListener("scroll", () => {
         if (window.scrollY > 20) {
@@ -1118,6 +499,7 @@
         }
       });
 
+      // Typing Effect
       const texts = ["Arsitektur Web.", "Desain Sistem.", "Logika Skrip.", "Clean Code."];
       const typeTarget = document.getElementById("typing-text");
       let textIdx = 0;
@@ -1146,7 +528,8 @@
       }
       setTimeout(typing, 500);
 
-      const ITEMS_PER_PAGE = 6;
+      // Filtering & Pagination Logic
+      const ITEMS_PER_PAGE = 4;
       let activePage = 1;
       let activeFilter = 'all';
       const allCards = Array.from(document.querySelectorAll('.card'));
@@ -1192,10 +575,9 @@
 
         filtered.slice(start, end).forEach((card, i) => {
           card.style.display = 'flex';
-          card.style.animationDelay = `${i * 0.1}s`;
           setTimeout(() => {
             card.classList.add('show');
-          }, 20);
+          }, i * 100);
         });
 
         buildPagination(maxPage);
@@ -1205,9 +587,11 @@
         paginationBox.innerHTML = '';
         if (maxPage <= 1) return;
 
+        const baseBtnClass = "page-btn w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-sm font-semibold transition-colors hover:bg-slate-100 text-slate-600";
+
         const prev = document.createElement('button');
-        prev.className = `page-btn text-btn ${activePage === 1 ? 'disabled' : ''}`;
-        prev.innerHTML = 'Prev';
+        prev.className = `${baseBtnClass} ${activePage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`;
+        prev.innerHTML = '&larr;';
         prev.onclick = () => {
           if (activePage > 1) {
             activePage--;
@@ -1218,7 +602,7 @@
 
         for (let i = 1; i <= maxPage; i++) {
           const btn = document.createElement('button');
-          btn.className = `page-btn ${activePage === i ? 'active' : ''}`;
+          btn.className = `${baseBtnClass} ${activePage === i ? 'active' : ''}`;
           btn.innerText = i;
           btn.onclick = () => {
             if (activePage !== i) {
@@ -1230,8 +614,8 @@
         }
 
         const next = document.createElement('button');
-        next.className = `page-btn text-btn ${activePage === maxPage ? 'disabled' : ''}`;
-        next.innerHTML = 'Next';
+        next.className = `${baseBtnClass} ${activePage === maxPage ? 'opacity-50 cursor-not-allowed' : ''}`;
+        next.innerHTML = '&rarr;';
         next.onclick = () => {
           if (activePage < maxPage) {
             activePage++;
@@ -1245,7 +629,8 @@
       filterButtons.forEach(btn => {
         btn.addEventListener("click", () => {
           if (activeFilter === btn.getAttribute("data-filter")) return;
-          filterButtons.forEach(b => b.classList.remove("active"));
+          filterButtons.forEach(b => b.classList.remove("active", "bg-blue-600", "text-white"));
+
           btn.classList.add("active");
           activeFilter = btn.getAttribute("data-filter");
           activePage = 1;
