@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Halaman Tidak Ditemukan | Kodingin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#4f46e5', // Indigo-600
+                            hover: '#4338ca',
+                            light: '#e0e7ff',
+                            darkLight: 'rgba(79, 70, 229, 0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-[#f8fafc] dark:bg-[#0f1115] text-slate-800 dark:text-slate-200 font-sans antialiased selection:bg-brand selection:text-white">
+
+    <main class="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-brand/5 dark:bg-brand/10 blur-[100px] rounded-full pointer-events-none">
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center">
+            <span
+                class="px-3 py-1 mb-6 text-xs font-bold text-brand bg-brand-light dark:bg-brand-darkLight rounded-full uppercase tracking-wider">
+                Error 404
+            </span>
+
+            <h1
+                class="text-8xl md:text-[9rem] font-extrabold text-slate-900 dark:text-white tracking-tighter leading-none mb-6">
+                4<span class="text-brand">0</span>4 
+            </h1>
+
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4">
+                Oops! Nyasar ya?
+            </h2>
+            <p class="text-base text-slate-600 dark:text-slate-400 max-w-md mb-10 leading-relaxed">
+                Halaman yang kamu cari mungkin sudah dihapus, diubah namanya, atau memang tidak pernah ada. Yuk, kembali
+                ke jalan yang benar!
+            </p>
+
+            <a href="/"
+                class="inline-flex items-center gap-2 px-8 py-3.5 bg-brand hover:bg-brand-hover text-white text-sm font-semibold rounded-xl transition-all hover:-translate-y-0.5 shadow-lg shadow-brand/25">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Kembali ke Beranda
+            </a>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
