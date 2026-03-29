@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul 1: Pondasi OOP PHP - Catatan Kader</title>
+    <title>Modul 3: Keamanan & SQL Injection - Catatan Kader</title>
     <meta name="description"
-        content="Pahami konsep dasar Object-Oriented Programming (OOP) pada PHP: Class, Object, Inheritance, dan Interface sebagai bekal sebelum menggunakan Framework.">
+        content="Panduan aman menyimpan data menggunakan Prepared Statements pada PDO untuk menghindari eksploitasi peretas (SQL Injection).">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,22 +102,22 @@
                 <article id="actual-content" class="hidden opacity-0">
                     <header class="mb-8">
                         <div
-                            class="inline-block px-4 py-1.5 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-mono text-xs font-semibold rounded-full mb-6 ring-1 ring-brand/20">
-                            Backend Engineering / PHP OOP
+                            class="inline-block px-4 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-mono text-xs font-semibold rounded-full mb-6 ring-1 ring-red-500/20">
+                            Backend Engineering / Security
                         </div>
                         <h1
                             class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-8 text-slate-900 dark:text-white">
-                            Modul 1: Pondasi OOP PHP
+                            Modul 3: Keamanan & SQL Injection
                         </h1>
 
                         <div
                             class="relative w-full h-64 md:h-[400px] rounded-3xl overflow-hidden mb-10 shadow-2xl border border-slate-200 dark:border-zinc-800">
-                            <img src="../asset/image/leangue_pemrograman/php.png"
-                                alt="PHP OOP Foundation" class="w-full h-full object-cover">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop"
+                                alt="Cyber Security Concept" class="w-full h-full object-cover">
                             <div class="absolute inset-0 hero-gradient flex flex-col justify-end p-6 md:p-10">
-                                <p class="text-white/70 font-mono text-sm mb-2">Modul 01</p>
-                                <h2 class="text-white text-xl md:text-3xl font-bold italic">"Bekal Wajib Sebelum
-                                    Masuk ke Framework"</h2>
+                                <p class="text-white/70 font-mono text-sm mb-2">Modul 03</p>
+                                <h2 class="text-white text-xl md:text-3xl font-bold italic">"Garis Pertahanan Utama
+                                    Database Anda"</h2>
                             </div>
                         </div>
 
@@ -136,7 +136,7 @@
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                60 Menit Eksekusi
+                                50 Menit Eksekusi
                             </div>
                         </div>
                     </header>
@@ -144,74 +144,95 @@
                     <div
                         class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-[17px] leading-relaxed">
                         <p class="mb-8 font-medium text-lg text-slate-900 dark:text-white">
-                            Pahami konsep Class, Object, Inheritance, dan Interface pada PHP. Modul ini adalah bekal
-                            mutlak sebelum Anda terjun ke dalam Framework modern seperti Laravel yang mengusung
-                            arsitektur berbasis objek secara penuh.
+                            <strong>SQL Injection (SQLi)</strong> adalah teknik eksploitasi di mana peretas menyisipkan
+                            perintah SQL berbahaya melalui input form atau URL. Tanpa penanganan yang tepat, mereka bisa
+                            mencuri, mengubah, hingga menghapus seluruh database Anda.
                         </p>
 
                         <div class="my-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
                             <div
-                                class="inline-block px-4 py-1 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-bold text-[10px] uppercase rounded mb-4 ring-1 ring-brand/20">
-                                Konsep Dasar OOP</div>
+                                class="inline-block px-4 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-bold text-[10px] uppercase rounded mb-4 ring-1 ring-red-500/20">
+                                Anatomi Serangan</div>
                             <h2
                                 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-10 tracking-tighter">
-                                Anatomi Objek di PHP</h2>
+                                Bagaimana Database Dijebol?</h2>
 
                             <h3
                                 class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
                                 <span
-                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">01</span>
-                                Class & Object
+                                    class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center text-sm font-black border border-red-500/20">01</span>
+                                Query yang Rentan (Vulnerable)
                             </h3>
-                            <p class="mb-4 text-sm"><strong>Class</strong> adalah blueprint atau cetakan, sedangkan
-                                <strong>Object</strong> adalah hasil nyata (instansiasi) dari blueprint tersebut. Class
-                                berisi <em>Property</em> (variabel) dan <em>Method</em> (fungsi).</p>
+                            <p class="mb-4 text-sm">Kesalahan paling umum adalah menggabungkan string query secara
+                                langsung dengan input dari user <em>(String Concatenation)</em>.</p>
+
+                            <pre
+                                class="bg-[#1e1e2e] text-red-400 p-6 rounded-xl font-mono text-sm mb-6 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
+// Input dari user (misal dari form login)
+$username = $_POST['username']; // User memasukkan: admin' OR '1'='1
+$password = $_POST['password']; // User memasukkan: sembarang
+
+// ❌ SANGAT BERBAHAYA!
+$sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+$pdo-&gt;query($sql);
+</code></pre>
+                            <p class="mb-10 text-sm italic text-slate-500">Query akhir yang dieksekusi database akan
+                                menjadi: <code
+                                    class="text-red-500">SELECT * FROM users WHERE username = 'admin' OR '1'='1' ...</code>.
+                                Karena '1'='1' selalu BENAR (True), hacker otomatis berhasil login tanpa tahu password!
+                            </p>
+
+                            <h3
+                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-sm font-black border border-emerald-500/20">02</span>
+                                Solusi: Prepared Statements
+                            </h3>
+                            <p class="mb-4 text-sm"><strong>Prepared Statements</strong> memisahkan antara <em>struktur
+                                    instruksi SQL</em> dengan <em>data input</em>. PDO akan memastikan data input
+                                diperlakukan murni sebagai string biasa, bukan sebagai perintah SQL tambahan.</p>
 
                             <pre
                                 class="bg-[#1e1e2e] text-emerald-400 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
-class User {
-    // Property
-    public $nama;
-    
-    // Constructor (Dijalankan otomatis saat object dibuat)
-    public function __construct($nama) {
-        $this-&gt;nama = $nama;
-    }
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-    // Method
-    public function sapa() {
-        return "Halo, nama saya " . $this-&gt;nama;
-    }
-}
+// ✅ AMAN: Gunakan placeholder (?) atau bernama (:username)
+$sql = "SELECT * FROM users WHERE username = :username AND password = :password";
 
-// Membuat Object (Instansiasi)
-$kader = new User("Abdul Kader");
-echo $kader-&gt;sapa(); // Output: Halo, nama saya Abdul Kader
+// 1. Prepare (Siapkan strukturnya)
+$stmt = $pdo-&gt;prepare($sql);
+
+// 2. Execute (Kirimkan datanya)
+$stmt-&gt;execute([
+    'username' =&gt; $username,
+    'password' =&gt; $password
+]);
+
+$user = $stmt-&gt;fetch();
 </code></pre>
 
                             <h3
                                 class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
                                 <span
-                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">02</span>
-                                Inheritance (Pewarisan)
+                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">03</span>
+                                Menyimpan Data Baru (Insert) dengan Aman
                             </h3>
-                            <p class="mb-4 text-sm">Inheritance memungkinkan sebuah Class (Child) mewarisi property dan
-                                method dari Class lain (Parent) menggunakan keyword <code>extends</code>. Ini mencegah
-                                pengulangan kode <em>(DRY - Don't Repeat Yourself)</em>.</p>
+                            <p class="mb-4 text-sm">Metode yang sama wajib digunakan saat melakukan operasi
+                                <code>INSERT</code>, <code>UPDATE</code>, atau <code>DELETE</code>.</p>
 
                             <pre
                                 class="bg-[#1e1e2e] text-blue-300 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
-class Admin extends User {
-    public $role = "Administrator";
+$nama  = $_POST['nama'];
+$email = $_POST['email'];
 
-    public function getRole() {
-        return "Role saya adalah " . $this-&gt;role;
-    }
+$sql = "INSERT INTO kader (nama, email) VALUES (:nama, :email)";
+$stmt = $pdo-&gt;prepare($sql);
+
+// Data akan disanitasi secara otomatis oleh PDO
+if ($stmt-&gt;execute(['nama' =&gt; $nama, 'email' =&gt; $email])) {
+    echo "Data berhasil disimpan dengan aman!";
 }
-
-$adminKader = new Admin("Abdul Kader");
-echo $adminKader-&gt;sapa(); // Memanggil method dari Parent Class
-echo $adminKader-&gt;getRole(); // Memanggil method spesifik Child Class
 </code></pre>
                         </div>
 
@@ -220,54 +241,18 @@ echo $adminKader-&gt;getRole(); // Memanggil method spesifik Child Class
                             <div class="flex items-center gap-2 mb-2">
                                 <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4">
+                                    </path>
                                 </svg>
-                                <span class="font-bold text-slate-900 dark:text-white">Kader Note (Visibility /
-                                    Encapsulation):</span>
+                                <span class="font-bold text-slate-900 dark:text-white">Kader Note (Konteks
+                                    Framework):</span>
                             </div>
-                            <p class="text-[15px] m-0 text-slate-700 dark:text-slate-300">Perhatikan kata
-                                <code>public</code> di atas. Dalam OOP, itu disebut Visibility. Ada 3 jenis:
-                                <strong>Public</strong> (bisa diakses dari mana saja), <strong>Protected</strong> (hanya
-                                bisa diakses di dalam class itu dan turunannya), dan <strong>Private</strong> (hanya
-                                bisa diakses murni di dalam class itu sendiri).</p>
-                        </div>
-
-                        <div class="my-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
-                            <h3
-                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
-                                <span
-                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">03</span>
-                                Interface (Kontrak Data)
-                            </h3>
-                            <p class="mb-4 text-sm"><strong>Interface</strong> ibarat sebuah kontrak pakta. Class apapun
-                                yang mengimplementasikan <em>(implements)</em> interface tersebut, WAJIB memiliki method
-                                yang dideklarasikan di dalamnya. Sangat berguna di Laravel (seperti konsep Repository
-                                Pattern).</p>
-
-                            <pre
-                                class="bg-[#1e1e2e] text-amber-300 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
-interface Logger {
-    public function log($message);
-}
-
-// FileLogger WAJIB memiliki method log()
-class FileLogger implements Logger {
-    public function log($message) {
-        echo "Menyimpan ke file: " . $message;
-    }
-}
-
-// DatabaseLogger WAJIB memiliki method log()
-class DatabaseLogger implements Logger {
-    public function log($message) {
-        echo "Menyimpan ke database: " . $message;
-    }
-}
-
-$logger = new DatabaseLogger();
-$logger-&gt;log("User login berhasil.");
-</code></pre>
-
+                            <p class="text-[15px] m-0 text-slate-700 dark:text-slate-300">Ketika Anda menggunakan
+                                Eloquent ORM di Laravel (contoh: <code>User::where('email', $email)-&gt;first()</code>),
+                                Laravel sudah menggunakan <strong>PDO Prepared Statements</strong> secara *default*.
+                                Namun, pemahaman ini menjadi sangat penting saat Anda terpaksa menulis query manual
+                                menggunakan <code>DB::raw()</code> di Laravel, agar Anda tidak menciptakan celah
+                                keamanan secara tidak sengaja.</p>
                         </div>
 
                     </div>
@@ -275,7 +260,7 @@ $logger-&gt;log("User login berhasil.");
                     <div
                         class="flex flex-col sm:flex-row justify-between items-center mt-12 border-t border-slate-200 dark:border-zinc-800 pt-8 gap-4">
 
-                        <a href="../index.html"
+                         <a href="../index.html"
                             class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 bg-transparent text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-zinc-700 rounded-full font-semibold hover:bg-slate-100 dark:hover:bg-zinc-800 transition-all duration-300">
                             <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -284,16 +269,16 @@ $logger-&gt;log("User login berhasil.");
                             </svg>
                             Kembali ke Beranda
                         </a>
-
-                        <a href="php-2.html"
+<!-- 
+                        <a href="php-4.html"
                             class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 bg-brand text-white border border-transparent rounded-full font-semibold hover:bg-brand-hover hover:-translate-y-1 transition-all duration-300 shadow-sm group">
-                            Lanjut ke Modul 2: Koneksi Database PDO
+                            Lanjut ke Modul 4: Konsep MVC
                             <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </article>
             </main>
@@ -313,8 +298,8 @@ $logger-&gt;log("User login berhasil.");
                             Catatan Kader</h3>
                         <blockquote
                             class="text-[15px] italic text-slate-700 dark:text-slate-300 leading-relaxed mb-4 border-l-4 border-brand pl-4 relative z-10">
-                            "Controller, Model, dan Middleware di Laravel pada dasarnya hanyalah Class PHP biasa. Pahami
-                            OOP, maka memahami Laravel akan jauh lebih mudah."
+                            "Jangan pernah percaya pada input dari user (Never trust user input). Lakukan validasi, dan
+                            selalulah gunakan Prepared Statements."
                         </blockquote>
                         <cite class="block text-right text-sm font-extrabold text-brand not-italic relative z-10">-
                             Abdul Kader</cite>

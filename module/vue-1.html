@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul 1: Pondasi OOP PHP - Catatan Kader</title>
+    <title>Modul 1: Vue 3 & Composition API - Catatan Kader</title>
     <meta name="description"
-        content="Pahami konsep dasar Object-Oriented Programming (OOP) pada PHP: Class, Object, Inheritance, dan Interface sebagai bekal sebelum menggunakan Framework.">
+        content="Membangun antarmuka interaktif menggunakan sintaks Vue 3 yang elegan dan lebih mudah di-maintain dengan Composition API.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], mono: ['"Fira Code"', 'monospace'], },
-                    colors: { brand: { DEFAULT: '#3b82f6', hover: '#2563eb', light: '#eff6ff', dark: '#60a5fa', darkLight: 'rgba(59, 130, 246, 0.15)', } },
+                    colors: { brand: { DEFAULT: '#42b883', hover: '#33a06f', light: '#ecfdf5', dark: '#34d399', darkLight: 'rgba(66, 184, 131, 0.15)', } },
                     animation: { fadeUp: 'fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards', },
                     keyframes: { fadeUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' }, } }
                 }
@@ -103,21 +103,21 @@
                     <header class="mb-8">
                         <div
                             class="inline-block px-4 py-1.5 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-mono text-xs font-semibold rounded-full mb-6 ring-1 ring-brand/20">
-                            Backend Engineering / PHP OOP
+                            Frontend Engineering / Vue.js
                         </div>
                         <h1
                             class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-8 text-slate-900 dark:text-white">
-                            Modul 1: Pondasi OOP PHP
+                            Modul 1: Pengenalan Vue 3 & Composition API
                         </h1>
 
                         <div
                             class="relative w-full h-64 md:h-[400px] rounded-3xl overflow-hidden mb-10 shadow-2xl border border-slate-200 dark:border-zinc-800">
-                            <img src="../asset/image/leangue_pemrograman/php.png"
-                                alt="PHP OOP Foundation" class="w-full h-full object-cover">
+                            <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000&auto=format&fit=crop"
+                                alt="Vue.js Frontend Development" class="w-full h-full object-cover">
                             <div class="absolute inset-0 hero-gradient flex flex-col justify-end p-6 md:p-10">
                                 <p class="text-white/70 font-mono text-sm mb-2">Modul 01</p>
-                                <h2 class="text-white text-xl md:text-3xl font-bold italic">"Bekal Wajib Sebelum
-                                    Masuk ke Framework"</h2>
+                                <h2 class="text-white text-xl md:text-3xl font-bold italic">"Membangun Antarmuka
+                                    Interaktif yang Elegan"</h2>
                             </div>
                         </div>
 
@@ -136,7 +136,7 @@
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                60 Menit Eksekusi
+                                45 Menit Eksekusi
                             </div>
                         </div>
                     </header>
@@ -144,75 +144,78 @@
                     <div
                         class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-[17px] leading-relaxed">
                         <p class="mb-8 font-medium text-lg text-slate-900 dark:text-white">
-                            Pahami konsep Class, Object, Inheritance, dan Interface pada PHP. Modul ini adalah bekal
-                            mutlak sebelum Anda terjun ke dalam Framework modern seperti Laravel yang mengusung
-                            arsitektur berbasis objek secara penuh.
+                            Vue 3 memperkenalkan <strong>Composition API</strong> melalui
+                            <code>&lt;script setup&gt;</code>. Sintaks ini sangat bersih, minim *boilerplate*, dan
+                            membuat penulisan logika JavaScript menjadi lebih natural (sangat mirip dengan *Vanilla JS*
+                            biasa) namun tetap *reactive*.
                         </p>
 
                         <div class="my-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
                             <div
                                 class="inline-block px-4 py-1 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-bold text-[10px] uppercase rounded mb-4 ring-1 ring-brand/20">
-                                Konsep Dasar OOP</div>
+                                Dasar Sintaks Vue 3</div>
                             <h2
                                 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-10 tracking-tighter">
-                                Anatomi Objek di PHP</h2>
+                                Reactivity & Event Handling</h2>
 
                             <h3
                                 class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
                                 <span
                                     class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">01</span>
-                                Class & Object
+                                Struktur Single File Component (SFC)
                             </h3>
-                            <p class="mb-4 text-sm"><strong>Class</strong> adalah blueprint atau cetakan, sedangkan
-                                <strong>Object</strong> adalah hasil nyata (instansiasi) dari blueprint tersebut. Class
-                                berisi <em>Property</em> (variabel) dan <em>Method</em> (fungsi).</p>
+                            <p class="mb-4 text-sm">Dalam Vue, satu file <code>.vue</code> memiliki 3 bagian utama:
+                                <code>&lt;script&gt;</code> untuk logika, <code>&lt;template&gt;</code> untuk HTML, dan
+                                <code>&lt;style&gt;</code> untuk CSS.</p>
 
                             <pre
-                                class="bg-[#1e1e2e] text-emerald-400 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
-class User {
-    // Property
-    public $nama;
-    
-    // Constructor (Dijalankan otomatis saat object dibuat)
-    public function __construct($nama) {
-        $this-&gt;nama = $nama;
-    }
+                                class="bg-[#1e1e2e] text-emerald-400 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;script setup&gt;
+// Di sini tempat logika Javascript
+const namaSistem = "Catatan Kader APP";
+&lt;/script&gt;
 
-    // Method
-    public function sapa() {
-        return "Halo, nama saya " . $this-&gt;nama;
-    }
-}
+&lt;template&gt;
+  &lt;!-- Gunakan kurung kurawal ganda untuk menampilkan variabel --&gt;
+  &lt;h1&gt;Selamat Datang di {{ namaSistem }}&lt;/h1&gt;
+&lt;/template&gt;
 
-// Membuat Object (Instansiasi)
-$kader = new User("Abdul Kader");
-echo $kader-&gt;sapa(); // Output: Halo, nama saya Abdul Kader
+&lt;style scoped&gt;
+/* CSS khusus untuk komponen ini saja */
+h1 { color: #42b883; }
+&lt;/style&gt;
 </code></pre>
 
                             <h3
                                 class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
                                 <span
                                     class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">02</span>
-                                Inheritance (Pewarisan)
+                                Reactivity dengan `ref`
                             </h3>
-                            <p class="mb-4 text-sm">Inheritance memungkinkan sebuah Class (Child) mewarisi property dan
-                                method dari Class lain (Parent) menggunakan keyword <code>extends</code>. Ini mencegah
-                                pengulangan kode <em>(DRY - Don't Repeat Yourself)</em>.</p>
+                            <p class="mb-4 text-sm">Agar variabel HTML bisa berubah secara otomatis saat datanya
+                                berubah, kita membungkus nilai tersebut dengan <code>ref()</code>.</p>
 
                             <pre
-                                class="bg-[#1e1e2e] text-blue-300 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
-class Admin extends User {
-    public $role = "Administrator";
+                                class="bg-[#1e1e2e] text-blue-300 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;script setup&gt;
+import { ref } from 'vue';
 
-    public function getRole() {
-        return "Role saya adalah " . $this-&gt;role;
-    }
-}
+// Membuat variabel reaktif
+const angka = ref(0);
 
-$adminKader = new Admin("Abdul Kader");
-echo $adminKader-&gt;sapa(); // Memanggil method dari Parent Class
-echo $adminKader-&gt;getRole(); // Memanggil method spesifik Child Class
+// Cara mengubah nilainya di dalam script HARUS menggunakan .value
+const tambah = () =&gt; {
+  angka.value++;
+};
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;!-- Di template, TIDAK PERLU pakai .value --&gt;
+    &lt;p&gt;Nilai saat ini: {{ angka }}&lt;/p&gt;
+    &lt;button @click="tambah"&gt;Tambah Angka&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 </code></pre>
+
                         </div>
 
                         <div
@@ -222,52 +225,14 @@ echo $adminKader-&gt;getRole(); // Memanggil method spesifik Child Class
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
-                                <span class="font-bold text-slate-900 dark:text-white">Kader Note (Visibility /
-                                    Encapsulation):</span>
+                                <span class="font-bold text-slate-900 dark:text-white">Kader Note (Composition
+                                    API):</span>
                             </div>
-                            <p class="text-[15px] m-0 text-slate-700 dark:text-slate-300">Perhatikan kata
-                                <code>public</code> di atas. Dalam OOP, itu disebut Visibility. Ada 3 jenis:
-                                <strong>Public</strong> (bisa diakses dari mana saja), <strong>Protected</strong> (hanya
-                                bisa diakses di dalam class itu dan turunannya), dan <strong>Private</strong> (hanya
-                                bisa diakses murni di dalam class itu sendiri).</p>
-                        </div>
-
-                        <div class="my-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
-                            <h3
-                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
-                                <span
-                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">03</span>
-                                Interface (Kontrak Data)
-                            </h3>
-                            <p class="mb-4 text-sm"><strong>Interface</strong> ibarat sebuah kontrak pakta. Class apapun
-                                yang mengimplementasikan <em>(implements)</em> interface tersebut, WAJIB memiliki method
-                                yang dideklarasikan di dalamnya. Sangat berguna di Laravel (seperti konsep Repository
-                                Pattern).</p>
-
-                            <pre
-                                class="bg-[#1e1e2e] text-amber-300 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
-interface Logger {
-    public function log($message);
-}
-
-// FileLogger WAJIB memiliki method log()
-class FileLogger implements Logger {
-    public function log($message) {
-        echo "Menyimpan ke file: " . $message;
-    }
-}
-
-// DatabaseLogger WAJIB memiliki method log()
-class DatabaseLogger implements Logger {
-    public function log($message) {
-        echo "Menyimpan ke database: " . $message;
-    }
-}
-
-$logger = new DatabaseLogger();
-$logger-&gt;log("User login berhasil.");
-</code></pre>
-
+                            <p class="text-[15px] m-0 text-slate-700 dark:text-slate-300">Dulu di Vue 2 kita menggunakan
+                                *Options API* (data, methods, computed). Dengan <code>&lt;script setup&gt;</code> di Vue
+                                3, kodenya jauh lebih sedikit, tidak perlu lagi menggunakan kata kunci
+                                <code>this</code>, dan sangat mudah untuk memecah logika yang panjang ke file terpisah
+                                (Composables).</p>
                         </div>
 
                     </div>
@@ -285,9 +250,9 @@ $logger-&gt;log("User login berhasil.");
                             Kembali ke Beranda
                         </a>
 
-                        <a href="php-2.html"
+                        <a href="vue-2.html"
                             class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 bg-brand text-white border border-transparent rounded-full font-semibold hover:bg-brand-hover hover:-translate-y-1 transition-all duration-300 shadow-sm group">
-                            Lanjut ke Modul 2: Koneksi Database PDO
+                            Lanjut ke Modul 2: Fetch Data & Axios
                             <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -313,12 +278,26 @@ $logger-&gt;log("User login berhasil.");
                             Catatan Kader</h3>
                         <blockquote
                             class="text-[15px] italic text-slate-700 dark:text-slate-300 leading-relaxed mb-4 border-l-4 border-brand pl-4 relative z-10">
-                            "Controller, Model, dan Middleware di Laravel pada dasarnya hanyalah Class PHP biasa. Pahami
-                            OOP, maka memahami Laravel akan jauh lebih mudah."
+                            "Vue.js itu ibarat gabungan kemudahan HTML tradisional dengan kekuatan reaktivitas modern.
+                            Jangan overcomplicate, mulai dari ref() dan event handling dasar."
                         </blockquote>
                         <cite class="block text-right text-sm font-extrabold text-brand not-italic relative z-10">-
                             Abdul Kader</cite>
                     </div>
+
+                    <a href="vue-2.html" class="block group">
+                        <div
+                            class="bg-brand-light dark:bg-brand-darkLight border border-brand/20 rounded-2xl p-6 hover:shadow-md transition-all duration-300">
+                            <h3
+                                class="font-mono text-xs font-semibold text-brand dark:text-brand-dark uppercase tracking-widest mb-2">
+                                Selanjutnya</h3>
+                            <p
+                                class="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-brand transition-colors">
+                                Modul 2: Fetch Data dengan Axios</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Implementasi lifecycle onMounted untuk
+                                mengambil data API.</p>
+                        </div>
+                    </a>
                 </div>
             </aside>
         </div>
