@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id-ID" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 1: Pengenalan & Fundamental PHP - Catatan Kader</title>
+    <meta name="description"
+        content="Panduan dasar PHP: memahami sintaks, variabel, tipe data, dan operator dalam pengembangan web backend.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], mono: ['"Fira Code"', 'monospace'], },
+                    colors: { brand: { DEFAULT: '#3b82f6', hover: '#2563eb', light: '#eff6ff', dark: '#60a5fa', darkLight: 'rgba(59, 130, 246, 0.15)', } },
+                    animation: { fadeUp: 'fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards', },
+                    keyframes: { fadeUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' }, } }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            ::-webkit-scrollbar-thumb {
+                background: #3f3f46;
+            }
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to top, rgba(9, 9, 11, 0.9), transparent);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-slate-50 font-sans antialiased overflow-x-hidden selection:bg-brand selection:text-white relative">
+
+    <div class="fixed w-full top-0 z-[100] transition-all duration-300 py-4 md:py-5 navbar bg-transparent" id="navbar">
+        <nav class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+            <a href="../index.html" class="flex items-center group">
+                <img src="../asset/image/logo.png" alt="Logo Catatan Kader"
+                    class="h-10 md:h-12 w-auto block dark:hidden group-hover:scale-105 transition-transform duration-300">
+                <img src="../asset/image/logo-dark.png" alt="Logo Catatan Kader"
+                    class="h-10 md:h-12 w-auto hidden dark:block group-hover:scale-105 transition-transform duration-300">
+            </a>
+            <ul class="hidden md:flex gap-8 font-medium text-slate-600 dark:text-slate-300">
+                <li><a href="../index.html" class="text-brand dark:text-brand-dark transition-colors">Beranda</a></li>
+            </ul>
+            <button id="mobile-menu-btn"
+                class="md:hidden text-slate-600 dark:text-slate-300 hover:text-brand dark:hover:text-brand-dark focus:outline-none transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+        <div id="mobile-menu"
+            class="hidden absolute top-full left-0 w-full bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md shadow-lg border-t border-slate-100 dark:border-zinc-800 py-4 px-6 flex-col gap-4 font-medium text-slate-600 dark:text-slate-300">
+            <a href="../index.html"
+                class="text-brand dark:text-brand-dark block py-2 border-b border-slate-50 dark:border-zinc-800/50">Beranda</a>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-5 md:px-6 pt-32 md:pt-40 pb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 lg:gap-16 items-start">
+
+            <main class="w-full min-w-0">
+                <div id="skeleton-loader" class="flex flex-col gap-6 w-full">
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-8 w-32 rounded-full"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-12 w-full md:w-5/6 rounded-lg"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-64 w-full rounded-xl my-6"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-4 w-full rounded"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-4 w-5/6 rounded"></div>
+                </div>
+
+                <article id="actual-content" class="hidden opacity-0">
+                    <header class="mb-8">
+                        <div
+                            class="inline-block px-4 py-1.5 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-mono text-xs font-semibold rounded-full mb-6 ring-1 ring-brand/20">
+                            Backend Engineering / PHP Native
+                        </div>
+                        <h1
+                            class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-8 text-slate-900 dark:text-white">
+                            Modul 1: Pengenalan & Fundamental PHP
+                        </h1>
+
+                        <div
+                            class="relative w-full h-64 md:h-[400px] rounded-3xl overflow-hidden mb-10 shadow-2xl border border-slate-200 dark:border-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000&auto=format&fit=crop"
+                                alt="PHP Foundation" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 hero-gradient flex flex-col justify-end p-6 md:p-10">
+                                <p class="text-white/70 font-mono text-sm mb-2">Modul 01</p>
+                                <h2 class="text-white text-xl md:text-3xl font-bold italic">"Memulai Perjalanan
+                                    Server-Side Scripting"</h2>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-wrap items-center gap-6 font-mono text-sm text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-zinc-800 pb-8">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                </svg>
+                                Diperbarui Terakhir
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                45 Menit Eksekusi
+                            </div>
+                        </div>
+                    </header>
+
+                    <div
+                        class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-[17px] leading-relaxed">
+                        <p class="mb-8 font-medium text-lg text-slate-900 dark:text-white">
+                            Selamat datang di Modul 1 PHP Native! Sebelum kita melangkah ke Framework raksasa seperti
+                            Laravel, pemahaman mendalam tentang fundamental PHP adalah mutlak. Di sini kita akan
+                            membedah anatomi dasar dari bahasa skrip paling populer di web ini.
+                        </p>
+
+                        <div class="my-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
+                            <div
+                                class="inline-block px-4 py-1 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-bold text-[10px] uppercase rounded mb-4 ring-1 ring-brand/20">
+                                Konsep Dasar</div>
+                            <h2
+                                class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-10 tracking-tighter">
+                                Anatomi Sintaks PHP</h2>
+
+                            <h3
+                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">01</span>
+                                Tag Pembuka & Penutup
+                            </h3>
+                            <p class="mb-4 text-sm">Setiap kode PHP harus berada di dalam tag
+                                <code>&lt;?php ... ?&gt;</code>. Jika file hanya berisi kode PHP tanpa HTML, praktik
+                                terbaik adalah <strong>tidak menggunakan</strong> tag penutup <code>?&gt;</code> untuk
+                                menghindari error spasi putih (whitespace).
+                            </p>
+
+                            <pre
+                                class="bg-[#1e1e2e] text-emerald-400 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
+// Ini adalah komentar satu baris
+/* Ini adalah komentar
+   multi-baris 
+*/
+
+echo "Halo, Dunia!";
+</code></pre>
+
+                            <h3
+                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">02</span>
+                                Variabel & Deklarasi
+                            </h3>
+                            <p class="mb-4 text-sm">Di PHP, variabel dimulai dengan tanda dolar (<code>$</code>) dan
+                                bersifat <em>Loosely Typed</em> (tidak perlu mendefinisikan tipe data di awal).</p>
+
+                            <pre
+                                class="bg-[#1e1e2e] text-blue-300 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
+$namaLengkap = "Abdul Kader"; // String
+$umur = 24;                  // Integer
+$ipk = 3.85;                 // Float / Double
+$statusAktif = true;         // Boolean
+
+// Menggabungkan string (Concatenation) menggunakan titik (.)
+echo "Nama saya " . $namaLengkap . ", umur saya " . $umur . " tahun.";
+</code></pre>
+                        </div>
+
+                        <div
+                            class="p-6 bg-brand-light dark:bg-brand-darkLight border-l-4 border-brand rounded-r-xl my-12 shadow-sm">
+                            <div class="flex items-center gap-2 mb-2">
+                                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="font-bold text-slate-900 dark:text-white">Kader Note (Penamaan
+                                    Variabel):</span>
+                            </div>
+                            <p class="text-[15px] m-0 text-slate-700 dark:text-slate-300">Variabel PHP bersifat
+                                <em>Case-Sensitive</em>. <code>$Nama</code> dan <code>$nama</code> adalah dua variabel
+                                yang berbeda. Gunakan konvensi <em>camelCase</em> (seperti `$namaLengkap`) atau
+                                <em>snake_case</em> (seperti `$nama_lengkap`) secara konsisten.
+                            </p>
+                        </div>
+
+                        <div class="my-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
+                            <h3
+                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">03</span>
+                                Tipe Data Kompleks & Debugging
+                            </h3>
+                            <p class="mb-4 text-sm">Selain tipe data dasar (skalar), PHP memiliki tipe data
+                                gabungan yaitu <strong>Array</strong> dan <strong>Object</strong>. Untuk mengecek
+                                struktur tipe data ini (debugging), kita wajib tau fungsi <code>var_dump()</code> atau
+                                <code>print_r()</code>.</p>
+
+                            <pre
+                                class="bg-[#1e1e2e] text-amber-300 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;?php
+// Array Index biasa
+$hobi = ["Coding", "Membaca", "Gaming"];
+
+// Array Asosiatif (Key => Value)
+$mahasiswa = [
+    "nim" => "1905001",
+    "nama" => "Abdul Kader",
+    "jurusan" => "Teknik Informatika"
+];
+
+// Menampilkan isi array (Debugging)
+var_dump($mahasiswa); 
+// print_r($hobi); juga sering dipakai
+</code></pre>
+
+                            <h3
+                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">04</span>
+                                Operator Penting
+                            </h3>
+                            <p class="mb-4 text-sm">Dalam PHP kita sering berinteraksi dengan tipe data menggunakan
+                                operator, beberapa yang paling sering digunakan adalah:</p>
+
+                            <ul class="list-disc pl-5 mb-8 text-sm space-y-2">
+                                <li><strong>Aritmatika:</strong> Penjumlahan (<code>+</code>), Pengurangan
+                                    (<code>-</code>), Perkalian (<code>*</code>), Pembagian (<code>/</code>), Modulus
+                                    (<code>%</code>).</li>
+                                <li><strong>Assignment:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>.</li>
+                                <li><strong>Perbandingan:</strong> Sama dengan (<code>==</code>), Identik tipe data
+                                    (<code>===</code>), Tidak sama dengan (<code>!=</code>), Lebih besar/kecil
+                                    (<code>&gt;</code>, <code>&lt;</code>).</li>
+                                <li><strong>Logika:</strong> AND (<code>&&</code>), OR (<code>||</code>), NOT
+                                    (<code>!</code>).</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-center mt-12 border-t border-slate-200 dark:border-zinc-800 pt-8 gap-4">
+
+                        <a href="../index.html"
+                            class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 bg-transparent text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-zinc-700 rounded-full font-semibold hover:bg-slate-100 dark:hover:bg-zinc-800 transition-all duration-300">
+                            <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                            Kembali ke Beranda
+                        </a>
+
+                        <a href="php-2.html"
+                            class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 bg-brand text-white border border-transparent rounded-full font-semibold hover:bg-brand-hover hover:-translate-y-1 transition-all duration-300 shadow-sm group">
+                            Lanjut ke Modul 2: Struktur Kendali
+                            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </main>
+
+            <aside class="hidden lg:block w-full h-full">
+                <div class="sticky top-28 lg:top-36 flex flex-col gap-8">
+                    <div
+                        class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 text-slate-100 dark:text-zinc-800/50">
+                            <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                            </svg>
+                        </div>
+                        <h3
+                            class="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6 relative z-10">
+                            Catatan Kader</h3>
+                        <blockquote
+                            class="text-[15px] italic text-slate-700 dark:text-slate-300 leading-relaxed mb-4 border-l-4 border-brand pl-4 relative z-10">
+                            "Framework lahir dan mati, tetapi fundamental bahasa akan selalu menyelamatkan Anda saat
+                            terjadi error di level core system."
+                        </blockquote>
+                        <cite class="block text-right text-sm font-extrabold text-brand not-italic relative z-10">-
+                            Abdul Kader</cite>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <img src="../asset/image/logo-dark.png" alt="Catatan Kader"
+                class="h-8 mx-auto mb-6 opacity-80 dark:opacity-100 hidden dark:block">
+            <img src="../asset/image/logo.png" alt="Catatan Kader"
+                class="h-8 mx-auto mb-6 opacity-80 dark:block dark:hidden">
+            <p class="text-slate-500 dark:text-slate-400 text-[15px] max-w-lg mx-auto mb-8 leading-relaxed">
+                Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis logika, serta
+                standarisasi implementasi sistem teknologi.
+            </p>
+            <p class="font-mono text-[13px] text-slate-500 dark:text-slate-400">&copy; 2026 Catatan Kader. Deployment
+                Active.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const navbar = document.getElementById("navbar");
+            const mobileBtn = document.getElementById("mobile-menu-btn");
+            const navMenu = document.getElementById("mobile-menu");
+            const menuIcon = document.getElementById("menu-icon");
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.remove("bg-transparent", "border-transparent");
+                    navbar.classList.add("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-md");
+                } else {
+                    navbar.classList.remove("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-md");
+                    navbar.classList.add("bg-transparent", "border-transparent");
+                }
+            });
+
+            let isMenuOpen = false;
+            mobileBtn.addEventListener("click", () => {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    navMenu.classList.remove("hidden"); navMenu.classList.add("flex");
+                    navbar.classList.add("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-md");
+                    navbar.classList.remove("bg-transparent", "border-transparent");
+                    menuIcon.setAttribute("d", "M6 18L18 6M6 6l12 12");
+                } else {
+                    navMenu.classList.add("hidden"); navMenu.classList.remove("flex");
+                    if (window.scrollY <= 20) {
+                        navbar.classList.remove("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-md");
+                        navbar.classList.add("bg-transparent", "border-transparent");
+                    }
+                    menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+                }
+            });
+
+            const skeleton = document.getElementById('skeleton-loader');
+            const content = document.getElementById('actual-content');
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                content.classList.remove('hidden'); content.classList.add('animate-fadeUp');
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

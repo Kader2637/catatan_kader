@@ -180,26 +180,28 @@
         <h2 class="text-3xl font-bold text-slate-900 mb-6">Eksplorasi Teknis</h2>
         <div class="filters flex flex-wrap gap-3">
           <button
-            class="filter-btn active px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            class="filter-btn active bg-blue-600 text-white border-blue-600 shadow-md px-5 py-2 rounded-full border text-sm font-medium transition-all duration-300"
             data-filter="all">Semua Data</button>
+
           <button
-            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            class="filter-btn bg-white text-slate-600 border-slate-200 hover:bg-slate-50 px-5 py-2 rounded-full border text-sm font-medium transition-all duration-300"
             data-filter="laravel">Laravel</button>
+
           <button
-            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
-            data-filter="react">React</button>
-          <button
-            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
-            data-filter="python">Python</button>
-          <button
-            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
+            class="filter-btn bg-white text-slate-600 border-slate-200 hover:bg-slate-50 px-5 py-2 rounded-full border text-sm font-medium transition-all duration-300"
             data-filter="php">PHP</button>
+
           <button
-            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
-            data-filter="ui">UI/UX</button>
+            class="filter-btn bg-white text-slate-600 border-slate-200 hover:bg-slate-50 px-5 py-2 rounded-full border text-sm font-medium transition-all duration-300"
+            data-filter="vue">Vue.js</button>
+
           <button
-            class="filter-btn px-5 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-slate-50 transition-all duration-300"
-            data-filter="system">System</button>
+            class="filter-btn bg-white text-slate-600 border-slate-200 hover:bg-slate-50 px-5 py-2 rounded-full border text-sm font-medium transition-all duration-300"
+            data-filter="react">React</button>
+
+          <button
+            class="filter-btn bg-white text-slate-600 border-slate-200 hover:bg-slate-50 px-5 py-2 rounded-full border text-sm font-medium transition-all duration-300"
+            data-filter="next">Next.js</button>
         </div>
       </div>
 
@@ -222,8 +224,7 @@
           }
         </script>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="cards-grid" style="display: none;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="cards-grid">
 
         <article
           class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
@@ -231,137 +232,122 @@
           <div class="relative h-56 overflow-hidden bg-slate-100">
             <img src="asset/image/course/laravel/instalasi.jpeg" alt="Laravel Setup"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800&h=500'">
+              onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800'">
           </div>
           <div class="p-6 flex flex-col flex-grow">
-            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Laravel</span>
-            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-              <a href="module/laravel-setup.html">Standardisasi Environment Laravel 11 Skala Produksi</a>
+            <span class="text-xs font-bold text-red-600 uppercase tracking-wider mb-2 block">Laravel • Modul 1</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">
+              <a href="module/laravel-1.html">Instalasi & Setup Environment</a>
             </h2>
-            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
-              Mendokumentasikan konfigurasi krusial pada level infrastruktur. Meliputi tuning koneksi database,
-              manajemen antrean tingkat lanjut...
-            </p>
-            <a href="module/laravel-setup.html"
-              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Langkah pertama memulai project. Belajar
+              instalasi Composer, mengatur file .env, serta mempersiapkan environment lokal.</p>
+            <a href="module/laravel-1.html"
+              class="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
                 stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
                 </path>
-              </svg>
-            </a>
+              </svg></a>
           </div>
         </article>
 
         <article
           class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
-          data-category="system">
+          data-category="laravel">
           <div class="relative h-56 overflow-hidden bg-slate-100">
-            <img src="asset/image/course/laravel/mvc.png" alt="MVC Architecture"
+            <img src="asset/image/course/laravel/migration.jpg" alt="Laravel Migration"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800&h=500'">
+              onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800'">
           </div>
           <div class="p-6 flex flex-col flex-grow">
-            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2 block">System Design</span>
-            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-              <a href="module/mvc-pattern.html">Dekonstruksi Pola MVC untuk Aplikasi Monolitik</a>
+            <span class="text-xs font-bold text-red-600 uppercase tracking-wider mb-2 block">Laravel • Modul 2</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">
+              <a href="module/laravel-2.html">Deep Dive: Migration & Eloquent Model</a>
             </h2>
-            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
-              Studi mendalam memisahkan controller yang gemuk menjadi service class yang dapat diuji (testable).
-              Arsitektur menggunakan repository pattern...
-            </p>
-            <a href="module/mvc-pattern.html"
-              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Merancang struktur database menggunakan
+              Migration dan memahami bagaimana Model Eloquent berinteraksi dengan tabel.</p>
+            <a href="module/laravel-2.html"
+              class="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
                 stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
                 </path>
-              </svg>
-            </a>
+              </svg></a>
           </div>
         </article>
 
         <article
           class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
-          data-category="react">
+          data-category="laravel">
           <div class="relative h-56 overflow-hidden bg-slate-100">
-            <img src="asset/image/course/react/instalasi.webp" alt="React Vite"
+            <img src="asset/image/course/laravel/routing.jpg" alt="Laravel MVC"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onerror="this.src='https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800&h=500'">
+              onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop'">
           </div>
           <div class="p-6 flex flex-col flex-grow">
-            <span class="text-xs font-bold text-cyan-600 uppercase tracking-wider mb-2 block">React</span>
-            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-              <a href="module/react-vite.html">Eksekusi Frontend Modern via Vite & TypeScript</a>
+            <span class="text-xs font-bold text-red-600 uppercase tracking-wider mb-2 block">Laravel • Modul 3</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">
+              <a href="module/laravel-3.html">Menguasai Routing, Controller & Blade Template</a>
             </h2>
-            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
-              Panduan teknis migrasi bundler dari Webpack ke ekosistem Vite. Menyertakan konfigurasi alias import
-              absolut dan integrasi strict mode...
-            </p>
-            <a href="module/react-vite.html"
-              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Menghubungkan alur aplikasi MVC. Mengatur
+              rute URL, logika di Controller, dan merender tampilan dinamis dengan Blade.</p>
+            <a href="module/laravel-3.html"
+              class="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
                 stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
                 </path>
-              </svg>
-            </a>
+              </svg></a>
           </div>
         </article>
 
         <article
           class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
-          data-category="python">
+          data-category="laravel">
           <div class="relative h-56 overflow-hidden bg-slate-100">
-            <img src="asset/image/leangue_pemrograman/python.png" alt="Python Data"
+            <img src="asset/image/course/laravel/create.jpg" alt="Laravel CRUD"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onerror="this.src='https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&q=80&w=800&h=500'">
+              onerror="this.src='https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=800'">
           </div>
           <div class="p-6 flex flex-col flex-grow">
-            <span class="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-2 block">Python</span>
-            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-              <a href="module/python-data.html">Pipeline ETL Sederhana dengan Python Pandas</a>
+            <span class="text-xs font-bold text-red-600 uppercase tracking-wider mb-2 block">Laravel • Modul 4</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">
+              <a href="module/laravel-4.html">Implementasi CRUD: Create & Read Data</a>
             </h2>
-            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
-              Dokumentasi pembuatan skrip Extract, Transform, Load untuk membersihkan jutaan baris data mentah secara
-              efisien...
-            </p>
-            <a href="module/python-data.html"
-              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Mulai mengolah data nyata. Mengambil data
+              dari database (Read) dan membuat form untuk menyisipkan data baru (Create).</p>
+            <a href="module/laravel-4.html"
+              class="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
                 stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
                 </path>
-              </svg>
-            </a>
+              </svg></a>
           </div>
         </article>
 
         <article
           class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
-          data-category="ui">
+          data-category="laravel">
           <div class="relative h-56 overflow-hidden bg-slate-100">
-            <img src="asset/image/leangue_pemrograman/taildwind.png" alt="Tailwind CSS"
+            <img src="asset/image/course/laravel/update.jpg" alt="Laravel Update Delete"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onerror="this.src='https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&q=80&w=800&h=500'">
+              onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop'">
           </div>
           <div class="p-6 flex flex-col flex-grow">
-            <span class="text-xs font-bold text-teal-600 uppercase tracking-wider mb-2 block">UI / Styling</span>
-            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-              <a href="module/tailwind-system.html">Membangun Engine Token Desain via Tailwind</a>
+            <span class="text-xs font-bold text-red-600 uppercase tracking-wider mb-2 block">Laravel • Modul 5</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">
+              <a href="module/laravel-5.html">Menyelesaikan CRUD: Update, Delete & Validasi</a>
             </h2>
-            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
-              Pendekatan arsitektural dalam mengatur warna, spasi, dan tipografi agar konsisten melintasi berbagai
-              platform...
-            </p>
-            <a href="module/tailwind-system.html"
-              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Menyempurnakan aplikasi dengan fitur Edit
+              (Update), fitur Hapus (Delete), dan menjaga integritas data menggunakan Form Validation.</p>
+            <a href="module/laravel-5.html"
+              class="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
                 stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
                 </path>
-              </svg>
-            </a>
+              </svg></a>
           </div>
         </article>
 
@@ -369,27 +355,274 @@
           class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
           data-category="php">
           <div class="relative h-56 overflow-hidden bg-slate-100">
-            <img src="asset/image/leangue_pemrograman/php.png" alt="PHP Security"
+            <img src="asset/image/leangue_pemrograman/php.png" alt="PHP OOP"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onerror="this.src='https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?auto=format&fit=crop&q=80&w=800&h=500'">
+              onerror="this.src='https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000&auto=format&fit=crop'">
           </div>
           <div class="p-6 flex flex-col flex-grow">
-            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2 block">PHP</span>
-            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-              <a href="module/php-security.html">Protokol Keamanan Wajib untuk Sistem Legacy PHP</a>
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2 block">PHP • Modul 1</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
+              <a href="module/php-1.html">Pondasi OOP PHP</a>
             </h2>
-            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
-              Langkah taktis menutup celah kerentanan pada sistem tanpa framework. Fokus pada injeksi SQL, token
-              anti-CSRF, parameterisasi PDO...
-            </p>
-            <a href="module/php-security.html"
-              class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-              Baca Analisis <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Pahami konsep Class, Object, Inheritance,
+              dan Interface pada PHP. Bekal sebelum ke Framework.</p>
+            <a href="module/php-1.html"
+              class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
                 stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
                 </path>
-              </svg>
-            </a>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="php">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/leangue_pemrograman/php-db.png" alt="PHP DB"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2 block">PHP • Modul 2</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
+              <a href="module/php-2.html">Koneksi Database PDO</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Belajar cara menghubungkan PHP ke MySQL
+              menggunakan PDO dan melakukan fetch data secara efisien.</p>
+            <a href="module/php-2.html"
+              class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="php">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/leangue_pemrograman/php-secure.png" alt="PHP Security"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2 block">PHP • Modul 3</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
+              <a href="module/php-3.html">Keamanan & SQL Injection</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Panduan aman menyimpan data menggunakan
+              Prepared Statements pada PDO untuk menghindari eksploitasi peretas.</p>
+            <a href="module/php-3.html"
+              class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="react">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/react/setup.webp" alt="React Setup"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-cyan-600 uppercase tracking-wider mb-2 block">React • Modul 1</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
+              <a href="module/react-1.html">Setup React Vite & Fundamental Hooks</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Menginstal proyek React menggunakan Vite.
+              Memahami konsep dasar komponen dan state melalui useState Hook.</p>
+            <a href="module/react-1.html"
+              class="inline-flex items-center text-sm font-semibold text-cyan-600 hover:text-cyan-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="react">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/react/read.webp" alt="React Fetching"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-cyan-600 uppercase tracking-wider mb-2 block">React • Modul 2</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
+              <a href="module/react-2.html">Fetching Data API dengan useEffect</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Kita akan memanggil REST API menggunakan
+              Fetch API & useEffect untuk me-render data ke antarmuka React.</p>
+            <a href="module/react-2.html"
+              class="inline-flex items-center text-sm font-semibold text-cyan-600 hover:text-cyan-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="react">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/react/form.webp" alt="React Form"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-cyan-600 uppercase tracking-wider mb-2 block">React • Modul 3</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
+              <a href="module/react-3.html">Handling Form untuk Create & Update</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Menguasai Controlled Components pada React.
+              Membaca input user, validasi, dan mengirimkan payload ke API.</p>
+            <a href="module/react-3.html"
+              class="inline-flex items-center text-sm font-semibold text-cyan-600 hover:text-cyan-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="vue">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/vue/vue.webp" alt="Vue Setup"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2 block">Vue.js • Modul 1</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
+              <a href="module/vue-1.html">Pengenalan Vue 3 & Composition API</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Membangun antarmuka interaktif menggunakan
+              sintaks Vue 3 yang elegan dan lebih mudah di-maintain.</p>
+            <a href="module/vue-1.html"
+              class="inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="vue">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/vue/read.webp" alt="Vue Fetch"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1542831371-32f555c86880?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2 block">Vue.js • Modul 2</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
+              <a href="module/vue-2.html">Menampilkan Data via Axios di Vue</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Implementasi lifecycle onMounted dan
+              pustaka Axios untuk mengambil data API, lalu menampilkannya dengan v-for.</p>
+            <a href="module/vue-2.html"
+              class="inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="vue">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/vue/form.webp" alt="Vue Form"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2 block">Vue.js • Modul 3</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
+              <a href="module/vue-3.html">Mengirim Data Form & v-model</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Memanfaatkan two-way data binding dengan
+              v-model. Kita akan menangani event dan mengirim request POST ke server.</p>
+            <a href="module/vue-3.html"
+              class="inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-800 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="next">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/next/next.webp" alt="Next JS Read"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 block">Next.js • Modul 1</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-600 transition-colors">
+              <a href="module/next-1.html">Routing & Fetching di App Router</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Menggunakan fitur React Server Components
+              di Next.js. Kita akan menarik data API langsung di sisi server.</p>
+            <a href="module/next-1.html"
+              class="inline-flex items-center text-sm font-semibold text-slate-800 hover:text-slate-600 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
+          </div>
+        </article>
+
+        <article
+          class="card card-item bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden group flex flex-col"
+          data-category="next">
+          <div class="relative h-56 overflow-hidden bg-slate-100">
+            <img src="asset/image/course/next/actions.webp" alt="Next JS Actions"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800'">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 block">Next.js • Modul 2</span>
+            <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-600 transition-colors">
+              <a href="module/next-2.html">Mutasi Data dengan Server Actions</a>
+            </h2>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Tidak butuh API Route tambahan. Kita
+              belajar operasi Create, Update, dan Delete menggunakan Server Actions.</p>
+            <a href="module/next-2.html"
+              class="inline-flex items-center text-sm font-semibold text-slate-800 hover:text-slate-600 transition-colors">Mulai
+              Belajar <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg></a>
           </div>
         </article>
 
@@ -457,19 +690,17 @@
   </div>
 
   <footer class="bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 text-center">
-        <div class="max-w-3xl mx-auto px-6">
-            <img src="../asset/image/logo-dark.png" alt="Catatan Kader"
-                class="h-8 mx-auto mb-6 opacity-80 dark:opacity-100">
-            <p class="text-slate-500 dark:text-slate-400 text-[15px] max-w-lg mx-auto mb-8 leading-relaxed">
-                Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis logika, serta
-                standarisasi implementasi sistem teknologi.
-            </p>
-            <p class="font-mono text-[13px] text-slate-500 dark:text-slate-400">
-                &copy; 2026 Catatan Kader. Deployment Active.
-            </p>
-        </div>
-    </footer>
-
+    <div class="max-w-3xl mx-auto px-6">
+      <img src="../asset/image/logo-dark.png" alt="Catatan Kader" class="h-8 mx-auto mb-6 opacity-80 dark:opacity-100">
+      <p class="text-slate-500 dark:text-slate-400 text-[15px] max-w-lg mx-auto mb-8 leading-relaxed">
+        Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis logika, serta
+        standarisasi implementasi sistem teknologi.
+      </p>
+      <p class="font-mono text-[13px] text-slate-500 dark:text-slate-400">
+        &copy; 2026 Catatan Kader. Deployment Active.
+      </p>
+    </div>
+  </footer>
 
   <script>
     // Mobile Menu Toggle Logic
@@ -487,6 +718,7 @@
         menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Ikon X
       }
     });
+
     document.addEventListener("DOMContentLoaded", () => {
       // Navbar Scroll Effect
       const navbar = document.getElementById("navbar");
@@ -538,11 +770,11 @@
 
       function triggerSkeletonAndRender() {
         cardsGrid.style.display = 'none';
-        paginationBox.style.display = 'none';
+        if (paginationBox) paginationBox.style.display = 'none';
         skeletonGrid.style.display = 'grid';
 
         const sectionHead = document.querySelector('.section-head');
-        if (window.scrollY > sectionHead.offsetTop) {
+        if (sectionHead && window.scrollY > sectionHead.offsetTop) {
           const y = sectionHead.getBoundingClientRect().top + window.scrollY - 100;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
@@ -550,7 +782,7 @@
         setTimeout(() => {
           skeletonGrid.style.display = 'none';
           cardsGrid.style.display = 'grid';
-          paginationBox.style.display = 'flex';
+          if (paginationBox) paginationBox.style.display = 'flex';
           renderView();
         }, 800);
       }
@@ -579,7 +811,7 @@
           }, i * 100);
         });
 
-        buildPagination(maxPage);
+        if (paginationBox) buildPagination(maxPage);
       }
 
       function buildPagination(maxPage) {
@@ -601,7 +833,7 @@
 
         for (let i = 1; i <= maxPage; i++) {
           const btn = document.createElement('button');
-          btn.className = `${baseBtnClass} ${activePage === i ? 'active' : ''}`;
+          btn.className = `${baseBtnClass} ${activePage === i ? 'bg-blue-50 text-blue-600 border-blue-200' : ''}`;
           btn.innerText = i;
           btn.onclick = () => {
             if (activePage !== i) {
@@ -628,15 +860,24 @@
       filterButtons.forEach(btn => {
         btn.addEventListener("click", () => {
           if (activeFilter === btn.getAttribute("data-filter")) return;
-          filterButtons.forEach(b => b.classList.remove("active", "bg-blue-600", "text-white"));
 
-          btn.classList.add("active");
+          // Reset semua tombol ke warna putih/abu
+          filterButtons.forEach(b => {
+            b.classList.remove("active", "bg-blue-600", "text-white", "border-blue-600", "shadow-md");
+            b.classList.add("bg-white", "text-slate-600", "border-slate-200");
+          });
+
+          // Ubah tombol yang diklik jadi warna biru
+          btn.classList.remove("bg-white", "text-slate-600", "border-slate-200");
+          btn.classList.add("active", "bg-blue-600", "text-white", "border-blue-600", "shadow-md");
+
           activeFilter = btn.getAttribute("data-filter");
-          activePage = 1;
+          activePage = 1; // Reset halaman ke 1 saat ganti filter
           triggerSkeletonAndRender();
         });
       });
 
+      // Jalankan render awal
       triggerSkeletonAndRender();
     });
   </script>
