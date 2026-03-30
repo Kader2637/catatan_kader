@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="id-ID" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 3: v-model & Form Submit Vue 3 - Catatan Kader</title>
+    <meta name="description"
+        content="Panduan lengkap menggunakan v-model untuk two-way data binding dan mengirim request POST menggunakan Axios di Vue 3.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#2563eb', /* Blue 600 */
+                            hover: '#1d4ed8',   /* Blue 700 */
+                            light: '#eff6ff',   /* Blue 50 */
+                            dark: '#60a5fa',    /* Blue 400 */
+                            darkLight: 'rgba(59, 130, 246, 0.15)',
+                        }
+                    },
+                    animation: {
+                        fadeUp: 'fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                        shimmer: 'shimmer 2s infinite linear',
+                        spinSlow: 'spin 3s linear infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            ::-webkit-scrollbar-thumb {
+                background: #3f3f46;
+            }
+        }
+
+        /* Typography & Code Elements */
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to top, rgba(9, 9, 11, 0.95), rgba(9, 9, 11, 0.4), transparent);
+        }
+
+        /* Syntax Highlighting Custom for Code Blocks */
+        .keyword {
+            color: #c678dd;
+        }
+
+        /* Ungu */
+        .string {
+            color: #98c379;
+        }
+
+        /* Hijau */
+        .function {
+            color: #61afef;
+        }
+
+        /* Biru */
+        .comment {
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Abu-abu */
+        .variable {
+            color: #e06c75;
+        }
+
+        /* Merah muda */
+        .tag {
+            color: #e06c75;
+        }
+
+        /* Tag HTML */
+        .attr {
+            color: #d19a66;
+        }
+
+        /* Atribut HTML */
+
+        /* Checkbox Custom CSS */
+        .custom-checkbox:checked+div {
+            background-color: #2563eb;
+            border-color: #2563eb;
+        }
+
+        .custom-checkbox:checked+div svg {
+            display: block;
+        }
+
+        /* Form Input Focus Transition */
+        .form-input-transition {
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Custom Styles for Skeleton Animation */
+        .skeleton-bg {
+            background: #f1f5f9;
+            background-image: linear-gradient(to right, #f1f5f9 0%, #e2e8f0 20%, #f1f5f9 40%, #f1f5f9 100%);
+            background-repeat: no-repeat;
+            background-size: 2000px 100%;
+            animation: shimmer 1.5s infinite linear forwards;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .skeleton-bg {
+                background: #27272a;
+                background-image: linear-gradient(to right, #27272a 0%, #3f3f46 20%, #27272a 40%, #27272a 100%);
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-slate-50 font-sans antialiased overflow-x-hidden selection:bg-brand selection:text-white relative">
+
+    <div class="fixed w-full top-0 z-50 transition-all duration-300 py-5 navbar" id="navbar">
+        <nav class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+
+            <a href="../index.html" class="flex items-center group">
+                <img src="../asset/image/logo.png" alt="Logo Catatan Kader"
+                    class="h-10 md:h-12 w-auto block dark:hidden group-hover:scale-105 transition-transform duration-300">
+                <img src="asset/image/logo-dark.png" alt="Logo Catatan Kader"
+                    class="h-10 md:h-12 w-auto hidden dark:block group-hover:scale-105 transition-transform duration-300">
+            </a>
+
+            <ul class="hidden md:flex gap-8 font-medium text-slate-600">
+                <li><a href="../index.html" class="text-blue-600 transition-colors">Beranda</a></li>
+                <!-- <li><a href="aboutus.html" class="hover:text-blue-600 transition-colors">Tentang Saya</a></li>
+        <li><a href="contacts/../index.html" class="hover:text-blue-600 transition-colors">Hubungi</a></li> -->
+            </ul>
+
+            <button id="mobile-menu-btn"
+                class="md:hidden text-slate-600 hover:text-blue-600 focus:outline-none transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-t border-slate-100 py-4 px-6 flex flex-col gap-4 font-medium text-slate-600">
+            <a href="../index.html" class="text-blue-600 block py-2 border-b border-slate-50">Beranda</a>
+            <!-- <a href="aboutus.html" class="hover:text-blue-600 block py-2 border-b border-slate-50">Tentang Saya</a>
+      <a href="contacts/index.html" class="hover:text-blue-600 block py-2">Hubungi</a> -->
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-5 md:px-6 pt-32 md:pt-40 pb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 lg:gap-16 items-start">
+
+            <main class="w-full min-w-0">
+                <div id="skeleton-loader" class="flex flex-col gap-6 w-full">
+                    <div class="skeleton-bg h-8 w-40 rounded-full animate-shimmer"></div>
+                    <div class="skeleton-bg h-14 w-full md:w-4/5 rounded-lg animate-shimmer"></div>
+                    <div class="skeleton-bg h-72 w-full rounded-2xl my-6 animate-shimmer"></div>
+                    <div class="skeleton-bg h-4 w-full rounded animate-shimmer"></div>
+                    <div class="skeleton-bg h-4 w-5/6 rounded animate-shimmer"></div>
+                    <div class="skeleton-bg h-48 w-full rounded-xl mt-8 animate-shimmer"></div>
+                </div>
+
+                <article id="actual-content" class="hidden opacity-0">
+                    <header class="mb-10">
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-mono text-xs font-bold rounded-full mb-6 ring-1 ring-brand/20 uppercase tracking-wide">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                </path>
+                            </svg>
+                            Modul 3 • Form & Data Mutation
+                        </div>
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.15] tracking-tight mb-8 text-slate-900 dark:text-white">
+                            Interaksi Pengguna: v-model & POST Request
+                        </h1>
+
+                        <div
+                            class="relative w-full h-72 md:h-[450px] rounded-[2rem] overflow-hidden mb-12 shadow-2xl border border-slate-200 dark:border-zinc-800 group">
+                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200&auto=format&fit=crop"
+                                alt="Form and Data Entry"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 hero-gradient flex flex-col justify-end p-8 md:p-12">
+                                <div class="flex gap-3 mb-4">
+                                    <span
+                                        class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-mono border border-white/30">v-model</span>
+                                    <span
+                                        class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-mono border border-white/30">@submit.prevent</span>
+                                    <span
+                                        class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-mono border border-white/30">Axios
+                                        POST</span>
+                                </div>
+                                <h2 class="text-white text-2xl md:text-4xl font-bold leading-tight max-w-2xl">
+                                    "Menangkap Input, Memvalidasi Niat, dan Mengirimkannya ke Server"
+                                </h2>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div
+                        class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-[17px] leading-relaxed">
+
+                        <section id="v-model" class="mb-20">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-4">
+                                <span
+                                    class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand/10 text-brand text-xl">1</span>
+                                Keajaiban Two-Way Binding (v-model)
+                            </h2>
+                            <p>
+                                Jika di JavaScript murni (Vanilla JS) kita harus repot-repot menggunakan
+                                <code>document.getElementById().value</code> lalu menambahkan
+                                <code>addEventListener('input', ...)</code> untuk menangkap ketikan user, di Vue kita
+                                hanya perlu <strong>satu direktif</strong>: <code>v-model</code>.
+                            </p>
+                            <p>
+                                <code>v-model</code> menciptakan <em>Two-Way Data Binding</em> (ikatan dua arah).
+                                Artinya:
+                            <ul class="list-disc pl-6 space-y-2 mt-2">
+                                <li>Jika user mengetik di input box, variabel di JavaScript (state) <strong>otomatis
+                                        terupdate</strong>.</li>
+                                <li>Jika Anda mengubah variabel di JavaScript secara terprogram, teks di input box
+                                    <strong>otomatis berubah</strong>.
+                                </li>
+                            </ul>
+                            </p>
+
+                            <pre
+                                class="bg-[#1e1e2e] p-6 rounded-xl font-mono text-[13px] md:text-sm mb-8 border border-zinc-800 overflow-x-auto text-slate-300 shadow-xl mt-6"><code><span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { ref } <span class="keyword">from</span> <span class="string">'vue'</span>;
+
+<span class="keyword">const</span> username = <span class="function">ref</span>(<span class="string">''</span>);
+<span class="keyword">&lt;/script&gt;</span>
+
+<span class="keyword">&lt;template&gt;</span>
+  <span class="comment">&lt;!-- Input diikat dengan variabel username --&gt;</span>
+  <span class="keyword">&lt;input</span> <span class="variable">v-model</span>=<span class="string">"username"</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">placeholder</span>=<span class="string">"Masukkan nama"</span> <span class="keyword">/&gt;</span>
+
+  <span class="comment">&lt;!-- Paragraf ini akan langsung berubah setiap kali Anda mengetik --&gt;</span>
+  <span class="keyword">&lt;p&gt;</span>Halo, {{ username }}!<span class="keyword">&lt;/p&gt;</span>
+<span class="keyword">&lt;/template&gt;</span></code></pre>
+
+                            <div
+                                class="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-6 rounded-r-xl my-8">
+                                <h4 class="font-bold text-amber-900 dark:text-amber-400 flex items-center gap-2 mb-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Praktik Terbaik: Gunakan `reactive` untuk Form
+                                </h4>
+                                <p class="text-[15px] m-0 text-slate-700 dark:text-slate-300">
+                                    Daripada membuat puluhan <code>ref()</code> untuk setiap inputan (nama, email,
+                                    password), lebih baik kumpulkan mereka ke dalam satu <code>reactive</code> object
+                                    bernama <code>form</code>. Ini membuat kode lebih rapi dan sangat mempermudah
+                                    pengiriman data API nantinya.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section id="event-handling" class="mb-20 pt-10 border-t border-slate-200 dark:border-zinc-800">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-4">
+                                <span
+                                    class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand/10 text-brand text-xl">2</span>
+                                Menahan Refresh dengan @submit.prevent
+                            </h2>
+                            <p>
+                                Sifat bawaan (default) HTML ketika sebuah form di-submit adalah melakukan <em>page
+                                    reload</em> (me-refresh seluruh halaman) dan mengirimkan data lewat URL. Di aplikasi
+                                Vue (SPA - Single Page Application), kita <strong>tidak ingin halaman
+                                    ter-refresh</strong> karena akan mereset semua state aplikasi kita.
+                            </p>
+                            <p>
+                                Kita mengatasi ini menggunakan <em>Event Modifier</em> milik Vue:
+                                <code>@submit.prevent="namaFungsi"</code>. Ini sama persis fungsinya dengan
+                                <code>event.preventDefault()</code> di Vanilla JS.
+                            </p>
+                        </section>
+
+                        <section id="axios-post" class="mb-20 pt-10 border-t border-slate-200 dark:border-zinc-800">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-4">
+                                <span
+                                    class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand/10 text-brand text-xl">3</span>
+                                Axios POST: Mengirim Payload
+                            </h2>
+                            <p>
+                                Jika `axios.get()` digunakan untuk meminta data, `axios.post()` digunakan untuk mengirim
+                                data baru ke server (biasanya untuk membuat *record* baru di database). Argumen kedua
+                                dari `axios.post()` adalah **Payload** (data yang ingin dikirim).
+                            </p>
+
+                            <pre
+                                class="bg-[#1e1e2e] p-6 rounded-xl font-mono text-[13px] md:text-sm mb-8 border border-zinc-800 overflow-x-auto text-slate-300 shadow-xl"><code><span class="keyword">const</span> submitForm = <span class="keyword">async</span> () =&gt; {
+  <span class="keyword">try</span> {
+    <span class="comment">// 1. Parameter pertama: URL Endpoint</span>
+    <span class="comment">// 2. Parameter kedua: Payload data (form yang kita buat pakai reactive)</span>
+    <span class="keyword">const</span> response = <span class="keyword">await</span> axios.<span class="function">post</span>(<span class="string">'https://api.example.com/register'</span>, form);
+    
+    console.<span class="function">log</span>(<span class="string">"Sukses!"</span>, response.data);
+  } <span class="keyword">catch</span> (error) {
+    console.<span class="function">error</span>(<span class="string">"Gagal mengirim data:"</span>, error);
+  }
+};</code></pre>
+                        </section>
+
+                        <section id="implementasi" class="mb-10 pt-10 border-t border-slate-200 dark:border-zinc-800">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6">4. Masterclass: Form
+                                Registrasi Kader Kompleks</h2>
+                            <p>
+                                Berikut adalah kode utuh (*Single File Component*) yang merangkum semua materi Modul 3.
+                                Form ini memiliki validasi, status loading, dan mengombinasikan berbagai tipe input
+                                (text, select, checkbox multiple, checkbox boolean).
+                            </p>
+
+                            <div class="relative group mt-8">
+                                <div
+                                    class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                                    <span
+                                        class="bg-brand text-white text-xs px-3 py-1 rounded-full font-mono shadow-md">KaderRegistration.vue</span>
+                                </div>
+                                <pre
+                                    class="bg-[#18181b] p-6 md:p-8 rounded-2xl font-mono text-[13px] md:text-sm border border-zinc-800 overflow-x-auto text-slate-300 leading-loose shadow-2xl relative"><code><span class="comment">&lt;!-- 
+  ========================================================================
+  KOMPONEN: KaderRegistration.vue
+  DESKRIPSI: Form registrasi komprehensif menggunakan reactive object,
+             v-model multi-type, frontend validation, dan simulasi POST.
+  AUTHOR: Catatan Kader
+  ======================================================================== 
+--&gt;</span>
+
+<span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { reactive, ref } <span class="keyword">from</span> <span class="string">'vue'</span>;
+<span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;
+
+<span class="comment">// ---------------------------------------------------------</span>
+<span class="comment">// 1. STATE FORM & VALIDASI</span>
+<span class="comment">// ---------------------------------------------------------</span>
+<span class="comment">// Menggunakan reactive untuk mengelompokkan data payload form</span>
+<span class="keyword">const</span> form = <span class="function">reactive</span>({
+  fullName: <span class="string">''</span>,
+  email: <span class="string">''</span>,
+  division: <span class="string">''</span>,
+  skills: [],       <span class="comment">// v-model untuk multi-checkbox menghasilkan Array</span>
+  agreeTerms: <span class="keyword">false</span> <span class="comment">// v-model untuk single-checkbox menghasilkan Boolean</span>
+});
+
+<span class="comment">// State khusus untuk menampung pesan error per-field</span>
+<span class="keyword">const</span> errors = <span class="function">reactive</span>({
+  fullName: <span class="string">''</span>,
+  email: <span class="string">''</span>,
+  division: <span class="string">''</span>,
+  agreeTerms: <span class="string">''</span>
+});
+
+<span class="comment">// State untuk UI Experience (Feedback Form)</span>
+<span class="keyword">const</span> isSubmitting = <span class="function">ref</span>(<span class="keyword">false</span>);
+<span class="keyword">const</span> submitStatus = <span class="function">ref</span>(<span class="keyword">null</span>); <span class="comment">// 'success' | 'error' | null</span>
+<span class="keyword">const</span> responseMessage = <span class="function">ref</span>(<span class="string">''</span>);
+
+<span class="comment">// ---------------------------------------------------------</span>
+<span class="comment">// 2. FUNGSI VALIDASI FRONTEND</span>
+<span class="comment">// ---------------------------------------------------------</span>
+<span class="keyword">const</span> validateForm = () =&gt; {
+  <span class="keyword">let</span> isValid = <span class="keyword">true</span>;
+  
+  <span class="comment">// Reset errors</span>
+  errors.fullName = <span class="string">''</span>;
+  errors.email = <span class="string">''</span>;
+  errors.division = <span class="string">''</span>;
+  errors.agreeTerms = <span class="string">''</span>;
+
+  <span class="comment">// Validasi Nama</span>
+  <span class="keyword">if</span> (!form.fullName.trim()) {
+    errors.fullName = <span class="string">'Nama lengkap wajib diisi'</span>;
+    isValid = <span class="keyword">false</span>;
+  } <span class="keyword">else</span> <span class="keyword">if</span> (form.fullName.length &lt; 3) {
+    errors.fullName = <span class="string">'Nama minimal 3 karakter'</span>;
+    isValid = <span class="keyword">false</span>;
+  }
+
+  <span class="comment">// Validasi Email dengan Regex sederhana</span>
+  <span class="keyword">const</span> emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  <span class="keyword">if</span> (!form.email.trim()) {
+    errors.email = <span class="string">'Email wajib diisi'</span>;
+    isValid = <span class="keyword">false</span>;
+  } <span class="keyword">else</span> <span class="keyword">if</span> (!emailPattern.test(form.email)) {
+    errors.email = <span class="string">'Format email tidak valid'</span>;
+    isValid = <span class="keyword">false</span>;
+  }
+
+  <span class="comment">// Validasi Divisi</span>
+  <span class="keyword">if</span> (!form.division) {
+    errors.division = <span class="string">'Silakan pilih divisi penempatan'</span>;
+    isValid = <span class="keyword">false</span>;
+  }
+
+  <span class="comment">// Validasi Persetujuan (Checkbox Mutlak)</span>
+  <span class="keyword">if</span> (!form.agreeTerms) {
+    errors.agreeTerms = <span class="string">'Anda harus menyetujui syarat & ketentuan'</span>;
+    isValid = <span class="keyword">false</span>;
+  }
+
+  <span class="keyword">return</span> isValid;
+};
+
+<span class="comment">// ---------------------------------------------------------</span>
+<span class="comment">// 3. METHOD SUBMIT FORM (AXIOS POST)</span>
+<span class="comment">// ---------------------------------------------------------</span>
+<span class="keyword">const</span> handleRegistration = <span class="keyword">async</span> () =&gt; {
+  <span class="comment">// 1. Jalankan fungsi validasi sebelum menembak API</span>
+  <span class="keyword">if</span> (!<span class="function">validateForm</span>()) {
+    <span class="comment">// Hentikan proses jika form tidak valid</span>
+    <span class="keyword">return</span>; 
+  }
+
+  <span class="comment">// 2. Mulai Loading State</span>
+  isSubmitting.value = <span class="keyword">true</span>;
+  submitStatus.value = <span class="keyword">null</span>;
+
+  <span class="keyword">try</span> {
+    <span class="comment">// Menyiapkan payload. Karena form adalah objek reaktif,</span>
+    <span class="comment">// kita bisa langsung mengirimnya atau men-destructure-nya.</span>
+    <span class="keyword">const</span> payload = {
+      name: form.fullName,
+      email: form.email,
+      department: form.division,
+      capabilities: form.skills
+    };
+
+    <span class="comment">// Endpoint Publik untuk simulasi POST Data (JSONPlaceholder tidak menyimpan beneran, </span>
+    <span class="comment">// tapi membalas dengan status 201 Created)</span>
+    <span class="keyword">const</span> response = <span class="keyword">await</span> axios.<span class="function">post</span>(<span class="string">'https://jsonplaceholder.typicode.com/posts'</span>, payload);
+    
+    <span class="comment">// 3. Sukses Skenario</span>
+    submitStatus.value = <span class="string">'success'</span>;
+    responseMessage.value = <span class="string">`Registrasi Berhasil! ID Pendaftaran Anda: KDR-${response.data.id}`</span>;
+    
+    <span class="comment">// Kosongkan form kembali ke state awal</span>
+    form.fullName = <span class="string">''</span>;
+    form.email = <span class="string">''</span>;
+    form.division = <span class="string">''</span>;
+    form.skills = [];
+    form.agreeTerms = <span class="keyword">false</span>;
+
+  } <span class="keyword">catch</span> (error) {
+    <span class="comment">// 4. Error Skenario</span>
+    console.error(<span class="string">'Submit Failed:'</span>, error);
+    submitStatus.value = <span class="string">'error'</span>;
+    responseMessage.value = <span class="string">'Terjadi kesalahan jaringan atau server saat menyimpan data.'</span>;
+  } <span class="keyword">finally</span> {
+    <span class="comment">// Matikan Loading State</span>
+    isSubmitting.value = <span class="keyword">false</span>;
+  }
+};
+<span class="keyword">&lt;/script&gt;</span>
+
+<span class="keyword">&lt;template&gt;</span>
+  <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"max-w-2xl mx-auto py-10"</span><span class="keyword">&gt;</span>
+    <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"bg-white dark:bg-zinc-900 rounded-3xl shadow-xl border border-slate-200 dark:border-zinc-800 overflow-hidden"</span><span class="keyword">&gt;</span>
+      
+      <span class="comment">&lt;!-- Form Header --&gt;</span>
+      <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"bg-brand px-8 py-10 text-white text-center relative overflow-hidden"</span><span class="keyword">&gt;</span>
+        <span class="comment">&lt;!-- Dekorasi Geometris Header --&gt;</span>
+        <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"absolute -right-10 -top-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"</span><span class="keyword">&gt;&lt;/div&gt;</span>
+        <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"absolute -left-10 -bottom-10 w-32 h-32 bg-white opacity-10 rounded-full blur-xl"</span><span class="keyword">&gt;&lt;/div&gt;</span>
+        
+        <span class="keyword">&lt;h2</span> <span class="variable">class</span>=<span class="string">"text-3xl font-black mb-2 relative z-10"</span><span class="keyword">&gt;</span>Registrasi Kader Baru<span class="keyword">&lt;/h2&gt;</span>
+        <span class="keyword">&lt;p</span> <span class="variable">class</span>=<span class="string">"text-brand-light opacity-90 relative z-10"</span><span class="keyword">&gt;</span>Isi formulir di bawah ini dengan data valid.<span class="keyword">&lt;/p&gt;</span>
+      <span class="keyword">&lt;/div&gt;</span>
+
+      <span class="comment">&lt;!-- 
+        Penggunaan @submit.prevent sangat penting di sini.
+        Ini mencegah browser melakukan reload halaman secara otomatis.
+      --&gt;</span>
+      <span class="keyword">&lt;form</span> <span class="variable">@submit.prevent</span>=<span class="string">"handleRegistration"</span> <span class="variable">class</span>=<span class="string">"p-8 sm:p-10 space-y-6"</span><span class="keyword">&gt;</span>
+        
+        <span class="comment">&lt;!-- 1. Input Text: Nama Lengkap --&gt;</span>
+        <span class="keyword">&lt;div</span><span class="keyword">&gt;</span>
+          <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"</span><span class="keyword">&gt;</span>Nama Lengkap <span class="keyword">&lt;span</span> <span class="variable">class</span>=<span class="string">"text-red-500"</span><span class="keyword">&gt;</span>*<span class="keyword">&lt;/span&gt;&lt;/label&gt;</span>
+          <span class="keyword">&lt;input</span> 
+            <span class="variable">v-model</span>=<span class="string">"form.fullName"</span>
+            <span class="variable">type</span>=<span class="string">"text"</span> 
+            <span class="variable">class</span>=<span class="string">"form-input-transition w-full px-4 py-3 rounded-xl border bg-slate-50 dark:bg-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand focus:bg-white dark:focus:bg-zinc-900"</span>
+            <span class="variable">:class</span>=<span class="string">"errors.fullName ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 dark:border-zinc-700'"</span>
+            <span class="variable">placeholder</span>=<span class="string">"Cth: John Doe"</span>
+          <span class="keyword">&gt;</span>
+          <span class="comment">&lt;!-- Pesan Error Dinamis --&gt;</span>
+          <span class="keyword">&lt;p</span> <span class="variable">v-if</span>=<span class="string">"errors.fullName"</span> <span class="variable">class</span>=<span class="string">"mt-2 text-sm text-red-500 flex items-center gap-1"</span><span class="keyword">&gt;</span>
+            <span class="keyword">&lt;svg</span> <span class="variable">class</span>=<span class="string">"w-4 h-4"</span> <span class="variable">fill</span>=<span class="string">"currentColor"</span> <span class="variable">viewBox</span>=<span class="string">"0 0 20 20"</span><span class="keyword">&gt;&lt;path</span> <span class="variable">fill-rule</span>=<span class="string">"evenodd"</span> <span class="variable">d</span>=<span class="string">"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"</span> <span class="variable">clip-rule</span>=<span class="string">"evenodd"</span><span class="keyword">&gt;&lt;/path&gt;&lt;/svg&gt;</span>
+            {{ errors.fullName }}
+          <span class="keyword">&lt;/p&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+
+        <span class="comment">&lt;!-- 2. Input Email --&gt;</span>
+        <span class="keyword">&lt;div</span><span class="keyword">&gt;</span>
+          <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"</span><span class="keyword">&gt;</span>Alamat Email <span class="keyword">&lt;span</span> <span class="variable">class</span>=<span class="string">"text-red-500"</span><span class="keyword">&gt;</span>*<span class="keyword">&lt;/span&gt;&lt;/label&gt;</span>
+          <span class="keyword">&lt;input</span> 
+            <span class="variable">v-model</span>=<span class="string">"form.email"</span>
+            <span class="variable">type</span>=<span class="string">"email"</span> 
+            <span class="variable">class</span>=<span class="string">"form-input-transition w-full px-4 py-3 rounded-xl border bg-slate-50 dark:bg-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand focus:bg-white"</span>
+            <span class="variable">:class</span>=<span class="string">"errors.email ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 dark:border-zinc-700'"</span>
+            <span class="variable">placeholder</span>=<span class="string">"john@example.com"</span>
+          <span class="keyword">&gt;</span>
+          <span class="keyword">&lt;p</span> <span class="variable">v-if</span>=<span class="string">"errors.email"</span> <span class="variable">class</span>=<span class="string">"mt-2 text-sm text-red-500 flex items-center gap-1"</span><span class="keyword">&gt;</span>
+            <span class="keyword">&lt;svg</span> <span class="variable">class</span>=<span class="string">"w-4 h-4"</span> <span class="variable">fill</span>=<span class="string">"currentColor"</span> <span class="variable">viewBox</span>=<span class="string">"0 0 20 20"</span><span class="keyword">&gt;&lt;path</span> <span class="variable">fill-rule</span>=<span class="string">"evenodd"</span> <span class="variable">d</span>=<span class="string">"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"</span> <span class="variable">clip-rule</span>=<span class="string">"evenodd"</span><span class="keyword">&gt;&lt;/path&gt;&lt;/svg&gt;</span>
+            {{ errors.email }}
+          <span class="keyword">&lt;/p&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+
+        <span class="comment">&lt;!-- 3. Select Dropdown: Divisi --&gt;</span>
+        <span class="keyword">&lt;div</span><span class="keyword">&gt;</span>
+          <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"</span><span class="keyword">&gt;</span>Pilih Divisi <span class="keyword">&lt;span</span> <span class="variable">class</span>=<span class="string">"text-red-500"</span><span class="keyword">&gt;</span>*<span class="keyword">&lt;/span&gt;&lt;/label&gt;</span>
+          <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"relative"</span><span class="keyword">&gt;</span>
+            <span class="keyword">&lt;select</span> 
+              <span class="variable">v-model</span>=<span class="string">"form.division"</span>
+              <span class="variable">class</span>=<span class="string">"form-input-transition appearance-none w-full px-4 py-3 rounded-xl border bg-slate-50 dark:bg-zinc-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand focus:bg-white cursor-pointer"</span>
+              <span class="variable">:class</span>=<span class="string">"errors.division ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 dark:border-zinc-700'"</span>
+            <span class="keyword">&gt;</span>
+              <span class="keyword">&lt;option</span> <span class="variable">disabled</span> <span class="variable">value</span>=<span class="string">""</span><span class="keyword">&gt;</span>-- Pilih Divisi --<span class="keyword">&lt;/option&gt;</span>
+              <span class="keyword">&lt;option</span> <span class="variable">value</span>=<span class="string">"engineering"</span><span class="keyword">&gt;</span>Software Engineering<span class="keyword">&lt;/option&gt;</span>
+              <span class="keyword">&lt;option</span> <span class="variable">value</span>=<span class="string">"design"</span><span class="keyword">&gt;</span>UI/UX Design<span class="keyword">&lt;/option&gt;</span>
+              <span class="keyword">&lt;option</span> <span class="variable">value</span>=<span class="string">"marketing"</span><span class="keyword">&gt;</span>Digital Marketing<span class="keyword">&lt;/option&gt;</span>
+              <span class="keyword">&lt;option</span> <span class="variable">value</span>=<span class="string">"product"</span><span class="keyword">&gt;</span>Product Management<span class="keyword">&lt;/option&gt;</span>
+            <span class="keyword">&lt;/select&gt;</span>
+            <span class="comment">&lt;!-- Custom Caret Icon karena kita hide default browser appearance --&gt;</span>
+            <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;svg</span> <span class="variable">class</span>=<span class="string">"w-5 h-5"</span> <span class="variable">fill</span>=<span class="string">"none"</span> <span class="variable">stroke</span>=<span class="string">"currentColor"</span> <span class="variable">viewBox</span>=<span class="string">"0 0 24 24"</span><span class="keyword">&gt;&lt;path</span> <span class="variable">stroke-linecap</span>=<span class="string">"round"</span> <span class="variable">stroke-linejoin</span>=<span class="string">"round"</span> <span class="variable">stroke-width</span>=<span class="string">"2"</span> <span class="variable">d</span>=<span class="string">"M19 9l-7 7-7-7"</span><span class="keyword">&gt;&lt;/path&gt;&lt;/svg&gt;</span>
+            <span class="keyword">&lt;/div&gt;</span>
+          <span class="keyword">&lt;/div&gt;</span>
+          <span class="keyword">&lt;p</span> <span class="variable">v-if</span>=<span class="string">"errors.division"</span> <span class="variable">class</span>=<span class="string">"mt-2 text-sm text-red-500 flex items-center gap-1"</span><span class="keyword">&gt;</span>
+            <span class="keyword">&lt;svg</span> <span class="variable">class</span>=<span class="string">"w-4 h-4"</span> <span class="variable">fill</span>=<span class="string">"currentColor"</span> <span class="variable">viewBox</span>=<span class="string">"0 0 20 20"</span><span class="keyword">&gt;&lt;path</span> <span class="variable">fill-rule</span>=<span class="string">"evenodd"</span> <span class="variable">d</span>=<span class="string">"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"</span> <span class="variable">clip-rule</span>=<span class="string">"evenodd"</span><span class="keyword">&gt;&lt;/path&gt;&lt;/svg&gt;</span>
+            {{ errors.division }}
+          <span class="keyword">&lt;/p&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+
+        <span class="comment">&lt;!-- 4. Checkbox Multiple (Array v-model) --&gt;</span>
+        <span class="keyword">&lt;div</span><span class="keyword">&gt;</span>
+          <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3"</span><span class="keyword">&gt;</span>Keahlian Tambahan (Opsional)<span class="keyword">&lt;/label&gt;</span>
+          <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"grid grid-cols-2 gap-3"</span><span class="keyword">&gt;</span>
+            <span class="comment">&lt;!-- Looping manual untuk efisiensi visual di sini, bisa pakai v-for --&gt;</span>
+            <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"flex items-center space-x-3 cursor-pointer p-3 border border-slate-200 dark:border-zinc-700 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;input</span> <span class="variable">v-model</span>=<span class="string">"form.skills"</span> <span class="variable">type</span>=<span class="string">"checkbox"</span> <span class="variable">value</span>=<span class="string">"Vue.js"</span> <span class="variable">class</span>=<span class="string">"w-5 h-5 text-brand rounded focus:ring-brand border-slate-300"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;span</span> <span class="variable">class</span>=<span class="string">"text-slate-700 dark:text-slate-300 text-sm font-medium"</span><span class="keyword">&gt;</span>Vue.js<span class="keyword">&lt;/span&gt;</span>
+            <span class="keyword">&lt;/label&gt;</span>
+            <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"flex items-center space-x-3 cursor-pointer p-3 border border-slate-200 dark:border-zinc-700 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;input</span> <span class="variable">v-model</span>=<span class="string">"form.skills"</span> <span class="variable">type</span>=<span class="string">"checkbox"</span> <span class="variable">value</span>=<span class="string">"Tailwind"</span> <span class="variable">class</span>=<span class="string">"w-5 h-5 text-brand rounded focus:ring-brand border-slate-300"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;span</span> <span class="variable">class</span>=<span class="string">"text-slate-700 dark:text-slate-300 text-sm font-medium"</span><span class="keyword">&gt;</span>Tailwind CSS<span class="keyword">&lt;/span&gt;</span>
+            <span class="keyword">&lt;/label&gt;</span>
+            <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"flex items-center space-x-3 cursor-pointer p-3 border border-slate-200 dark:border-zinc-700 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;input</span> <span class="variable">v-model</span>=<span class="string">"form.skills"</span> <span class="variable">type</span>=<span class="string">"checkbox"</span> <span class="variable">value</span>=<span class="string">"Node.js"</span> <span class="variable">class</span>=<span class="string">"w-5 h-5 text-brand rounded focus:ring-brand border-slate-300"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;span</span> <span class="variable">class</span>=<span class="string">"text-slate-700 dark:text-slate-300 text-sm font-medium"</span><span class="keyword">&gt;</span>Node.js API<span class="keyword">&lt;/span&gt;</span>
+            <span class="keyword">&lt;/label&gt;</span>
+            <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"flex items-center space-x-3 cursor-pointer p-3 border border-slate-200 dark:border-zinc-700 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;input</span> <span class="variable">v-model</span>=<span class="string">"form.skills"</span> <span class="variable">type</span>=<span class="string">"checkbox"</span> <span class="variable">value</span>=<span class="string">"Figma"</span> <span class="variable">class</span>=<span class="string">"w-5 h-5 text-brand rounded focus:ring-brand border-slate-300"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;span</span> <span class="variable">class</span>=<span class="string">"text-slate-700 dark:text-slate-300 text-sm font-medium"</span><span class="keyword">&gt;</span>Figma Design<span class="keyword">&lt;/span&gt;</span>
+            <span class="keyword">&lt;/label&gt;</span>
+          <span class="keyword">&lt;/div&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+
+        <span class="comment">&lt;!-- 5. Checkbox Boolean (Syarat & Ketentuan) --&gt;</span>
+        <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"pt-4 border-t border-slate-200 dark:border-zinc-800"</span><span class="keyword">&gt;</span>
+          <span class="keyword">&lt;label</span> <span class="variable">class</span>=<span class="string">"relative flex items-start cursor-pointer"</span><span class="keyword">&gt;</span>
+            <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"flex items-center h-5"</span><span class="keyword">&gt;</span>
+              <span class="comment">&lt;!-- v-model pada single checkbox akan mengembalikan true / false --&gt;</span>
+              <span class="keyword">&lt;input</span> 
+                <span class="variable">v-model</span>=<span class="string">"form.agreeTerms"</span> 
+                <span class="variable">type</span>=<span class="string">"checkbox"</span> 
+                <span class="variable">class</span>=<span class="string">"w-5 h-5 border border-slate-300 rounded text-brand focus:ring-brand bg-slate-50 transition-all"</span>
+              <span class="keyword">&gt;</span>
+            <span class="keyword">&lt;/div&gt;</span>
+            <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"ml-3 text-sm"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;span</span> <span class="variable">class</span>=<span class="string">"font-medium text-slate-700 dark:text-slate-300"</span><span class="keyword">&gt;</span>Saya menyetujui seluruh <span class="keyword">&lt;a</span> <span class="variable">href</span>=<span class="string">"#"</span> <span class="variable">class</span>=<span class="string">"text-brand hover:underline"</span><span class="keyword">&gt;</span>Syarat & Ketentuan<span class="keyword">&lt;/a&gt;</span> serta Kebijakan Privasi perusahaan.<span class="keyword">&lt;/span&gt;</span>
+              <span class="keyword">&lt;p</span> <span class="variable">v-if</span>=<span class="string">"errors.agreeTerms"</span> <span class="variable">class</span>=<span class="string">"mt-1 text-sm text-red-500 font-semibold"</span><span class="keyword">&gt;</span>{{ errors.agreeTerms }}<span class="keyword">&lt;/p&gt;</span>
+            <span class="keyword">&lt;/div&gt;</span>
+          <span class="keyword">&lt;/label&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+
+        <span class="comment">&lt;!-- Status Alert (Akan muncul setelah submit) --&gt;</span>
+        <span class="keyword">&lt;div</span> <span class="variable">v-if</span>=<span class="string">"submitStatus === 'success'"</span> <span class="variable">class</span>=<span class="string">"p-4 bg-green-50 border-l-4 border-green-500 rounded-r-xl"</span><span class="keyword">&gt;</span>
+          <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"flex items-center"</span><span class="keyword">&gt;</span>
+            <span class="keyword">&lt;svg</span> <span class="variable">class</span>=<span class="string">"w-6 h-6 text-green-500 mr-3"</span> <span class="variable">fill</span>=<span class="string">"none"</span> <span class="variable">stroke</span>=<span class="string">"currentColor"</span> <span class="variable">viewBox</span>=<span class="string">"0 0 24 24"</span><span class="keyword">&gt;&lt;path</span> <span class="variable">stroke-linecap</span>=<span class="string">"round"</span> <span class="variable">stroke-linejoin</span>=<span class="string">"round"</span> <span class="variable">stroke-width</span>=<span class="string">"2"</span> <span class="variable">d</span>=<span class="string">"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"</span><span class="keyword">&gt;&lt;/path&gt;&lt;/svg&gt;</span>
+            <span class="keyword">&lt;p</span> <span class="variable">class</span>=<span class="string">"text-green-800 font-bold"</span><span class="keyword">&gt;</span>{{ responseMessage }}<span class="keyword">&lt;/p&gt;</span>
+          <span class="keyword">&lt;/div&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+        
+        <span class="keyword">&lt;div</span> <span class="variable">v-if</span>=<span class="string">"submitStatus === 'error'"</span> <span class="variable">class</span>=<span class="string">"p-4 bg-red-50 border-l-4 border-red-500 rounded-r-xl"</span><span class="keyword">&gt;</span>
+          <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"flex items-center"</span><span class="keyword">&gt;</span>
+            <span class="keyword">&lt;svg</span> <span class="variable">class</span>=<span class="string">"w-6 h-6 text-red-500 mr-3"</span> <span class="variable">fill</span>=<span class="string">"none"</span> <span class="variable">stroke</span>=<span class="string">"currentColor"</span> <span class="variable">viewBox</span>=<span class="string">"0 0 24 24"</span><span class="keyword">&gt;&lt;path</span> <span class="variable">stroke-linecap</span>=<span class="string">"round"</span> <span class="variable">stroke-linejoin</span>=<span class="string">"round"</span> <span class="variable">stroke-width</span>=<span class="string">"2"</span> <span class="variable">d</span>=<span class="string">"M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"</span><span class="keyword">&gt;&lt;/path&gt;&lt;/svg&gt;</span>
+            <span class="keyword">&lt;p</span> <span class="variable">class</span>=<span class="string">"text-red-800 font-bold"</span><span class="keyword">&gt;</span>{{ responseMessage }}<span class="keyword">&lt;/p&gt;</span>
+          <span class="keyword">&lt;/div&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+
+        <span class="comment">&lt;!-- Action Button --&gt;</span>
+        <span class="keyword">&lt;div</span> <span class="variable">class</span>=<span class="string">"pt-4"</span><span class="keyword">&gt;</span>
+          <span class="comment">&lt;!-- Tombol dimatikan (disabled) saat isSubmitting bernilai true --&gt;</span>
+          <span class="keyword">&lt;button</span> 
+            <span class="variable">type</span>=<span class="string">"submit"</span> 
+            <span class="variable">:disabled</span>=<span class="string">"isSubmitting"</span>
+            <span class="variable">class</span>=<span class="string">"w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-xl shadow-lg text-lg font-bold text-white bg-brand hover:bg-brand-hover focus:outline-none focus:ring-4 focus:ring-brand/30 transition-all disabled:opacity-70 disabled:cursor-not-allowed"</span>
+          <span class="keyword">&gt;</span>
+            <span class="comment">&lt;!-- Spinner Loading (Tampil hanya saat isSubmitting true) --&gt;</span>
+            <span class="keyword">&lt;svg</span> <span class="variable">v-if</span>=<span class="string">"isSubmitting"</span> <span class="variable">class</span>=<span class="string">"animate-spin -ml-1 mr-3 h-5 w-5 text-white"</span> <span class="variable">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="variable">fill</span>=<span class="string">"none"</span> <span class="variable">viewBox</span>=<span class="string">"0 0 24 24"</span><span class="keyword">&gt;</span>
+              <span class="keyword">&lt;circle</span> <span class="variable">class</span>=<span class="string">"opacity-25"</span> <span class="variable">cx</span>=<span class="string">"12"</span> <span class="variable">cy</span>=<span class="string">"12"</span> <span class="variable">r</span>=<span class="string">"10"</span> <span class="variable">stroke</span>=<span class="string">"currentColor"</span> <span class="variable">stroke-width</span>=<span class="string">"4"</span><span class="keyword">&gt;&lt;/circle&gt;</span>
+              <span class="keyword">&lt;path</span> <span class="variable">class</span>=<span class="string">"opacity-75"</span> <span class="variable">fill</span>=<span class="string">"currentColor"</span> <span class="variable">d</span>=<span class="string">"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"</span><span class="keyword">&gt;&lt;/path&gt;</span>
+            <span class="keyword">&lt;/svg&gt;</span>
+            {{ isSubmitting ? 'Memproses Data...' : 'Kirim Pendaftaran' }}
+          <span class="keyword">&lt;/button&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+
+      <span class="keyword">&lt;/form&gt;</span>
+    <span class="keyword">&lt;/div&gt;</span>
+  <span class="keyword">&lt;/div&gt;</span>
+<span class="keyword">&lt;/template&gt;</span></code></pre>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-center mt-12 border-t border-slate-200 dark:border-zinc-800 pt-8 gap-4">
+                        <a href="vue-2.html"
+                            class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 bg-transparent text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-zinc-700 rounded-full font-semibold hover:bg-slate-100 dark:hover:bg-zinc-800 transition-all duration-300">
+                            <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                            Kembali ke Modul 2
+                        </a>
+
+                        <a href="#"
+                            class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 bg-zinc-200 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 rounded-full font-semibold cursor-not-allowed">
+                            Modul Selesai
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </main>
+
+            <aside class="hidden lg:block w-full h-full">
+                <div class="sticky top-28 lg:top-36 flex flex-col gap-8">
+                    <div
+                        class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 text-slate-100 dark:text-zinc-800/50">
+                            <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                            </svg>
+                        </div>
+                        <h3
+                            class="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6 relative z-10">
+                            Catatan Kader
+                        </h3>
+                        <blockquote
+                            class="text-[15px] italic text-slate-700 dark:text-slate-300 leading-relaxed mb-4 border-l-4 border-brand pl-4 relative z-10">
+                            "Menulis form di Vue.js itu seperti sihir. v-model menghapus ratusan baris kode boilerplate
+                            JavaScript murni. Namun ingat aturan emasnya: Jangan pernah percaya 100% pada input
+                            pengguna. Lakukan selalu validasi di sisi Frontend dan pastikan Backend memvalidasi ulang."
+                        </blockquote>
+                        <cite class="block text-right text-sm font-extrabold text-brand not-italic relative z-10">-
+                            Tech Lead</cite>
+                    </div>
+
+                    <div
+                        class="bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-800/30 rounded-2xl p-6">
+                        <h3
+                            class="font-mono text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-widest mb-2">
+                            Pencapaian</h3>
+                        <p class="font-bold text-slate-900 dark:text-white mb-2">Seri Dasar Selesai! 🎉</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Selamat! Kamu sudah menguasai reaktivitas
+                            dasar, koneksi API (GET & POST), dan manajemen Form.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <img src="../asset/image/logo-dark.png" alt="Catatan Kader"
+                class="h-8 mx-auto mb-6 opacity-80 dark:opacity-100 hidden dark:block">
+            <img src="../asset/image/logo.png" alt="Catatan Kader"
+                class="h-8 mx-auto mb-6 opacity-80 dark:block dark:hidden">
+            <p class="text-slate-500 dark:text-slate-400 text-[15px] max-w-lg mx-auto mb-8 leading-relaxed">
+                Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis logika, serta
+                standarisasi implementasi sistem teknologi.
+            </p>
+            <p class="font-mono text-[13px] text-slate-500 dark:text-slate-400">
+                &copy; 2026 Catatan Kader. Deployment Active.
+            </p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Navbar Scroll Effect
+            const navbar = document.getElementById("navbar");
+            const mobileBtn = document.getElementById("mobile-menu-btn");
+            const navMenu = document.getElementById("mobile-menu");
+            const menuIcon = document.getElementById("menu-icon");
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.remove("bg-transparent", "border-transparent");
+                    navbar.classList.add("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-sm");
+                } else {
+                    navbar.classList.remove("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-sm");
+                    navbar.classList.add("bg-transparent", "border-transparent");
+                }
+            });
+
+            // Mobile Menu Toggle Logic
+            let isMenuOpen = false;
+            mobileBtn.addEventListener("click", () => {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    navMenu.classList.remove("hidden");
+                    navMenu.classList.add("flex");
+                    navbar.classList.add("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-sm");
+                    navbar.classList.remove("bg-transparent", "border-transparent");
+                    menuIcon.setAttribute("d", "M6 18L18 6M6 6l12 12");
+                } else {
+                    navMenu.classList.add("hidden");
+                    navMenu.classList.remove("flex");
+                    if (window.scrollY <= 20) {
+                        navbar.classList.remove("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-sm");
+                        navbar.classList.add("bg-transparent", "border-transparent");
+                    }
+                    menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+                }
+            });
+
+            // Smooth Transition for Page Load Simulation
+            const skeleton = document.getElementById('skeleton-loader');
+            const content = document.getElementById('actual-content');
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                content.classList.remove('hidden');
+                content.classList.add('animate-fadeUp');
+            }, 800);
+        });
+    </script>
+</body>
+
+</html>

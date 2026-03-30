@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul 1: Vue 3 & Composition API - Catatan Kader</title>
+    <title>Modul 1: Ultimate Vue 3 & Composition API - Catatan Kader</title>
     <meta name="description"
         content="Membangun antarmuka interaktif menggunakan sintaks Vue 3 yang elegan dan lebih mudah di-maintain dengan Composition API.">
 
@@ -20,10 +20,28 @@
             darkMode: 'media',
             theme: {
                 extend: {
-                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], mono: ['"Fira Code"', 'monospace'], },
-                    colors: { brand: { DEFAULT: '#42b883', hover: '#33a06f', light: '#ecfdf5', dark: '#34d399', darkLight: 'rgba(66, 184, 131, 0.15)', } },
-                    animation: { fadeUp: 'fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards', },
-                    keyframes: { fadeUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' }, } }
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#2563eb', /* Blue 600 */
+                            hover: '#1d4ed8',   /* Blue 700 */
+                            light: '#eff6ff',   /* Blue 50 */
+                            dark: '#60a5fa',    /* Blue 400 */
+                            darkLight: 'rgba(59, 130, 246, 0.15)',
+                        }
+                    },
+                    animation: {
+                        fadeUp: 'fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
                 }
             }
         }
@@ -55,35 +73,65 @@
         .hero-gradient {
             background: linear-gradient(to top, rgba(9, 9, 11, 0.9), transparent);
         }
+
+        /* Syntax Highlighting Custom for Code Blocks */
+        .keyword {
+            color: #c678dd;
+        }
+
+        .string {
+            color: #98c379;
+        }
+
+        .function {
+            color: #61afef;
+        }
+
+        .comment {
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .variable {
+            color: #e06c75;
+        }
     </style>
 </head>
 
 <body
     class="bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-slate-50 font-sans antialiased overflow-x-hidden selection:bg-brand selection:text-white relative">
 
-    <div class="fixed w-full top-0 z-[100] transition-all duration-300 py-4 md:py-5 navbar bg-transparent" id="navbar">
+    <div class="fixed w-full top-0 z-50 transition-all duration-300 py-5 navbar" id="navbar">
         <nav class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+
             <a href="../index.html" class="flex items-center group">
                 <img src="../asset/image/logo.png" alt="Logo Catatan Kader"
                     class="h-10 md:h-12 w-auto block dark:hidden group-hover:scale-105 transition-transform duration-300">
-                <img src="../asset/image/logo-dark.png" alt="Logo Catatan Kader"
+                <img src="asset/image/logo-dark.png" alt="Logo Catatan Kader"
                     class="h-10 md:h-12 w-auto hidden dark:block group-hover:scale-105 transition-transform duration-300">
             </a>
-            <ul class="hidden md:flex gap-8 font-medium text-slate-600 dark:text-slate-300">
-                <li><a href="../index.html" class="text-brand dark:text-brand-dark transition-colors">Beranda</a></li>
+
+            <ul class="hidden md:flex gap-8 font-medium text-slate-600">
+                <li><a href="../index.html" class="text-blue-600 transition-colors">Beranda</a></li>
+                <!-- <li><a href="aboutus.html" class="hover:text-blue-600 transition-colors">Tentang Saya</a></li>
+        <li><a href="contacts/../index.html" class="hover:text-blue-600 transition-colors">Hubungi</a></li> -->
             </ul>
+
             <button id="mobile-menu-btn"
-                class="md:hidden text-slate-600 dark:text-slate-300 hover:text-brand dark:hover:text-brand-dark focus:outline-none transition-colors">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="md:hidden text-slate-600 hover:text-blue-600 focus:outline-none transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
         </nav>
+
         <div id="mobile-menu"
-            class="hidden absolute top-full left-0 w-full bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md shadow-lg border-t border-slate-100 dark:border-zinc-800 py-4 px-6 flex-col gap-4 font-medium text-slate-600 dark:text-slate-300">
-            <a href="../index.html"
-                class="text-brand dark:text-brand-dark block py-2 border-b border-slate-50 dark:border-zinc-800/50">Beranda</a>
+            class="hidden md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-t border-slate-100 py-4 px-6 flex flex-col gap-4 font-medium text-slate-600">
+            <a href="../index.html" class="text-blue-600 block py-2 border-b border-slate-50">Beranda</a>
+            <!-- <a href="aboutus.html" class="hover:text-blue-600 block py-2 border-b border-slate-50">Tentang Saya</a>
+      <a href="contacts/index.html" class="hover:text-blue-600 block py-2">Hubungi</a> -->
         </div>
     </div>
 
@@ -97,17 +145,19 @@
                     <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-64 w-full rounded-xl my-6"></div>
                     <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-4 w-full rounded"></div>
                     <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-4 w-5/6 rounded"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-4 w-4/6 rounded"></div>
+                    <div class="animate-pulse bg-slate-200 dark:bg-zinc-800 h-32 w-full rounded-xl mt-4"></div>
                 </div>
 
                 <article id="actual-content" class="hidden opacity-0">
                     <header class="mb-8">
                         <div
                             class="inline-block px-4 py-1.5 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-mono text-xs font-semibold rounded-full mb-6 ring-1 ring-brand/20">
-                            Frontend Engineering / Vue.js
+                            Frontend Engineering / Vue.js 3
                         </div>
                         <h1
-                            class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-8 text-slate-900 dark:text-white">
-                            Modul 1: Pengenalan Vue 3 & Composition API
+                            class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight mb-8 text-slate-900 dark:text-white">
+                            Modul 1: Menguasai Vue 3 & <br>Composition API Secara Menyeluruh
                         </h1>
 
                         <div
@@ -115,9 +165,9 @@
                             <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000&auto=format&fit=crop"
                                 alt="Vue.js Frontend Development" class="w-full h-full object-cover">
                             <div class="absolute inset-0 hero-gradient flex flex-col justify-end p-6 md:p-10">
-                                <p class="text-white/70 font-mono text-sm mb-2">Modul 01</p>
-                                <h2 class="text-white text-xl md:text-3xl font-bold italic">"Membangun Antarmuka
-                                    Interaktif yang Elegan"</h2>
+                                <p class="text-white/70 font-mono text-sm mb-2">Modul 01 • Masterclass</p>
+                                <h2 class="text-white text-xl md:text-3xl font-bold italic">"Dari Dasar hingga
+                                    Arsitektur Skala Enterprise"</h2>
                             </div>
                         </div>
 
@@ -128,7 +178,7 @@
                                     viewBox="0 0 24 24">
                                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                 </svg>
-                                Diperbarui Terakhir
+                                Diperbarui: Modul Lengkap
                             </div>
                             <div class="flex items-center gap-2">
                                 <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" stroke-width="2"
@@ -136,105 +186,516 @@
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                45 Menit Eksekusi
+                                120 Menit Eksekusi & Teori
                             </div>
                         </div>
                     </header>
 
                     <div
                         class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-[17px] leading-relaxed">
-                        <p class="mb-8 font-medium text-lg text-slate-900 dark:text-white">
-                            Vue 3 memperkenalkan <strong>Composition API</strong> melalui
-                            <code>&lt;script setup&gt;</code>. Sintaks ini sangat bersih, minim *boilerplate*, dan
-                            membuat penulisan logika JavaScript menjadi lebih natural (sangat mirip dengan *Vanilla JS*
-                            biasa) namun tetap *reactive*.
-                        </p>
 
-                        <div class="my-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
+                        <section id="pendahuluan" class="mb-16">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6">1. Apa itu Vue.js?</h2>
+                            <p>
+                                Vue (diucapkan /vjuː/, seperti kata bahasa Inggris <strong>view</strong>) adalah
+                                framework JavaScript yang bersifat progresif untuk membangun antarmuka pengguna (User
+                                Interfaces). Berbeda dengan framework monolitik yang memaksa Anda menggunakan seluruh
+                                ekosistemnya, Vue dirancang dari bawah ke atas agar dapat diadopsi secara bertahap.
+                            </p>
+                            <p>
+                                Pustaka inti Vue hanya difokuskan pada lapisan tampilan (View Layer), sehingga mudah
+                                diambil dan diintegrasikan dengan pustaka lain atau proyek yang sudah ada. Dua fitur
+                                inti utama Vue adalah:
+                            </p>
+                            <ul class="space-y-3 mt-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Declarative Rendering:</strong> Vue memperluas standar HTML dengan
+                                        sintaks template yang memungkinkan kita mendeskripsikan secara deklaratif output
+                                        HTML berdasarkan keadaan (state) JavaScript.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Reactivity:</strong> Vue secara otomatis melacak perubahan state
+                                        JavaScript dan secara efisien memperbarui Document Object Model (DOM) ketika
+                                        perubahan terjadi.</span>
+                                </li>
+                            </ul>
+
                             <div
-                                class="inline-block px-4 py-1 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-bold text-[10px] uppercase rounded mb-4 ring-1 ring-brand/20">
-                                Dasar Sintaks Vue 3</div>
-                            <h2
-                                class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-10 tracking-tighter">
-                                Reactivity & Event Handling</h2>
-
-                            <h3
-                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
-                                <span
-                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">01</span>
-                                Struktur Single File Component (SFC)
-                            </h3>
-                            <p class="mb-4 text-sm">Dalam Vue, satu file <code>.vue</code> memiliki 3 bagian utama:
-                                <code>&lt;script&gt;</code> untuk logika, <code>&lt;template&gt;</code> untuk HTML, dan
-                                <code>&lt;style&gt;</code> untuk CSS.</p>
-
-                            <pre
-                                class="bg-[#1e1e2e] text-emerald-400 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;script setup&gt;
-// Di sini tempat logika Javascript
-const namaSistem = "Catatan Kader APP";
-&lt;/script&gt;
-
-&lt;template&gt;
-  &lt;!-- Gunakan kurung kurawal ganda untuk menampilkan variabel --&gt;
-  &lt;h1&gt;Selamat Datang di {{ namaSistem }}&lt;/h1&gt;
-&lt;/template&gt;
-
-&lt;style scoped&gt;
-/* CSS khusus untuk komponen ini saja */
-h1 { color: #42b883; }
-&lt;/style&gt;
-</code></pre>
-
-                            <h3
-                                class="text-xl font-bold mb-4 flex items-center gap-3 text-slate-800 dark:text-slate-100">
-                                <span
-                                    class="w-8 h-8 rounded-lg bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark flex items-center justify-center text-sm font-black border border-brand/20">02</span>
-                                Reactivity dengan `ref`
-                            </h3>
-                            <p class="mb-4 text-sm">Agar variabel HTML bisa berubah secara otomatis saat datanya
-                                berubah, kita membungkus nilai tersebut dengan <code>ref()</code>.</p>
-
-                            <pre
-                                class="bg-[#1e1e2e] text-blue-300 p-6 rounded-xl font-mono text-sm mb-10 border border-zinc-800 overflow-x-auto shadow-lg"><code>&lt;script setup&gt;
-import { ref } from 'vue';
-
-// Membuat variabel reaktif
-const angka = ref(0);
-
-// Cara mengubah nilainya di dalam script HARUS menggunakan .value
-const tambah = () =&gt; {
-  angka.value++;
-};
-&lt;/script&gt;
-
-&lt;template&gt;
-  &lt;div&gt;
-    &lt;!-- Di template, TIDAK PERLU pakai .value --&gt;
-    &lt;p&gt;Nilai saat ini: {{ angka }}&lt;/p&gt;
-    &lt;button @click="tambah"&gt;Tambah Angka&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
-
-                        </div>
-
-                        <div
-                            class="p-6 bg-brand-light dark:bg-brand-darkLight border-l-4 border-brand rounded-r-xl my-12 shadow-sm">
-                            <div class="flex items-center gap-2 mb-2">
-                                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                <span class="font-bold text-slate-900 dark:text-white">Kader Note (Composition
-                                    API):</span>
+                                class="p-6 bg-brand-light dark:bg-brand-darkLight border-l-4 border-brand rounded-r-xl my-8">
+                                <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
+                                    <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Konsep Virtual DOM
+                                </h4>
+                                <p class="text-sm m-0">
+                                    Vue menggunakan <strong>Virtual DOM</strong>. Alih-alih langsung memanipulasi elemen
+                                    HTML asli di browser (yang sangat lambat), Vue membuat representasi memori ringan
+                                    dari DOM. Ketika ada variabel yang berubah, Vue menghitung perbedaan (diffing)
+                                    antara Virtual DOM lama dan baru, lalu hanya menerapkan perubahan spesifik tersebut
+                                    ke DOM asli. Inilah yang membuat Vue 3 sangat cepat.
+                                </p>
                             </div>
-                            <p class="text-[15px] m-0 text-slate-700 dark:text-slate-300">Dulu di Vue 2 kita menggunakan
-                                *Options API* (data, methods, computed). Dengan <code>&lt;script setup&gt;</code> di Vue
-                                3, kodenya jauh lebih sedikit, tidak perlu lagi menggunakan kata kunci
-                                <code>this</code>, dan sangat mudah untuk memecah logika yang panjang ke file terpisah
-                                (Composables).</p>
-                        </div>
+                        </section>
 
+                        <section id="composition-api"
+                            class="mb-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6">2. Apa itu "API" dalam
+                                Vue?</h2>
+                            <p>
+                                Ketika mendengar kata "API" (Application Programming Interface), banyak pemula langsung
+                                memikirkan URL backend (seperti <code>https://api.example.com/users</code>). Dalam
+                                konteks Vue, "API" memiliki makna yang berbeda.
+                            </p>
+                            <p>
+                                Dalam Vue, API merujuk pada <strong>sekumpulan fungsi, metode, dan aturan
+                                    sintaks</strong> yang disediakan oleh pembuat Vue agar kita (developer) bisa
+                                berkomunikasi dengan sistem internal Vue. Misalnya, fungsi <code>ref()</code> adalah
+                                sebuah API yang disediakan Vue agar kita bisa memberi tahu Vue, "Hei, tolong pantau
+                                variabel ini!".
+                            </p>
+
+                            <h3 class="text-2xl font-bold mt-10 mb-4">Mengenal Composition API</h3>
+                            <p>
+                                Di Vue 2, kita menggunakan <strong>Options API</strong>. Kita membagi kode berdasarkan
+                                "laci" properti: ada laci untuk <code>data()</code>, laci untuk <code>methods</code>,
+                                dan laci untuk <code>computed</code>. Masalahnya, ketika komponen menjadi sangat besar,
+                                logika untuk satu fitur (misalnya fitur pencarian) akan terpecah-pecah ke berbagai
+                                "laci" tersebut.
+                            </p>
+                            <p>
+                                <strong>Composition API</strong> yang diperkenalkan di Vue 3 memecahkan masalah ini.
+                                Alih-alih mengelompokkan kode berdasarkan "tipe opsi", kita mengelompokkannya
+                                berdasarkan <strong>fitur logis</strong>. Ini membuat kode jauh lebih mudah dibaca,
+                                dipelihara, dan digunakan kembali (reusable).
+                            </p>
+
+                            <div class="my-8">
+                                <h4 class="font-bold mb-4 text-brand">Perbandingan Kasus: Options API vs Composition API
+                                </h4>
+
+                                <p class="text-sm font-mono text-slate-500 mb-2">// 1. Menggunakan Options API (Vue 2
+                                    Style)</p>
+                                <pre
+                                    class="bg-[#18181b] p-6 rounded-xl font-mono text-sm mb-6 border border-zinc-800 overflow-x-auto text-slate-300"><code><span class="keyword">export default</span> {
+  <span class="function">data</span>() {
+    <span class="keyword">return</span> {
+      <span class="variable">count</span>: 0,
+      <span class="variable">searchQuery</span>: ''
+    }
+  },
+  <span class="keyword">computed</span>: {
+    <span class="function">doubleCount</span>() {
+      <span class="keyword">return</span> <span class="keyword">this</span>.count * 2;
+    }
+  },
+  <span class="keyword">methods</span>: {
+    <span class="function">increment</span>() {
+      <span class="keyword">this</span>.count++;
+    },
+    <span class="function">doSearch</span>() {
+      console.log(<span class="string">'Mencari:'</span>, <span class="keyword">this</span>.searchQuery);
+    }
+  }
+}</code></pre>
+
+                                <p class="text-sm font-mono text-slate-500 mb-2">// 2. Menggunakan Composition API
+                                    &lt;script setup&gt; (Vue 3 Style)</p>
+                                <pre
+                                    class="bg-[#1e1e2e] p-6 rounded-xl font-mono text-sm mb-6 border border-zinc-800 overflow-x-auto text-slate-300 shadow-xl shadow-brand/10 ring-1 ring-brand/30"><code><span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { ref, computed } <span class="keyword">from</span> <span class="string">'vue'</span>;
+
+<span class="comment">// --- Fitur Counter ---</span>
+<span class="keyword">const</span> count = <span class="function">ref</span>(0);
+<span class="keyword">const</span> doubleCount = <span class="function">computed</span>(() =&gt; count.value * 2);
+<span class="keyword">const</span> increment = () =&gt; {
+  count.value++;
+};
+
+<span class="comment">// --- Fitur Pencarian ---</span>
+<span class="keyword">const</span> searchQuery = <span class="function">ref</span>(<span class="string">''</span>);
+<span class="keyword">const</span> doSearch = () =&gt; {
+  console.log(<span class="string">'Mencari:'</span>, searchQuery.value);
+};
+<span class="keyword">&lt;/script&gt;</span></code></pre>
+                                <p class="text-sm">Terlihat jelas bahwa pada Composition API, kode terkait
+                                    <em>Counter</em> dan kode terkait <em>Pencarian</em> bisa dikelompokkan secara
+                                    berdekatan. Ini adalah "Game Changer" untuk codebase berukuran besar.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section id="reactivity" class="mb-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6">3. Inti Vue 3:
+                                Reactivity System</h2>
+                            <p>
+                                Reactivity adalah jantung dari Vue. Ada dua cara utama untuk mendeklarasikan state
+                                reaktif di Vue 3 Composition API: menggunakan <code>ref()</code> dan
+                                <code>reactive()</code>.
+                            </p>
+
+                            <h3 class="text-xl font-bold mt-8 mb-4">A. Menggunakan <code>ref()</code></h3>
+                            <p>
+                                <code>ref()</code> direkomendasikan sebagai standar default di Vue 3. Ia dapat menerima
+                                tipe data primitif (String, Number, Boolean) maupun tipe data non-primitif (Object,
+                                Array).
+                            </p>
+                            <p class="font-bold text-red-500 dark:text-red-400">Aturan Emas <code>ref</code>:</p>
+                            <ul class="mb-6">
+                                <li>Di dalam <code>&lt;script&gt;</code>, Anda <strong>wajib</strong> menggunakan
+                                    <code>.value</code> untuk membaca atau mengubah nilainya.
+                                </li>
+                                <li>Di dalam <code>&lt;template&gt;</code>, Vue secara otomatis melakukan
+                                    <em>unwrapping</em>, sehingga Anda <strong>tidak perlu</strong> menggunakan
+                                    <code>.value</code>.
+                                </li>
+                            </ul>
+
+                            <pre
+                                class="bg-[#1e1e2e] p-6 rounded-xl font-mono text-sm mb-8 border border-zinc-800 overflow-x-auto text-slate-300"><code><span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { ref } <span class="keyword">from</span> <span class="string">'vue'</span>;
+
+<span class="comment">// Deklarasi primitif</span>
+<span class="keyword">const</span> nama = <span class="function">ref</span>(<span class="string">'Kader'</span>);
+<span class="keyword">const</span> umur = <span class="function">ref</span>(25);
+<span class="keyword">const</span> isLogin = <span class="function">ref</span>(<span class="keyword">false</span>);
+
+<span class="comment">// Deklarasi Array</span>
+<span class="keyword">const</span> hobi = <span class="function">ref</span>([<span class="string">'Coding'</span>, <span class="string">'Membaca'</span>]);
+
+<span class="comment">// Fungsi untuk mengubah nilai</span>
+<span class="keyword">const</span> rayakanUlangTahun = () =&gt; {
+  <span class="comment">// Wajib pakai .value di dalam script!</span>
+  umur.value++; 
+  console.log(<span class="string">`Selamat ulang tahun ${nama.value}, sekarang umurmu ${umur.value}`</span>);
+};
+<span class="keyword">&lt;/script&gt;</span>
+
+<span class="keyword">&lt;template&gt;</span>
+  <span class="keyword">&lt;div&gt;</span>
+    <span class="comment">&lt;!-- TIDAK perlu .value di template --&gt;</span>
+    <span class="keyword">&lt;h1&gt;</span>Halo, nama saya {{ nama }}<span class="keyword">&lt;/h1&gt;</span>
+    <span class="keyword">&lt;p&gt;</span>Umur: {{ umur }} tahun<span class="keyword">&lt;/p&gt;</span>
+    
+    <span class="keyword">&lt;button</span> <span class="variable">@click</span>="<span class="function">rayakanUlangTahun</span>"<span class="keyword">&gt;</span>Tambah Umur<span class="keyword">&lt;/button&gt;</span>
+  <span class="keyword">&lt;/div&gt;</span>
+<span class="keyword">&lt;/template&gt;</span></code></pre>
+
+                            <h3 class="text-xl font-bold mt-10 mb-4">B. Menggunakan <code>reactive()</code></h3>
+                            <p>
+                                Berbeda dengan <code>ref</code>, <code>reactive()</code> <strong>hanya</strong> menerima
+                                tipe data Object (termasuk Array, Map, Set). Ia tidak bisa digunakan untuk nilai
+                                primitif. Keunggulannya adalah Anda tidak perlu menggunakan <code>.value</code>.
+                            </p>
+
+                            <pre
+                                class="bg-[#1e1e2e] p-6 rounded-xl font-mono text-sm mb-8 border border-zinc-800 overflow-x-auto text-slate-300"><code><span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { reactive } <span class="keyword">from</span> <span class="string">'vue'</span>;
+
+<span class="comment">// Hanya bisa menerima Object</span>
+<span class="keyword">const</span> pengguna = <span class="function">reactive</span>({
+  nama: <span class="string">'John Doe'</span>,
+  umur: 30,
+  pekerjaan: <span class="string">'Frontend Engineer'</span>
+});
+
+<span class="keyword">const</span> ubahPekerjaan = () =&gt; {
+  <span class="comment">// Langsung akses properti, tanpa .value</span>
+  pengguna.pekerjaan = <span class="string">'Tech Lead'</span>; 
+};
+<span class="keyword">&lt;/script&gt;</span></code></pre>
+
+                            <blockquote
+                                class="border-l-4 border-amber-500 pl-4 bg-amber-50 dark:bg-amber-900/20 py-3 rounded-r">
+                                <strong>Peringatan Kader:</strong> Hati-hati melakukan destrukturisasi pada
+                                <code>reactive()</code>. Jika Anda melakukan <code>const { nama } = pengguna;</code>,
+                                variabel <code>nama</code> akan kehilangan sifat reaktifnya! Untuk mengatasinya, Vue
+                                menyediakan fungsi <code>toRefs()</code>. Namun, lebih aman menggunakan
+                                <code>ref()</code> untuk sebagian besar kasus.
+                            </blockquote>
+
+                        </section>
+
+                        <section id="computed-watch" class="mb-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6">4. Computed Properties &
+                                Watchers</h2>
+
+                            <h3 class="text-xl font-bold mb-4">Computed Properties</h3>
+                            <p>
+                                <code>computed()</code> digunakan untuk membuat variabel reaktif yang nilainya
+                                bergantung pada variabel reaktif lainnya. Keunggulan utama <code>computed</code> adalah
+                                <strong>Caching</strong>. Fungsi di dalam <code>computed</code> hanya akan dijalankan
+                                ulang jika variabel dependensinya berubah.
+                            </p>
+
+                            <pre
+                                class="bg-[#1e1e2e] p-6 rounded-xl font-mono text-sm mb-8 border border-zinc-800 overflow-x-auto text-slate-300"><code><span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { ref, computed } <span class="keyword">from</span> <span class="string">'vue'</span>;
+
+<span class="keyword">const</span> keranjang = <span class="function">ref</span>([
+  { id: 1, nama: <span class="string">'Laptop'</span>, harga: 15000000 },
+  { id: 2, nama: <span class="string">'Mouse'</span>, harga: 500000 }
+]);
+
+<span class="comment">// totalBelanja akan otomatis ter-update jika isi 'keranjang' berubah</span>
+<span class="comment">// dan nilainya di-cache hingga perubahan berikutnya terjadi.</span>
+<span class="keyword">const</span> totalBelanja = <span class="function">computed</span>(() =&gt; {
+  <span class="keyword">return</span> keranjang.value.reduce((total, item) =&gt; total + item.harga, 0);
+});
+<span class="keyword">&lt;/script&gt;</span></code></pre>
+
+                            <h3 class="text-xl font-bold mb-4">Watchers (<code>watch</code> & <code>watchEffect</code>)
+                            </h3>
+                            <p>
+                                Sementara <code>computed</code> digunakan untuk menghasilkan *nilai baru*,
+                                <code>watch()</code> digunakan untuk menjalankan *side-effect* (efek samping) ketika
+                                sebuah data berubah. Contoh *side-effect* adalah: mengambil data dari API, menyimpan
+                                data ke LocalStorage, atau memanipulasi DOM secara manual.
+                            </p>
+
+                            <pre
+                                class="bg-[#1e1e2e] p-6 rounded-xl font-mono text-sm mb-8 border border-zinc-800 overflow-x-auto text-slate-300"><code><span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { ref, watch } <span class="keyword">from</span> <span class="string">'vue'</span>;
+
+<span class="keyword">const</span> kataKunci = <span class="function">ref</span>(<span class="string">''</span>);
+
+<span class="comment">// Memantau variabel kataKunci</span>
+<span class="function">watch</span>(kataKunci, (nilaiBaru, nilaiLama) =&gt; {
+  console.log(<span class="string">`Pencarian diubah dari "${nilaiLama}" menjadi "${nilaiBaru}"`</span>);
+  <span class="comment">// Disini kita bisa panggil API untuk mencari data</span>
+  <span class="comment">// panggilAPIBackend(nilaiBaru);</span>
+});
+<span class="keyword">&lt;/script&gt;</span></code></pre>
+                        </section>
+
+                        <section id="lifecycle" class="mb-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6">5. Komponen Lifecycle
+                                Hooks</h2>
+                            <p>
+                                Setiap komponen Vue melewati serangkaian langkah inisialisasi saat dibuat—misalnya,
+                                mengatur reaktivitas, menyusun templat, memasang (mounting) komponen ke DOM, dan
+                                memperbarui DOM saat data berubah. Di sepanjang proses ini, Vue menjalankan
+                                fungsi-fungsi khusus yang disebut <strong>Lifecycle Hooks</strong>.
+                            </p>
+
+                            <p>Dalam Composition API (<code>&lt;script setup&gt;</code>), Hook yang paling sering
+                                digunakan adalah <code>onMounted</code> dan <code>onUnmounted</code>.</p>
+
+                            <pre
+                                class="bg-[#1e1e2e] p-6 rounded-xl font-mono text-sm mb-8 border border-zinc-800 overflow-x-auto text-slate-300"><code><span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { ref, onMounted, onUnmounted } <span class="keyword">from</span> <span class="string">'vue'</span>;
+
+<span class="keyword">const</span> posisiScroll = <span class="function">ref</span>(0);
+
+<span class="keyword">const</span> updateScroll = () =&gt; {
+  posisiScroll.value = window.scrollY;
+};
+
+<span class="comment">// Dijalankan HANYA SEKALI ketika komponen telah dirender ke layar</span>
+<span class="function">onMounted</span>(() =&gt; {
+  console.log(<span class="string">'Komponen siap!'</span>);
+  window.addEventListener(<span class="string">'scroll'</span>, updateScroll);
+});
+
+<span class="comment">// Penting: Bersihkan event listener saat komponen dihapus</span>
+<span class="comment">// untuk mencegah memory leak!</span>
+<span class="function">onUnmounted</span>(() =&gt; {
+  window.removeEventListener(<span class="string">'scroll'</span>, updateScroll);
+});
+<span class="keyword">&lt;/script&gt;</span></code></pre>
+                        </section>
+
+                        <section id="full-implementation"
+                            class="mb-16 border-t border-slate-200 dark:border-zinc-800 pt-16">
+                            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6">6. Implementasi Penuh:
+                                Aplikasi Task Management Vue 3</h2>
+                            <p>
+                                Untuk membuktikan bahwa Anda menguasai semua teori di atas, mari kita gabungkan
+                                semuanya. Di bawah ini adalah kode lengkap untuk komponen <code>TodoList.vue</code> yang
+                                mengimplementasikan <code>ref</code>, <code>computed</code>, <code>watch</code> (untuk
+                                LocalStorage), dan Event Handling. Ini adalah standar kode level menengah ke atas.
+                            </p>
+
+                            <div class="relative group">
+                                <div
+                                    class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span
+                                        class="bg-brand text-white text-xs px-3 py-1 rounded-full font-mono">TodoList.vue</span>
+                                </div>
+                                <pre
+                                    class="bg-[#18181b] p-6 rounded-xl font-mono text-sm border border-zinc-800 overflow-x-auto text-slate-300 leading-loose shadow-2xl"><code><span class="keyword">&lt;script</span> <span class="variable">setup</span><span class="keyword">&gt;</span>
+<span class="keyword">import</span> { ref, computed, watch, onMounted } <span class="keyword">from</span> <span class="string">'vue'</span>;
+
+<span class="comment">// ==========================================</span>
+<span class="comment">// 1. STATE MANAGEMENT</span>
+<span class="comment">// ==========================================</span>
+<span class="comment">// Array reaktif untuk menyimpan daftar tugas</span>
+<span class="keyword">const</span> tasks = <span class="function">ref</span>([]);
+
+<span class="comment">// Variabel untuk input form teks tugas baru</span>
+<span class="keyword">const</span> newTaskTitle = <span class="function">ref</span>(<span class="string">''</span>);
+
+<span class="comment">// Variabel filter (bisa 'all', 'active', atau 'completed')</span>
+<span class="keyword">const</span> filter = <span class="function">ref</span>(<span class="string">'all'</span>);
+
+<span class="comment">// ==========================================</span>
+<span class="comment">// 2. COMPUTED PROPERTIES</span>
+<span class="comment">// ==========================================</span>
+<span class="comment">// Mengembalikan daftar tugas yang sudah difilter</span>
+<span class="keyword">const</span> filteredTasks = <span class="function">computed</span>(() =&gt; {
+    <span class="keyword">if</span> (filter.value === <span class="string">'active'</span>) {
+        <span class="keyword">return</span> tasks.value.filter(task =&gt; !task.completed);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (filter.value === <span class="string">'completed'</span>) {
+        <span class="keyword">return</span> tasks.value.filter(task =&gt; task.completed);
+    }
+    <span class="comment">// Default jika filter === 'all'</span>
+    <span class="keyword">return</span> tasks.value;
+});
+
+<span class="comment">// Menghitung sisa tugas yang belum selesai</span>
+<span class="keyword">const</span> remainingTasks = <span class="function">computed</span>(() =&gt; {
+    <span class="keyword">return</span> tasks.value.filter(task =&gt; !task.completed).length;
+});
+
+<span class="comment">// ==========================================</span>
+<span class="comment">// 3. METHODS (BUSINESS LOGIC)</span>
+<span class="comment">// ==========================================</span>
+<span class="comment">// Fungsi untuk menambah tugas baru</span>
+<span class="keyword">const</span> addTask = () =&gt; {
+    <span class="comment">// Validasi: jangan izinkan teks kosong</span>
+    <span class="keyword">if</span> (newTaskTitle.value.trim() === <span class="string">''</span>) {
+        <span class="keyword">return</span>;
+    }
+    
+    <span class="comment">// Menambahkan object tugas baru ke awal array</span>
+    tasks.value.unshift({
+        id: Date.now(), <span class="comment">// Membuat ID unik dengan timestamp</span>
+        title: newTaskTitle.value,
+        completed: <span class="keyword">false</span>
+    });
+    
+    <span class="comment">// Reset input form</span>
+    newTaskTitle.value = <span class="string">''</span>;
+};
+
+<span class="comment">// Fungsi untuk menghapus tugas berdasarkan ID</span>
+<span class="keyword">const</span> removeTask = (taskId) =&gt; {
+    tasks.value = tasks.value.filter(task =&gt; task.id !== taskId);
+};
+
+<span class="comment">// Fungsi untuk membersihkan semua tugas yang sudah selesai</span>
+<span class="keyword">const</span> clearCompleted = () =&gt; {
+    tasks.value = tasks.value.filter(task =&gt; !task.completed);
+};
+
+<span class="comment">// ==========================================</span>
+<span class="comment">// 4. WATCHERS (SIDE EFFECTS)</span>
+<span class="comment">// ==========================================</span>
+<span class="comment">// Menggunakan parameter { deep: true } karena kita</span>
+<span class="comment">// memantau array of objects. Jika properti 'completed'</span>
+<span class="comment">// di dalam object berubah, watcher ini akan terpicu.</span>
+<span class="function">watch</span>(tasks, (newTasks) =&gt; {
+    <span class="comment">// Menyimpan ke Local Storage setiap kali ada perubahan</span>
+    localStorage.setItem(<span class="string">'vue-todo-list'</span>, JSON.stringify(newTasks));
+}, { deep: <span class="keyword">true</span> });
+
+<span class="comment">// ==========================================</span>
+<span class="comment">// 5. LIFECYCLE HOOKS</span>
+<span class="comment">// ==========================================</span>
+<span class="function">onMounted</span>(() =&gt; {
+    <span class="comment">// Saat komponen dimuat, ambil data dari Local Storage</span>
+    <span class="keyword">const</span> savedTasks = localStorage.getItem(<span class="string">'vue-todo-list'</span>);
+    <span class="keyword">if</span> (savedTasks) {
+        <span class="keyword">try</span> {
+            tasks.value = JSON.parse(savedTasks);
+        } <span class="keyword">catch</span> (e) {
+            console.error(<span class="string">'Gagal melakukan parsing data LocalStorage'</span>, e);
+        }
+    }
+});
+<span class="keyword">&lt;/script&gt;</span>
+
+<span class="keyword">&lt;template&gt;</span>
+  <span class="keyword">&lt;div</span> <span class="variable">class</span>="<span class="string">todo-container</span>"<span class="keyword">&gt;</span>
+    <span class="keyword">&lt;h1&gt;</span>Tugas Harian Vue 3<span class="keyword">&lt;/h1&gt;</span>
+    
+    <span class="comment">&lt;!-- Form Input Tugas --&gt;</span>
+    <span class="comment">&lt;!-- @submit.prevent otomatis membatalkan event reload page dari form --&gt;</span>
+    <span class="keyword">&lt;form</span> <span class="variable">@submit.prevent</span>="<span class="function">addTask</span>" <span class="variable">class</span>="<span class="string">todo-form</span>"<span class="keyword">&gt;</span>
+      <span class="keyword">&lt;input</span> 
+        <span class="variable">v-model</span>="<span class="variable">newTaskTitle</span>" 
+        <span class="variable">type</span>="<span class="string">text</span>" 
+        <span class="variable">placeholder</span>="<span class="string">Apa yang perlu diselesaikan hari ini?</span>"
+        <span class="variable">class</span>="<span class="string">todo-input</span>"
+      <span class="keyword">&gt;</span>
+      <span class="keyword">&lt;button</span> <span class="variable">type</span>="<span class="string">submit</span>" <span class="variable">class</span>="<span class="string">btn-primary</span>"<span class="keyword">&gt;</span>Tambah<span class="keyword">&lt;/button&gt;</span>
+    <span class="keyword">&lt;/form&gt;</span>
+
+    <span class="comment">&lt;!-- Daftar Tugas --&gt;</span>
+    <span class="keyword">&lt;ul</span> <span class="variable">class</span>="<span class="string">todo-list</span>" <span class="variable">v-if</span>="<span class="variable">filteredTasks.length &gt; 0</span>"<span class="keyword">&gt;</span>
+      <span class="keyword">&lt;li</span> 
+        <span class="variable">v-for</span>="<span class="variable">task in filteredTasks</span>" 
+        <span class="variable">:key</span>="<span class="variable">task.id</span>"
+        <span class="variable">:class</span>="<span class="string">{ 'task-completed': task.completed }</span>"
+      <span class="keyword">&gt;</span>
+        <span class="keyword">&lt;div</span> <span class="variable">class</span>="<span class="string">task-content</span>"<span class="keyword">&gt;</span>
+          <span class="comment">&lt;!-- Checkbox untuk status --&gt;</span>
+          <span class="keyword">&lt;input</span> <span class="variable">type</span>="<span class="string">checkbox</span>" <span class="variable">v-model</span>="<span class="variable">task.completed</span>"<span class="keyword">&gt;</span>
+          <span class="keyword">&lt;span</span> <span class="variable">class</span>="<span class="string">task-title</span>"<span class="keyword">&gt;</span>{{ task.title }}<span class="keyword">&lt;/span&gt;</span>
+        <span class="keyword">&lt;/div&gt;</span>
+        <span class="keyword">&lt;button</span> <span class="variable">@click</span>="<span class="function">removeTask</span><span class="variable">(task.id)</span>" <span class="variable">class</span>="<span class="string">btn-danger</span>"<span class="keyword">&gt;</span>Hapus<span class="keyword">&lt;/button&gt;</span>
+      <span class="keyword">&lt;/li&gt;</span>
+    <span class="keyword">&lt;/ul&gt;</span>
+    <span class="keyword">&lt;p</span> <span class="variable">v-else</span> <span class="variable">class</span>="<span class="string">empty-state</span>"<span class="keyword">&gt;</span>Tidak ada tugas yang sesuai dengan filter.<span class="keyword">&lt;/p&gt;</span>
+
+    <span class="comment">&lt;!-- Footer Panel (Filter & Statistik) --&gt;</span>
+    <span class="keyword">&lt;div</span> <span class="variable">class</span>="<span class="string">todo-footer</span>" <span class="variable">v-if</span>="<span class="variable">tasks.length &gt; 0</span>"<span class="keyword">&gt;</span>
+      <span class="keyword">&lt;span&gt;</span>{{ remainingTasks }} tugas tersisa<span class="keyword">&lt;/span&gt;</span>
+      
+      <span class="keyword">&lt;div</span> <span class="variable">class</span>="<span class="string">filter-buttons</span>"<span class="keyword">&gt;</span>
+        <span class="keyword">&lt;button</span> <span class="variable">:class</span>="<span class="string">{ active: filter === 'all' }</span>" <span class="variable">@click</span>="<span class="function">filter = 'all'</span>"<span class="keyword">&gt;</span>Semua<span class="keyword">&lt;/button&gt;</span>
+        <span class="keyword">&lt;button</span> <span class="variable">:class</span>="<span class="string">{ active: filter === 'active' }</span>" <span class="variable">@click</span>="<span class="function">filter = 'active'</span>"<span class="keyword">&gt;</span>Aktif<span class="keyword">&lt;/button&gt;</span>
+        <span class="keyword">&lt;button</span> <span class="variable">:class</span>="<span class="string">{ active: filter === 'completed' }</span>" <span class="variable">@click</span>="<span class="function">filter = 'completed'</span>"<span class="keyword">&gt;</span>Selesai<span class="keyword">&lt;/button&gt;</span>
+      <span class="keyword">&lt;/div&gt;</span>
+      
+      <span class="keyword">&lt;button</span> 
+        <span class="variable">v-show</span>="<span class="variable">tasks.length &gt; remainingTasks</span>" 
+        <span class="variable">@click</span>="<span class="function">clearCompleted</span>" 
+        <span class="variable">class</span>="<span class="string">btn-clear</span>"
+      <span class="keyword">&gt;</span>
+        Bersihkan Selesai
+      <span class="keyword">&lt;/button&gt;</span>
+    <span class="keyword">&lt;/div&gt;</span>
+  <span class="keyword">&lt;/div&gt;</span>
+<span class="keyword">&lt;/template&gt;</span>
+
+<span class="keyword">&lt;style</span> <span class="variable">scoped</span><span class="keyword">&gt;</span>
+<span class="comment">/* Karena ini menggunakan scope, CSS ini tidak akan bocor ke komponen lain */</span>
+<span class="variable">.todo-container</span> {
+  <span class="variable">max-width</span>: <span class="string">600px</span>;
+  <span class="variable">margin</span>: <span class="string">0 auto</span>;
+  <span class="variable">padding</span>: <span class="string">2rem</span>;
+  <span class="variable">background</span>: <span class="string">#ffffff</span>;
+  <span class="variable">border-radius</span>: <span class="string">12px</span>;
+  <span class="variable">box-shadow</span>: <span class="string">0 4px 6px rgba(0,0,0,0.1)</span>;
+}
+<span class="comment">/* ... (dan banyak CSS styling lainnya di aplikasi riil) ... */</span>
+<span class="keyword">&lt;/style&gt;</span></code></pre>
+                            </div>
+
+                        </section>
                     </div>
 
                     <div
@@ -252,7 +713,7 @@ const tambah = () =&gt; {
 
                         <a href="vue-2.html"
                             class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 bg-brand text-white border border-transparent rounded-full font-semibold hover:bg-brand-hover hover:-translate-y-1 transition-all duration-300 shadow-sm group">
-                            Lanjut ke Modul 2: Fetch Data & Axios
+                            Lanjut ke Modul 2: Data via Axios di Vue
                             <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -275,14 +736,16 @@ const tambah = () =&gt; {
                         </div>
                         <h3
                             class="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6 relative z-10">
-                            Catatan Kader</h3>
+                            Catatan Kader
+                        </h3>
                         <blockquote
                             class="text-[15px] italic text-slate-700 dark:text-slate-300 leading-relaxed mb-4 border-l-4 border-brand pl-4 relative z-10">
-                            "Vue.js itu ibarat gabungan kemudahan HTML tradisional dengan kekuatan reaktivitas modern.
-                            Jangan overcomplicate, mulai dari ref() dan event handling dasar."
+                            "Kunci menguasai Vue 3 ada pada pemahaman 'Reactivity'. Pahami kapan harus memakai
+                            <code>ref</code> dan kapan harus membungkus logika di dalam <code>computed</code>. Vue
+                            melakukan sisanya untukmu."
                         </blockquote>
                         <cite class="block text-right text-sm font-extrabold text-brand not-italic relative z-10">-
-                            Abdul Kader</cite>
+                            Senior Frontend</cite>
                     </div>
 
                     <a href="vue-2.html" class="block group">
@@ -293,9 +756,9 @@ const tambah = () =&gt; {
                                 Selanjutnya</h3>
                             <p
                                 class="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-brand transition-colors">
-                                Modul 2: Fetch Data dengan Axios</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Implementasi lifecycle onMounted untuk
-                                mengambil data API.</p>
+                                Modul 2: Data via Axios di Vue</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Implementasi lifecycle onMounted dan
+                                pustaka Axios untuk mengambil data API, lalu menampilkannya dengan v-for.</p>
                         </div>
                     </a>
                 </div>
@@ -303,7 +766,7 @@ const tambah = () =&gt; {
         </div>
     </div>
 
-    <footer class="bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 text-center">
+      <footer class="bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 text-center">
         <div class="max-w-3xl mx-auto px-6">
             <img src="../asset/image/logo-dark.png" alt="Catatan Kader"
                 class="h-8 mx-auto mb-6 opacity-80 dark:opacity-100 hidden dark:block">
@@ -313,13 +776,15 @@ const tambah = () =&gt; {
                 Catatan ini dikelola untuk keperluan dokumentasi pribadi, pengembangan kemampuan analisis logika, serta
                 standarisasi implementasi sistem teknologi.
             </p>
-            <p class="font-mono text-[13px] text-slate-500 dark:text-slate-400">&copy; 2026 Catatan Kader. Deployment
-                Active.</p>
+            <p class="font-mono text-[13px] text-slate-500 dark:text-slate-400">
+                &copy; 2026 Catatan Kader. Deployment Active.
+            </p>
         </div>
     </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Navbar Scroll Logic
             const navbar = document.getElementById("navbar");
             const mobileBtn = document.getElementById("mobile-menu-btn");
             const navMenu = document.getElementById("mobile-menu");
@@ -328,37 +793,42 @@ const tambah = () =&gt; {
             window.addEventListener("scroll", () => {
                 if (window.scrollY > 20) {
                     navbar.classList.remove("bg-transparent", "border-transparent");
-                    navbar.classList.add("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-md");
+                    navbar.classList.add("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-sm");
                 } else {
-                    navbar.classList.remove("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-md");
+                    navbar.classList.remove("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-sm");
                     navbar.classList.add("bg-transparent", "border-transparent");
                 }
             });
 
+            // Mobile Menu Toggle
             let isMenuOpen = false;
             mobileBtn.addEventListener("click", () => {
                 isMenuOpen = !isMenuOpen;
                 if (isMenuOpen) {
-                    navMenu.classList.remove("hidden"); navMenu.classList.add("flex");
-                    navbar.classList.add("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-md");
+                    navMenu.classList.remove("hidden");
+                    navMenu.classList.add("flex");
+                    navbar.classList.add("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-sm");
                     navbar.classList.remove("bg-transparent", "border-transparent");
-                    menuIcon.setAttribute("d", "M6 18L18 6M6 6l12 12");
+                    menuIcon.setAttribute("d", "M6 18L18 6M6 6l12 12"); // X icon
                 } else {
-                    navMenu.classList.add("hidden"); navMenu.classList.remove("flex");
+                    navMenu.classList.add("hidden");
+                    navMenu.classList.remove("flex");
                     if (window.scrollY <= 20) {
-                        navbar.classList.remove("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-md");
+                        navbar.classList.remove("bg-white/95", "dark:bg-zinc-900/95", "backdrop-blur-md", "border-slate-200", "dark:border-zinc-800", "shadow-sm");
                         navbar.classList.add("bg-transparent", "border-transparent");
                     }
-                    menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+                    menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16"); // Hamburger icon
                 }
             });
 
+            // Skeleton Loader Logic Simulation
             const skeleton = document.getElementById('skeleton-loader');
             const content = document.getElementById('actual-content');
             setTimeout(() => {
                 skeleton.style.display = 'none';
-                content.classList.remove('hidden'); content.classList.add('animate-fadeUp');
-            }, 1000);
+                content.classList.remove('hidden');
+                content.classList.add('animate-fadeUp');
+            }, 800);
         });
     </script>
 </body>
