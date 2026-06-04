@@ -89,8 +89,16 @@ export default function Navbar() {
         <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform duration-300">
-              <GraduationCap className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
+              <img 
+                src="/asset/image/logo.png" 
+                alt="Catatan Kader Logo"
+                className="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300"
+                onLoad={(e) => {
+                  (e.target as HTMLImageElement).classList.remove("opacity-0");
+                }}
+              />
+              <GraduationCap className="w-6 h-6 z-10 transition-opacity duration-300" />
             </div>
             <div className="flex flex-col">
               <span className="font-extrabold text-lg md:text-xl tracking-tight text-slate-900 dark:text-white leading-none">
