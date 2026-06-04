@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+<head>
+    <meta charset="UTF-8">
+    <title>Modul 2: Mutasi Data dengan Server Actions - Catatan Kader</title>
+</head>
+<body>
+    <article id="actual-content">
+        <header class="mb-8">
+            <div class="inline-block px-4 py-1.5 bg-brand-light dark:bg-brand-darkLight text-brand dark:text-brand-dark font-mono text-xs font-semibold rounded-full mb-6 ring-1 ring-brand/20">
+                Backend & Fullstack / Next.js
+            </div>
+            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-8 text-slate-900 dark:text-white">
+                Mutasi Data Menggunakan Server Actions
+            </h1>
+        </header>
+
+        <div class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-[17px] leading-relaxed">
+            <p class="mb-8 font-medium text-lg text-slate-900 dark:text-white">
+                Sebelum Next.js App Router, untuk mengubah data di server dari form sisi client, kita harus membuat API route terpisah (misal: <code>/api/todo</code>) dan memanggilnya dengan fetch request. <b>Server Actions</b> menghilangkan boilerplate tersebut dengan mengizinkan pemanggilan fungsi server langsung dari elemen form HTML.
+            </p>
+
+            <h2>Mendefinisikan Server Action</h2>
+            <p>Sebuah Server Action dideklarasikan menggunakan direktif <code>"use server";</code> di baris pertama fungsinya (atau di bagian atas file module terpisah).</p>
+
+            <h2>Contoh Implementasi Mutasi Form Todo</h2>
+            <p>Berikut adalah contoh component halaman di mana form mengirimkan data input langsung ke fungsi server untuk disimpan, lalu men-trigger re-fetch data halaman secara real-time:</p>
+
+            <pre><code>import { revalidatePath } from 'next/cache';
+
+// Database Mock
+const todoDatabase: string[] = ["Belajar Next.js", "Konfigurasi Tailwind"];
+
+export default async function TodoPage() {
+  
+  // Fungsi Server Action untuk menyimpan todo baru
+  async function addTodoAction(formData: FormData) {
+    "use server"; // Deklarasi mutlak Server Action
+    
+    const task = formData.get("todoItem") as string;
+    if (task && task.trim() !== "") {
+      todoDatabase.push(task);
+      console.log("Database update:", todoDatabase);
+      
+      // Bersihkan cache rute ini agar daftar todo terupdate di browser
+      revalidatePath("/todo");
+    }
+  }
+
+  return (
+    &lt;div className="p-8 max-w-md mx-auto"&gt;
+      &lt;h1 className="text-xl font-bold mb-4"&gt;Daftar Tugas Anda&lt;/h1&gt;
+      
+      {/* Form Action memanggil fungsi server secara langsung */}
+      &lt;form action={addTodoAction} className="flex gap-2 mb-6"&gt;
+        &lt;input 
+          type="text" 
+          name="todoItem" 
+          placeholder="Tulis tugas baru..." 
+          className="flex-1 p-2 border rounded-xl dark:bg-zinc-800"
+          required
+        /&gt;
+        &lt;button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold"&gt;
+          Tambah
+        &lt;/button&gt;
+      &lt;/form&gt;
+
+      &lt;ul className="space-y-2"&gt;
+        {todoDatabase.map((todo, idx) =&gt; (
+          &lt;li key={idx} className="p-3 bg-white dark:bg-zinc-900 border rounded-xl shadow-xs"&gt;
+            {todo}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <div class="p-5 bg-blue-50 dark:bg-blue-950/20 border-l-4 border-blue-500 rounded-r-xl my-8 text-sm text-slate-700 dark:text-blue-200 shadow-xs">
+                <strong>Kader Note (Progressive Enhancement):</strong>
+                Server Actions mendukung Progressive Enhancement secara default. Artinya, elemen form HTML yang diikat dengan Server Action akan tetap dapat mengirimkan data ke server meskipun browser client mematikan JavaScript secara total.
+            </div>
+
+            <h2>Referensi Belajar Resmi</h2>
+            <ul class="list-disc pl-6 space-y-2 mt-4 text-xs font-mono">
+                <li><a href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations" target="_blank" class="text-brand hover:underline">Dokumentasi Server Actions Next.js</a></li>
+            </ul>
+        </div>
+    </article>
+</body>
+</html>
