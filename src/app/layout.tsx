@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   description: "Kumpulan catatan arsitektur, kode, rekayasa perangkat lunak, dan dokumentasi teknis oleh Abdul Kader.",
   icons: {
-    icon: "/asset/image/favicon.png",
+    icon: "/favicon.png",
   },
 };
 

@@ -19,16 +19,8 @@ export default function Footer() {
         {/* Branding & Summary */}
         <div className="md:col-span-6 space-y-4">
           <Link href="/" className="flex items-center gap-2.5 group w-fit">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-md relative overflow-hidden">
-              <img 
-                src="/asset/image/logo.png" 
-                alt="Catatan Kader Logo"
-                className="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300"
-                onLoad={(e) => {
-                  (e.target as HTMLImageElement).classList.remove("opacity-0");
-                }}
-              />
-              <GraduationCap className="w-5 h-5 z-10" />
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-md">
+              <GraduationCap className="w-5 h-5" />
             </div>
             <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white">
               Catatan Kader
