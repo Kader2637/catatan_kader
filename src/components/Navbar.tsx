@@ -72,6 +72,11 @@ export default function Navbar() {
     setMobileSelectedCourse(null);
   }, [pathname]);
 
+  // Hide navbar on module pages
+  if (pathname && pathname.startsWith("/modules/")) {
+    return null;
+  }
+
   return (
     <>
       <header

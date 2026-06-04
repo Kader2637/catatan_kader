@@ -246,6 +246,33 @@ export default function HomePage() {
     return glowMap[courseId] || "hover:shadow-md";
   };
 
+  const getCourseBorderColor = (courseId: string) => {
+    const borderMap: Record<string, string> = {
+      laravel: "border-l-red-500 dark:border-l-red-500/80",
+      php: "border-l-indigo-500 dark:border-l-indigo-500/80",
+      react: "border-l-cyan-500 dark:border-l-cyan-500/80",
+      vue: "border-l-emerald-500 dark:border-l-emerald-500/80",
+      next: "border-l-slate-900 dark:border-l-slate-450",
+      python: "border-l-blue-500 dark:border-l-blue-500/80",
+      javascript: "border-l-amber-500 dark:border-l-amber-500/80",
+      typescript: "border-l-blue-600 dark:border-l-blue-600/80",
+      golang: "border-l-sky-500 dark:border-l-sky-500/80",
+      rust: "border-l-orange-850 dark:border-l-orange-800/80",
+      docker: "border-l-blue-500 dark:border-l-blue-500/80",
+      git: "border-l-orange-500 dark:border-l-orange-500/80",
+      sql: "border-l-sky-600 dark:border-l-sky-600/80",
+      nodejs: "border-l-green-500 dark:border-l-green-500/80",
+      htmlcss: "border-l-orange-500 dark:border-l-orange-500/80",
+      tailwind: "border-l-teal-500 dark:border-l-teal-500/80",
+      flutter: "border-l-sky-500 dark:border-l-sky-500/80",
+      kotlin: "border-l-purple-500 dark:border-l-purple-500/80",
+      swift: "border-l-orange-500 dark:border-l-orange-500/80",
+      java: "border-l-red-500 dark:border-l-red-500/80",
+      kubernetes: "border-l-blue-600 dark:border-l-blue-600/80",
+    };
+    return borderMap[courseId] || "border-l-slate-450";
+  };
+
   return (
     <div className="relative pt-28 pb-20 px-6 bg-slate-50/50 dark:bg-zinc-950/50 min-h-screen overflow-x-hidden w-full max-w-full">
       
@@ -273,6 +300,21 @@ export default function HomePage() {
               <p className="text-slate-300 text-sm md:text-base leading-relaxed">
                 Platform pembelajaran dan standardisasi industri perangkat lunak modern. Selesaikan seluruh materi modular terstruktur untuk membangun kecakapan engineering kelas atas.
               </p>
+              
+              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/10 max-w-lg">
+                <div>
+                  <span className="text-[10px] font-mono text-slate-400 block tracking-wider uppercase">KURIKULUM</span>
+                  <span className="text-xs font-black text-white mt-1 block">21 Kelas Industri</span>
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono text-slate-400 block tracking-wider uppercase">TOTAL MATERI</span>
+                  <span className="text-xs font-black text-white mt-1 block">{allModules.length} Modul Aktif</span>
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono text-slate-400 block tracking-wider uppercase">STANDARDISASI</span>
+                  <span className="text-xs font-black text-brand-400 mt-1 block">Software Engineer</span>
+                </div>
+              </div>
             </div>
 
             {/* Quick Resume Button */}
@@ -298,26 +340,28 @@ export default function HomePage() {
         </section>
  
         {/* 2. TAB CONTROLLER: ALUR BELAJAR VS EXPLORER */}
-        <div className="bg-slate-100 dark:bg-zinc-900/60 p-1.5 rounded-2xl border border-slate-200/50 dark:border-zinc-800/80 flex w-fit gap-1">
+        <div className="bg-slate-100 dark:bg-zinc-900/60 p-1.5 rounded-2xl border border-slate-200/50 dark:border-zinc-800/80 flex w-fit gap-1 shadow-xs">
           <button
             onClick={() => setSelectedTab("paths")}
-            className={`px-5 py-2.5 text-xs font-extrabold rounded-xl transition-all duration-300 ${
+            className={`px-5 py-2.5 text-xs font-extrabold rounded-xl transition-all duration-300 flex items-center gap-2 ${
               selectedTab === "paths"
                 ? "bg-white dark:bg-zinc-800 text-brand-600 dark:text-brand-400 shadow-sm border border-slate-200/20 dark:border-zinc-700/50"
                 : "text-slate-500 hover:text-slate-800 dark:hover:text-white"
             }`}
           >
-            Alur Belajar (Roadmaps)
+            <GraduationCap className="w-4 h-4 text-brand-500 shrink-0" />
+            <span>Alur Belajar (Roadmaps)</span>
           </button>
           <button
             onClick={() => setSelectedTab("explorer")}
-            className={`px-5 py-2.5 text-xs font-extrabold rounded-xl transition-all duration-300 ${
+            className={`px-5 py-2.5 text-xs font-extrabold rounded-xl transition-all duration-300 flex items-center gap-2 ${
               selectedTab === "explorer"
                 ? "bg-white dark:bg-zinc-800 text-brand-600 dark:text-brand-400 shadow-sm border border-slate-200/20 dark:border-zinc-700/50"
                 : "text-slate-500 hover:text-slate-800 dark:hover:text-white"
             }`}
           >
-            Semua Modul Explorer
+            <BookOpen className="w-4 h-4 text-cyan-500 shrink-0" />
+            <span>Semua Modul Explorer</span>
           </button>
         </div>
 
@@ -462,23 +506,34 @@ export default function HomePage() {
                   <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
                     {/* Category tabs - Horizontal Scroll Row */}
                     <div className="flex-1 min-w-0 overflow-hidden relative">
-                      <div className="flex overflow-x-auto gap-2 pb-1.5 scrollbar-none scroll-smooth -mx-2 px-2">
+                      <div className="flex overflow-x-auto gap-2.5 pb-2 scrollbar-none scroll-smooth -mx-2 px-2">
                         {[
                           { id: "all", name: "Semua" },
                           ...coursesData.map(c => ({ id: c.id, name: getShortName(c.title) }))
-                        ].map((tab) => (
-                          <button
-                            key={tab.id}
-                            onClick={() => setSelectedExplorerCategory(tab.id)}
-                            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all ${
-                              selectedExplorerCategory === tab.id
-                                ? "bg-brand-500 text-white shadow-sm shadow-brand-500/20"
-                                : "bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-600 dark:text-slate-300"
-                            }`}
-                          >
-                            {tab.name}
-                          </button>
-                        ))}
+                        ].map((tab) => {
+                          const isActive = selectedExplorerCategory === tab.id;
+                          return (
+                            <button
+                              key={tab.id}
+                              onClick={() => setSelectedExplorerCategory(tab.id)}
+                              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all duration-200 flex items-center gap-1.5 border ${
+                                isActive
+                                  ? "bg-gradient-to-r from-brand-500 to-indigo-600 text-white border-transparent shadow-md shadow-brand-500/20"
+                                  : "bg-white dark:bg-zinc-900 text-slate-600 dark:text-slate-400 border-slate-200/60 dark:border-zinc-800/80 hover:bg-slate-50 dark:hover:bg-zinc-800"
+                              }`}
+                            >
+                              {tab.id !== "all" && getCourseIconUrl(tab.id) && (
+                                <img 
+                                  src={getCourseIconUrl(tab.id)} 
+                                  alt={tab.name}
+                                  className="w-3.5 h-3.5 object-contain shrink-0"
+                                  style={{ filter: isActive ? "brightness(0) invert(1)" : "none" }}
+                                />
+                              )}
+                              <span>{tab.name}</span>
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
 
@@ -670,7 +725,7 @@ export default function HomePage() {
                           return (
                             <div
                               key={course.id}
-                              className={`bg-white dark:bg-zinc-900 border border-slate-200/60 dark:border-zinc-800/80 rounded-2xl overflow-hidden transition-all duration-300 ${getHoverGlow(course.id)}`}
+                              className={`bg-white dark:bg-zinc-900 border border-slate-200/60 dark:border-zinc-800/80 border-l-4 ${getCourseBorderColor(course.id)} rounded-2xl overflow-hidden transition-all duration-300 ${getHoverGlow(course.id)}`}
                             >
                               {/* Course Header Toggle */}
                               <button
@@ -760,13 +815,13 @@ export default function HomePage() {
                                         completedLessons
                                       );
 
-                                      if (!isUnlocked) {
-                                        return (
-                                          <div
-                                            key={m.slug}
-                                            className="relative overflow-hidden bg-slate-100/40 dark:bg-zinc-900/20 border border-slate-200/40 dark:border-zinc-800/40 rounded-xl p-4 flex flex-col justify-between opacity-55 cursor-not-allowed select-none"
-                                            title="Selesaikan modul sebelumnya untuk membuka materi ini."
-                                          >
+                                       if (!isUnlocked) {
+                                         return (
+                                           <div
+                                             key={m.slug}
+                                             className="relative overflow-hidden bg-slate-100/20 dark:bg-zinc-900/10 backdrop-blur-xs border border-slate-200/30 dark:border-zinc-850 rounded-xl p-4 flex flex-col justify-between opacity-50 cursor-not-allowed select-none transition-all"
+                                             title="Selesaikan modul sebelumnya untuk membuka materi ini."
+                                           >
                                             <div className="space-y-2">
                                               <div className="flex items-center justify-between">
                                                 <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-200/50 dark:bg-zinc-800/50 text-slate-500 shrink-0">
