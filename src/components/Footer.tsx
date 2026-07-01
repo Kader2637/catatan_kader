@@ -8,12 +8,10 @@ export default function Footer() {
   const pathname = usePathname();
 
   // Hide footer on module pages
-  if (pathname && pathname.startsWith("/modules/")) {
-    return null;
-  }
+  const isModulePage = pathname && pathname.startsWith("/modules/");
 
   return (
-    <footer className="bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 transition-colors duration-300">
+    <footer className={`bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 py-16 transition-colors duration-300 ${isModulePage ? "hidden" : ""}`}>
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10">
         
         {/* Branding & Summary */}

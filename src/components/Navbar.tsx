@@ -57,8 +57,11 @@ export default function Navbar() {
   }, []);
 
   // Handle keyboard shortcut Cmd+K or Ctrl+K
+  const isModulePage = pathname && pathname.startsWith("/modules/");
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (isModulePage) return;
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setSearchOpen(true);
@@ -66,7 +69,7 @@ export default function Navbar() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [isModulePage]);
 
   // Close mobile menu and submenus on page change
   useEffect(() => {
@@ -75,15 +78,12 @@ export default function Navbar() {
     setMobileSelectedCourse(null);
   }, [pathname]);
 
-  // Hide navbar on module pages
-  if (pathname && pathname.startsWith("/modules/")) {
-    return null;
-  }
-
   return (
     <>
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isModulePage ? "hidden" : ""
+        } ${
           scrolled
             ? "py-3 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-md border-b border-slate-200/50 dark:border-zinc-800/50"
             : "py-5 bg-transparent"
